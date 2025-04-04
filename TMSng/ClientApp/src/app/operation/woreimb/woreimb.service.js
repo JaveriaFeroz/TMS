@@ -1,0 +1,45 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WOReImbService = void 0;
+const core_1 = require("@angular/core");
+let WOReImbService = class WOReImbService {
+    constructor(http, baseUrl) {
+        this.http = http;
+        this.apiURL = baseUrl;
+    }
+    getReimbursements() {
+        return this.http.get(this.apiURL + 'operation/WOReImbursement/');
+    }
+    getLookup() {
+        return this.http.get(this.apiURL + 'operation/WOReImbursement/GetLookups');
+    }
+    get(requestId) {
+        return this.http.get(this.apiURL + 'operation/WOReImbursement/' + requestId);
+    }
+    load(branchId, supplierId, subCategoryId, periodFromId, periodToId, leaseTypeId) {
+        return this.http.get(this.apiURL + 'operation/WOReImbursement/GetPendingWO/' + branchId + '/' + supplierId + '/' + subCategoryId + '/' + periodFromId + '/' + periodToId + '/' + leaseTypeId);
+    }
+    save(wore) {
+        return this.http.post(this.apiURL + 'operation/WOReImbursement/', wore);
+    }
+    close(requestId) {
+        return this.http.post(this.apiURL + 'operation/WOReImbursement/Close/' + requestId, requestId);
+    }
+};
+WOReImbService = __decorate([
+    core_1.Injectable({
+        providedIn: 'root'
+    }),
+    __param(1, core_1.Inject('API_BASE_URL'))
+], WOReImbService);
+exports.WOReImbService = WOReImbService;
+//# sourceMappingURL=woreimb.service.js.map

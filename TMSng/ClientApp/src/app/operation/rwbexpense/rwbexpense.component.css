@@ -1,0 +1,44 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divGrids {
+  height: 50vh;
+  width: 97vw;
+  float: left;
+}
+
+.divExpense {
+  height: 53vh;
+  width: 25vw;
+  float: left;
+}
+
+.grdExpense {
+  height: 48vh;
+  width: 25vw;
+  float: left;
+}
+
+.divCharges {
+  height: 53vh;
+  width: 36vw;
+  float: left;
+}
+
+.grdCharges {
+  height: 48vh;
+  width: 36vw;
+  float: left;
+}
+
+.divCashFuel {
+  height: 53vh;
+  width: 34vw;
+  float: left;
+}
+
+.grdCashFuel {
+  height: 48vh;
+  width: 34vw;
+  float: left;
+}

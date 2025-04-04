@@ -1,0 +1,54 @@
+<form [formGroup]="frmSupplierAging">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Supplier Aging</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnExtract" matTooltip="Click To Start Extraction Process" (click)="tbExport()" class="export"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Back to Mian Page" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td >
+        <mat-form-field class="tb200">
+          <mat-label>Date Up To</mat-label>
+          <input matInput [matDatepicker]="MdpDateTo" [min]="MinDate" [max]="MaxDate" matTooltip="Enter From Date" formControlName="dateUpto" placeholder="Choose Date" required>
+          <mat-datepicker-toggle matSuffix [for]="MdpDateTo"></mat-datepicker-toggle>
+          <mat-datepicker #MdpDateTo></mat-datepicker>
+        </mat-form-field>
+       <!-- <mat-error *ngIf="!frmSupplierAging.get('DateUpto').value && frmSupplierAging.get('DateUpto').touched">Select Date </mat-error>-->
+      </td>
+      <td>
+        <button type="button" id="btnLoad" matTooltip="Load"
+                (click)="tbLoad()" class="load float-left"></button>
+      </td>
+    </tr>    
+
+    <tr>
+      <td colspan="8">
+        <div class="divSAGrid">
+          <ag-grid-angular class="ag-theme-balham grdSA" id="grdSA" 
+                           [gridOptions]="goSupplierAging"
+                           [columnDefs]="colSupplierAging"
+                           [rowData]="supplierAgingData"></ag-grid-angular>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+
+@import "../../../assets/css/toolbar.css";
+
+
+.mcTitle {
+  color: darkgoldenrod;
+  border-bottom: 2px maroon solid;
+}
+
+.lbTitle {
+  font-family: Tahoma;
+  font-size: 10pt;
+}
+
+.divOPGrid {
+  height: 62vh;
+  width: 70vw;
+  float: left;
+}
+
+.grdAllocation {
+  height: 57vh;
+  width: 68vw;
+}
+
+.mat-form-field.mat-form-field {
+  font-size: 12px;
+}
+
+.mat-form-field label {
+  font-size: 15px;
+}
+
+.mat-form-field.mat-form-field-should-float label {
+  font-size: 12px;
+}
+
+mat-form-field.mat-form-field {
+  font-size: 14px;
+}

@@ -1,0 +1,40 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divTab {
+  height: 40vh;
+  width: 50vw;
+}
+
+.divToolbarDoc {
+  height: 35px;
+  width: 100%;
+}
+
+.grdDriver {
+  height: 35vh;
+  width: 40vw;
+}
+
+.grdParty {
+  height: 35vh;
+  width: 40vw;
+}
+
+.grdDocument {
+  height: 35vh;
+  width: 40vw;
+}
+
+#watermark {
+  width: 40vw;
+  color: Red;
+  font-weight: bold;
+  font-size: 40pt;
+  font-family: 'Monotype Corsiva';
+  border-bottom: double 5px dotted brown;
+  transform: rotateZ(-45deg);
+  position: absolute;
+  left: 30vw;
+  top: 10vh;
+}

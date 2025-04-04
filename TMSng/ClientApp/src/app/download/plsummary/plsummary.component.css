@@ -1,0 +1,36 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+
+
+.mat-radio-group {
+  width: 50%;
+  font-size: 10px;
+  text-align: center;
+}
+
+
+mat-radio-button {
+  color: blue;
+  font-weight: bold;
+  /* display: inline; */
+}
+
+
+.site-title {
+  color: #ff5900;
+  font-family: Arial;
+  font-size: 10pt;
+  margin: 0;
+}
+
+.divPLGrid {
+  width: 95vw;
+  height: 80vh;
+}
+
+.grdPL {
+  width: 96vw;
+  height: 73vh;
+}
+

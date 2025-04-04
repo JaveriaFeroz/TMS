@@ -1,0 +1,30 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.mat-radio-group {
+  width: 50%;
+  font-size: 18px;
+  text-align: center;
+}
+
+
+mat-radio-button {
+  color: blue;
+  font-weight: bold;
+  /* display: inline; */
+}
+
+
+.site-title {
+  color: #ff5900;
+  font-family: Comic Sans MS;
+  font-size: 18pt;
+  margin: 0;
+}
+
+.site-subtitle {
+  color: #8d0c0c;
+  font-family: Lucida Sans Unicode;
+  font-size: 11pt;
+  margin: 0;
+}

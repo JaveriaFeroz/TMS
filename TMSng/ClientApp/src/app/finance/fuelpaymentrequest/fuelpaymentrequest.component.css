@@ -1,0 +1,13 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divFPGrid {
+  height: 60vh;
+  width: 56vw;
+  float: left;
+}
+
+.grdDetail {
+  height: 58vh;
+  width: 54.5vw;
+}

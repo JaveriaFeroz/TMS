@@ -1,0 +1,303 @@
+<form [formGroup]="frmWFClientRate">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Client Rate Setup</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnSearch" matTooltip="Search from lookup list" (click)="tbSearch()" class="find"></button>
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnAdd" matTooltip="Click to create new Entry" (click)="tbAdd()" class="add"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <div id="divSave" class="float-left">
+            <button type="button" id="btnSave" *ngIf="frmWFClientRate.get('stateId').value==0 || frmWFClientRate.get('stateId').value==1 ||  frmWFClientRate.get('stateId').value==5 " matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          </div>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb60" color="accent">
+          <mat-label>Form #</mat-label>
+          <input formControlName="formId" #formId matTooltip="Form #, auto generated for new entry" placeholder="Form #"
+                 matInput maxlength="6" numbersOnly (keydown.enter)="get(formId.value)">
+        </mat-form-field>
+      </td>
+
+      <td colspan="2">
+        <mat-form-field class="tb250">
+          <mat-label>Client</mat-label>
+          <mat-select #clientId formControlName="clientId" matTooltip="Select Client" (selectionChange)="getExistingRate($event)" required>
+            <mat-option *ngFor="let c of lstClient" [value]="c.clientId">{{c.clientName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Status</mat-label>
+          <input formControlName="stateId" matInput hidden>
+          <input formControlName="owner" matInput hidden>
+          <input formControlName="completed" matInput hidden>
+          <input formControlName="stateName" matInput disabled readonly>
+        </mat-form-field>
+      </td>
+      <td colspan="3" rowspan="3">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+      <td colspan="3"></td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field>
+          <mat-label>Invoice Mode</mat-label>
+          <mat-select #invoiceModeId formControlName="invoiceModeId" matTooltip="Select Invoice Mode" required>
+            <mat-option *ngFor="let im of lstInvoiceMode" [value]="im.modeId">{{im.modeName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Ton Waiver</mat-label> 
+          <input type="number" formControlName="waiverTon" class="tbRA" min="0" max="99999999" matTooltip="Enter Waiver Ton" maxlength="9" matInput oninput="validity.valid||(value=''); ">
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Max Shipment</mat-label>
+          <input type="number" formControlName="maxShipmentsPerInvoice" class="tbRA" min="0"  max="99999999" matTooltip="Enter maximum number of shipments to be included in each Invoice, 0 means unlimited" maxlength="9" matInput oninput="validity.valid||(value=''); ">
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Max Inv Amount</mat-label>
+          <input type="number" formControlName="maxInvAmount" min="0" class="tbRA"  max="99999999" matTooltip="Enter maximum Amount per invoice to be allowed and the invoice to be split, , 0 means unlimited" maxlength="9" matInput oninput="validity.valid||(value=''); ">
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb250">
+          <mat-label>Rate Type</mat-label>
+          <mat-select formControlName="rateTypeId" id="rateTypeId" #ratetype matTooltip="Select Rate Type" required readonly>
+            <mat-option *ngFor="let r of lstRateType" [value]="r.typeId"> {{r.typeName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Det Grace HRs</mat-label>
+          <input type="number" formControlName="detGraceHrs" min="0" max="999" matInput matTooltip="Detention Grace hours allowed" maxlength="3"  oninput="validity.valid||(value=''); " class="tbRA"/>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="8">
+        <mat-tab-group (selectedTabChange)="validateGridStatus()">
+          <mat-tab label="Dedicated Fleet Rentals" *ngIf="frmWFClientRate.get('rateTypeId').value==0" >
+            <div class="divDedicated">
+              <div class="divDedicatedRent">
+                <div class="grdToolbar" id="tbGrid">
+                  <button type="button" (click)="onAddDR()" class="add" title="Add line item"></button>
+                  <button type="button" (click)="onDeleteDR()" class="delete" title="Remove selected line item"></button>
+                </div>
+                <ag-grid-angular class="ag-theme-balham grdDedicatedRent" id="grdDedicatedRent" [frameworkComponents]="frameworkComponents"
+                                 [gridOptions]="goDedicatedRent" [columnDefs]="colDedicatedRent" [rowData]="dedicatedRentData"></ag-grid-angular>
+              </div>
+              <div class="divHandling">
+                <div class="grdToolbar" id="tbGrid">
+                  <button type="button" (click)="onAddHandling()" class="add" title="Add line item"></button>
+                  <button type="button" (click)="onDeleteHandling()" class="delete" title="Remove selected line item"></button>
+                </div>
+                <ag-grid-angular class="ag-theme-balham grdHandling" id="grdHandling" [frameworkComponents]="frameworkComponents"
+                                 [gridOptions]="goHandling" [columnDefs]="colHandling" [rowData]="handlingData"></ag-grid-angular>
+              </div>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Variable Rates" *ngIf="frmWFClientRate.get('rateTypeId').value==0" >
+            <div class="divDedicatedOther">
+              <div class="divVariable">
+                <div class="grdToolbar" id="tbGrid">
+                  <button type="button" (click)="onAddDV()" class="add" title="Add line item"></button>
+                  <button type="button" (click)="onDeleteDV()" class="delete" title="Remove selected line item"></button>
+                </div>
+                <ag-grid-angular class="ag-theme-balham grdDedicatedVar" id="grdDedicatedVar" [frameworkComponents]="frameworkComponents"
+                                 [gridOptions]="goDedicatedVar" [columnDefs]="colDedicatedVar" [rowData]="dedicatedVarData"></ag-grid-angular>
+              </div>
+              <div class="divToll">
+                <div class="grdToolbar" id="tbGrid">
+                  <button type="button" (click)="onAddToll()" class="add" title="Add line item"></button>
+                  <button type="button" (click)="onDeleteToll()" class="delete" title="Remove selected line item"></button>
+                </div>
+                <ag-grid-angular class="ag-theme-balham grdDedicatedToll" id="grdDedicatedToll" [frameworkComponents]="frameworkComponents"
+                                 [gridOptions]="goDedicatedToll" [columnDefs]="colDedicatedToll" [rowData]="dedicatedTollData"></ag-grid-angular>
+              </div>
+              <div class="divKM">
+                <div class="grdToolbar" id="tbGrid">
+                  <button type="button" (click)="onAddDKM()" class="add" title="Add line item"></button>
+                  <button type="button" (click)="onDeleteDKM()" class="delete" title="Remove selected line item"></button>
+                </div>
+                <ag-grid-angular class="ag-theme-balham grdDedicatedKM" id="grdDedicatedKM"
+                                 [gridOptions]="goDedicatedKM" [columnDefs]="colDedicatedKM" [rowData]="dedicatedKMData"></ag-grid-angular>
+              </div>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Charges Per Trip" *ngIf="frmWFClientRate.get('rateTypeId').value==1">
+            <div class="divTrip">
+              <div class="grdToolbar" id="tbGrid">
+                <button type="button" (click)="onAddTrip()" class="add" title="Add line item"></button>
+                <button type="button" (click)="onDeleteTrip()" class="delete" title="Remove selected line item"></button>
+              </div>
+              <ag-grid-angular class="ag-theme-balham grdTrip" id="grdTrip" [frameworkComponents]="frameworkComponents"
+                                [gridOptions]="goTrip" [columnDefs]="colTrip" [rowData]="tripData"></ag-grid-angular>
+            </div>
+          </mat-tab>
+            
+          <mat-tab label="Charges Per Trip & Ton" *ngIf="frmWFClientRate.get('rateTypeId').value==3">
+            <div class="divTripTon">
+              <div class="grdToolbar" id="tbGrid">
+                <button type="button" (click)="onAddTripTon()" class="add" title="Add line item"></button>
+                <button type="button" (click)="onDeleteTripTon()" class="delete" title="Remove selected line item"></button>
+              </div>
+              <ag-grid-angular class="ag-theme-balham grdTripTon" id="grdTripTon" [frameworkComponents]="frameworkComponents"
+                                [gridOptions]="goTripTon" [columnDefs]="colTripTon" [rowData]="tripTonData"></ag-grid-angular>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Charges Per KL/Ton" *ngIf="frmWFClientRate.get('rateTypeId').value==6">
+            <div class="divKLTon">
+              <div class="grdToolbar" id="tbGrid">
+                <button type="button" (click)="onAddKLTon()" class="add" title="Add line item"></button>
+                <button type="button" (click)="onDeleteKLTon()" class="delete" title="Remove selected line item"></button>
+              </div>
+              <ag-grid-angular class="ag-theme-balham grdKLTon" id="grdKLTon" [frameworkComponents]="frameworkComponents"
+                  [gridOptions]="goKLTon" [columnDefs]="colKLTon" [rowData]="klTonData"></ag-grid-angular>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Detention & Handling Charges" *ngIf="frmWFClientRate.get('rateTypeId').value!=0 && frmWFClientRate.get('rateTypeId').value!=null">
+            <div class="divDetHandling">
+              <div class="divDetention">
+                <div class="grdToolbar" id="tbGrid">
+                  <button type="button" (click)="onAddDetention()" class="add" title="Add line item"></button>
+                  <button type="button" (click)="onDeleteDetention()" class="delete" title="Remove selected line item"></button>
+                </div>
+                <ag-grid-angular class="ag-theme-balham grdDetention" id="grdDetention" [frameworkComponents]="frameworkComponents"
+                                  [gridOptions]="goDetention" [columnDefs]="colDetention" [rowData]="detentionData"></ag-grid-angular>
+              </div>
+              <div class="divHandling">
+                <div class="grdToolbar" id="tbGrid">
+                  <button type="button" (click)="onAddHandling()" class="add" title="Add line item"></button>
+                  <button type="button" (click)="onDeleteHandling()" class="delete" title="Remove selected line item"></button>
+                </div>
+                <ag-grid-angular class="ag-theme-balham grdHandling" id="grdHandling" [frameworkComponents]="frameworkComponents"
+                                  [gridOptions]="goHandling" [columnDefs]="colHandling" [rowData]="handlingData"></ag-grid-angular>
+              </div>
+            </div>
+          </mat-tab>            
+        </mat-tab-group>
+      </td>
+
+      <td *ngIf="frmWFClientRate.get('clientId').value" colspan="2" style="vertical-align:top; ">
+        <table style="overflow: scroll">
+          <tr> Client Flags</tr>
+          <tr></tr>
+          <tr>
+            <td><mat-slide-toggle formControlName="invoiceByRoute" matInput>Separate Invoice By Route</mat-slide-toggle></td>
+          </tr>
+          <tr>
+            <td><mat-slide-toggle formControlName="invoiceByCategory" matInput>Separate Invoice By Category</mat-slide-toggle></td>
+          </tr>
+          <tr>
+            <td><mat-slide-toggle formControlName="invoiceByOrigin" matInput>Separate Invoice By Origin</mat-slide-toggle></td>
+          </tr>
+          <tr *ngIf="frmWFClientRate.get('rateTypeId').value!=0">
+            <td><mat-slide-toggle formControlName="separateDetInv" matInput>Separate Invoice for Detention</mat-slide-toggle></td>
+          </tr>
+          <tr>
+            <td><mat-slide-toggle formControlName="separateOtherChgsInv" matInput>Separate Invoice for Other Charges</mat-slide-toggle></td>
+          </tr>
+          <tr>
+            <td><mat-slide-toggle formControlName="categoryMandatory" matInput>Category Mandatory</mat-slide-toggle></td>
+          </tr>
+          <tr>
+            <td><mat-slide-toggle formControlName="productMandatory" matInput>Product Mandatory</mat-slide-toggle></td>
+          </tr>
+          <tr>
+            <td><mat-slide-toggle formControlName="invMandatoryOnPoD" matInput>Inv Mandatory on PoD</mat-slide-toggle></td>
+          </tr>
+          <tr>
+            <td><mat-slide-toggle formControlName="oBDMandatoryOnPoD" matInput>OBD# Mandatory on PoD</mat-slide-toggle></td>
+          </tr>
+          <tr>
+            <td><mat-slide-toggle formControlName="shipmentNoMandatoryOnPoD" matInput>Shipment# Mandatory on PoD</mat-slide-toggle></td>
+          </tr>
+          <tr>
+            <td><mat-slide-toggle formControlName="validateRoute" matInput matTooltip="Only allow Route selection on RWB that are declared under client rate setup as Route for this customer">Validate Route</mat-slide-toggle></td>
+          </tr>
+          <tr *ngIf="frmWFClientRate.get('rateTypeId').value==0">
+            <td><mat-slide-toggle formControlName="validateVehicle" matInput matTooltip="Only allow vehicles selection on departure page that are declared under client rate setup as dedicated vehicle for this customer">Validate Vehicle</mat-slide-toggle></td>
+          </tr>
+              <!--<tr>
+        <td><mat-slide-toggle formControlName="consigneeMandatory" matInput>Consignee Mandatory</mat-slide-toggle></td>
+      </tr>-->
+            <!--<tr>
+        <td><mat-slide-toggle formControlName="DetentionByTime" matInput>Detention By Time</mat-slide-toggle></td>
+      </tr>-->
+          <tr *ngIf="frmWFClientRate.get('rateTypeId').value!=0">
+            <td><mat-slide-toggle formControlName="detGraceHRsFromRWB" matInput>Detention Grace Hours By Rwb</mat-slide-toggle></td>
+          </tr>
+          <tr>
+            <td><mat-slide-toggle formControlName="allowZeroRate" matInput>Allow Zero Rate</mat-slide-toggle></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<footer>
+  <button type="button" id="btnHistory" [disabled]="submissionButtonsStatus" matTooltip="Click to view selected Client Rate Status History"
+          (click)="tbHistory(frmWFClientRate.get('formId').value)" class="history float-right" *ngIf="frmWFClientRate.get('stateId').value>=1"></button>
+  <button type="button" id="btnSubmit" [disabled]="submissionButtonsStatus" matTooltip="Click to submit this Request for approval"
+          (click)="tbFormSubmission(frmWFClientRate.get('formId').value, 2)" class="submit float-right"
+          *ngIf="(frmWFClientRate.get('stateId').value==1 || frmWFClientRate.get('stateId').value==5) && !frmWFClientRate.get('completed').value &&
+                            frmWFClientRate.get('owner').value==this.footer.createdBy"></button>
+  <button type="button" id="btnCancel" [disabled]="submissionButtonsStatus" matTooltip="Cancel this request to mark this form as completed (Rejected). This form can't be used afterwards"
+          *ngIf="(frmWFClientRate.get('stateId').value==1 || frmWFClientRate.get('stateId').value==5) && !frmWFClientRate.get('completed').value &&
+                            frmWFClientRate.get('owner').value==this.footer.createdBy"
+          (click)="tbFormSubmission(frmWFClientRate.get('formId').value,99)" class="cancel float-right"></button>
+
+  <button type="button" id="btnApprove" [disabled]="submissionButtonsStatus" matTooltip="Click to mark this Client Rate request as approved, it will overwrite existing client Rates"
+          (click)="tbFormSubmission(frmWFClientRate.get('formId').value,2)" class="approve float-right"
+          *ngIf="frmWFClientRate.get('stateId').value==2 && frmWFClientRate.get('owner').value==this.currentUserId
+            && !frmWFClientRate.get('completed').value && this.currentUserId!=this.footer.createdBy"></button>
+
+  <button type="button" id="btnReturn" [disabled]="submissionButtonsStatus" matTooltip="Click to return this Client Rate Request"
+          (click)="tbFormSubmission(frmWFClientRate.get('formId').value,5)" class="return float-right"
+          *ngIf="frmWFClientRate.get('stateId').value==2 && frmWFClientRate.get('owner').value==this.currentUserId
+            && !frmWFClientRate.get('completed').value && this.currentUserId!=this.footer.createdBy"></button>
+
+  <button type="button" id="btnReject" [disabled]="submissionButtonsStatus" matTooltip="Click to reject this Client Rate Request. This request will no longer be actionable once you reject it!"
+          (click)="tbFormSubmission(frmWFClientRate.get('formId').value,4)" class="reject float-right"
+          *ngIf="(frmWFClientRate.get('stateId').value==2  ) && frmWFClientRate.get('owner').value==this.currentUserId
+            && !frmWFClientRate.get('completed').value && this.currentUserId!=this.footer.createdBy"></button>
+  <app-footer [items]="footer"></app-footer>
+</footer>

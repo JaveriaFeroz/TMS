@@ -1,0 +1,884 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <ApplicationIcon>ClientApp\src\assets\icons\agility.ico</ApplicationIcon>
+    <UserSecretsId>321ac627-579f-48e1-9352-82cb83a54fb5</UserSecretsId>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AngularJS.Route" Version="1.8.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.3" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.7.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="tslint" Version="6.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="API\**" />
+    <Compile Remove="ClientApp\dist\**" />
+    <Compile Remove="ClientApp\src\app\**" />
+    <Compile Remove="ClientApp\src\assets\images\**" />
+    <Compile Remove="Controllers\**" />
+    <Compile Remove="TMSAPI\**" />
+    <Compile Remove="_legacyAPI\**" />
+    <Compile Remove="_legacyControllers\**" />
+    <Content Remove="$(SpaRoot)**" />
+    <Content Remove="API\**" />
+    <Content Remove="ClientApp\dist\**" />
+    <Content Remove="ClientApp\src\app\**" />
+    <Content Remove="ClientApp\src\assets\images\**" />
+    <Content Remove="Controllers\**" />
+    <Content Remove="TMSAPI\**" />
+    <Content Remove="_legacyAPI\**" />
+    <Content Remove="_legacyControllers\**" />
+    <EmbeddedResource Remove="API\**" />
+    <EmbeddedResource Remove="ClientApp\dist\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\**" />
+    <EmbeddedResource Remove="ClientApp\src\assets\images\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="TMSAPI\**" />
+    <EmbeddedResource Remove="_legacyAPI\**" />
+    <EmbeddedResource Remove="_legacyControllers\**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Remove="API\**" />
+    <None Remove="ClientApp\dist\**" />
+    <None Remove="ClientApp\src\app\**" />
+    <None Remove="ClientApp\src\assets\images\**" />
+    <None Remove="Controllers\**" />
+    <None Remove="TMSAPI\**" />
+    <None Remove="_legacyAPI\**" />
+    <None Remove="_legacyControllers\**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="WeatherForecast.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\dist\acknowledge.PNG" />
+    <None Remove="ClientApp\dist\Actual.jpg" />
+    <None Remove="ClientApp\dist\Add.png" />
+    <None Remove="ClientApp\dist\AddTiny.png" />
+    <None Remove="ClientApp\dist\approve.png" />
+    <None Remove="ClientApp\dist\assets\css\footer.css" />
+    <None Remove="ClientApp\dist\assets\css\formsite.css" />
+    <None Remove="ClientApp\dist\assets\css\mainlayout.css" />
+    <None Remove="ClientApp\dist\assets\css\menu.css" />
+    <None Remove="ClientApp\dist\assets\css\toolbar.css" />
+    <None Remove="ClientApp\dist\assets\icons\agility.ico" />
+    <None Remove="ClientApp\dist\assets\images\acknowledge.PNG" />
+    <None Remove="ClientApp\dist\assets\images\Actual.jpg" />
+    <None Remove="ClientApp\dist\assets\images\add.png" />
+    <None Remove="ClientApp\dist\assets\images\AddTiny.png" />
+    <None Remove="ClientApp\dist\assets\images\approve.PNG" />
+    <None Remove="ClientApp\dist\assets\images\Attachment.png" />
+    <None Remove="ClientApp\dist\assets\images\Close.png" />
+    <None Remove="ClientApp\dist\assets\images\Delete.png" />
+    <None Remove="ClientApp\dist\assets\images\DeleteTiny.png" />
+    <None Remove="ClientApp\dist\assets\images\edit.png" />
+    <None Remove="ClientApp\dist\assets\images\EditTiny.png" />
+    <None Remove="ClientApp\dist\assets\images\Estimate.png" />
+    <None Remove="ClientApp\dist\assets\images\Exit.png" />
+    <None Remove="ClientApp\dist\assets\images\exporticon.png" />
+    <None Remove="ClientApp\dist\assets\images\Forward.png" />
+    <None Remove="ClientApp\dist\assets\images\GIL_Logo.bmp" />
+    <None Remove="ClientApp\dist\assets\images\go_ahead.png" />
+    <None Remove="ClientApp\dist\assets\images\go_back.png" />
+    <None Remove="ClientApp\dist\assets\images\history.png" />
+    <None Remove="ClientApp\dist\assets\images\home.png" />
+    <None Remove="ClientApp\dist\assets\images\Maintenance.jpg" />
+    <None Remove="ClientApp\dist\assets\images\Options.png" />
+    <None Remove="ClientApp\dist\assets\images\PMMaintenance.png" />
+    <None Remove="ClientApp\dist\assets\images\Recall.png" />
+    <None Remove="ClientApp\dist\assets\images\reject.PNG" />
+    <None Remove="ClientApp\dist\assets\images\resolve.PNG" />
+    <None Remove="ClientApp\dist\assets\images\return.PNG" />
+    <None Remove="ClientApp\dist\assets\images\Save.png" />
+    <None Remove="ClientApp\dist\assets\images\search.png" />
+    <None Remove="ClientApp\dist\assets\images\submit.PNG" />
+    <None Remove="ClientApp\dist\assets\images\swap.png" />
+    <None Remove="ClientApp\dist\assets\images\TMS.png" />
+    <None Remove="ClientApp\dist\assets\images\transfer.png" />
+    <None Remove="ClientApp\dist\assets\images\Undo.png" />
+    <None Remove="ClientApp\dist\assets\images\UndoTiny.png" />
+    <None Remove="ClientApp\dist\assets\images\Upload.png" />
+    <None Remove="ClientApp\dist\assets\images\View.png" />
+    <None Remove="ClientApp\dist\assets\theme\aggrid-theme.scss" />
+    <None Remove="ClientApp\dist\assets\theme\agility-theme.css" />
+    <None Remove="ClientApp\dist\assets\theme\agility-theme.min.css" />
+    <None Remove="ClientApp\dist\assets\theme\agility-theme.scss" />
+    <None Remove="ClientApp\dist\Close.png" />
+    <None Remove="ClientApp\dist\common-es2015.js" />
+    <None Remove="ClientApp\dist\common-es2015.js.map" />
+    <None Remove="ClientApp\dist\common-es5.js" />
+    <None Remove="ClientApp\dist\common-es5.js.map" />
+    <None Remove="ClientApp\dist\Delete.png" />
+    <None Remove="ClientApp\dist\deletetiny.png" />
+    <None Remove="ClientApp\dist\Edit.png" />
+    <None Remove="ClientApp\dist\EditTiny.png" />
+    <None Remove="ClientApp\dist\Estimate.png" />
+    <None Remove="ClientApp\dist\Exit.png" />
+    <None Remove="ClientApp\dist\exporticon.png" />
+    <None Remove="ClientApp\dist\finance-finance-module-es2015.js" />
+    <None Remove="ClientApp\dist\finance-finance-module-es2015.js.map" />
+    <None Remove="ClientApp\dist\finance-finance-module-es5.js" />
+    <None Remove="ClientApp\dist\finance-finance-module-es5.js.map" />
+    <None Remove="ClientApp\dist\Forward.png" />
+    <None Remove="ClientApp\dist\go_ahead.png" />
+    <None Remove="ClientApp\dist\go_back.png" />
+    <None Remove="ClientApp\dist\history.png" />
+    <None Remove="ClientApp\dist\home.png" />
+    <None Remove="ClientApp\dist\index.html" />
+    <None Remove="ClientApp\dist\insurance-insurance-module-es2015.js" />
+    <None Remove="ClientApp\dist\insurance-insurance-module-es2015.js.map" />
+    <None Remove="ClientApp\dist\insurance-insurance-module-es5.js" />
+    <None Remove="ClientApp\dist\insurance-insurance-module-es5.js.map" />
+    <None Remove="ClientApp\dist\inventory-inventory-module-es2015.js" />
+    <None Remove="ClientApp\dist\inventory-inventory-module-es2015.js.map" />
+    <None Remove="ClientApp\dist\inventory-inventory-module-es5.js" />
+    <None Remove="ClientApp\dist\inventory-inventory-module-es5.js.map" />
+    <None Remove="ClientApp\dist\main-es2015.js" />
+    <None Remove="ClientApp\dist\main-es2015.js.map" />
+    <None Remove="ClientApp\dist\main-es5.js" />
+    <None Remove="ClientApp\dist\main-es5.js.map" />
+    <None Remove="ClientApp\dist\master-master-module-es2015.js" />
+    <None Remove="ClientApp\dist\master-master-module-es2015.js.map" />
+    <None Remove="ClientApp\dist\master-master-module-es5.js" />
+    <None Remove="ClientApp\dist\master-master-module-es5.js.map" />
+    <None Remove="ClientApp\dist\operation-operation-module-es2015.js" />
+    <None Remove="ClientApp\dist\operation-operation-module-es2015.js.map" />
+    <None Remove="ClientApp\dist\operation-operation-module-es5.js" />
+    <None Remove="ClientApp\dist\operation-operation-module-es5.js.map" />
+    <None Remove="ClientApp\dist\Options.png" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\app.material.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\app.material.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\app.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\app.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\app.routes.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\app.routes.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\app.server.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\app.server.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\common.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\common.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\common.route.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\common.route.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\common.routes.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\common.routes.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\footer\footer.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\footer\footer.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\footer\footer.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\footer\footer.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\login\login.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\login\login.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\login\login.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\login\login.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\login\login.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\login\login.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\main\main-layout.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\main\main-layout.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\menu\Menu.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\menu\Menu.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\menu\menu.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\menu\menu.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\myform\myform.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\myform\myform.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\myform\myform.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\myform\myform.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\recipient\recipient.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\common\recipient\recipient.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\counter\counter.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\counter\counter.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\counter\counter.component.spec.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\counter\counter.component.spec.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\dataextract\woextract\woextract.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\dataextract\woextract\woextract.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\dataextract\woextract\woextract.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\dataextract\woextract\woextract.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\dataextract\woextract\woextract.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\dataextract\woextract\woextract.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\dataextract\woreimbursementextract\woreimbursementextract.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\dataextract\woreimbursementextract\woreimbursementextract.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\download.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\download.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\download.routes.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\download.routes.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\invoicesummary\invoicesummary.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\invoicesummary\invoicesummary.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\plreportextract\plreportextract.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\plreportextract\plreportextract.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\workorder\woextract.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\workorder\woextract.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\workorder\woextract.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\workorder\woextract.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\workorder\woextract.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\download\workorder\woextract.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\fetch-data\fetch-data.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\fetch-data\fetch-data.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\filter.pipe.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\filter.pipe.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice - Copy\accessorialinvoice.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice - Copy\accessorialinvoice.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice - Copy\accessorialinvoice.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice - Copy\accessorialinvoice.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice - Copy\accessorialinvoice.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice - Copy\accessorialinvoice.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice\accessorialinvoice.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice\accessorialinvoice.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice\accessorialinvoice.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice\accessorialinvoice.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice\accessorialinvoice.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice\accessorialinvoice.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice\accessorialinvoicedetail.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\accessorialinvoice\accessorialinvoicedetail.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\accessorialinvoice.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\accessorialinvoice.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\accessorialinvoice.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\accessorialinvoice.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\accessorialinvoice.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\accessorialinvoice.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientrate.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientrate.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientrate.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientrate.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientrate.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientrate.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratedeliverytonnage.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratedeliverytonnage.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratedetention.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratedetention.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratefixedmonthly.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratefixedmonthly.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratefixedmonthlyplusdistance.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratefixedmonthlyplusdistance.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratefixedmonthlyplusperkm.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratefixedmonthlyplusperkm.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratefixedpertripplusperkm.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratefixedpertripplusperkm.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratetripbasis.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratetripbasis.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratetripliter.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratetripliter.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratetriptonnage.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\clientrate\clientratetriptonnage.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\expensereimbursement\expensereimbursement.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\expensereimbursement\expensereimbursement.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\expensereimbursement\expensereimbursement.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\expensereimbursement\expensereimbursement.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\expensereimbursement\expensereimbursement.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\expensereimbursement\expensereimbursement.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\expensereimbursement\expensereimbursementdetail.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\expensereimbursement\expensereimbursementdetail.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\finance.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\finance.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\finance.routes.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\finance.routes.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\fuelpaymentrequest\fuelpaymentrequest.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\fuelpaymentrequest\fuelpaymentrequest.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\fuelpaymentrequest\fuelpaymentrequest.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\fuelpaymentrequest\fuelpaymentrequest.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\fuelpaymentrequest\fuelpaymentrequest.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\fuelpaymentrequest\fuelpaymentrequest.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\fuelpaymentrequest\fuelpaymentrequestdetail.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\fuelpaymentrequest\fuelpaymentrequestdetail.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\generateinvoice\generateinvoice.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\generateinvoice\generateinvoice.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\generateinvoice\generateinvoice.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\generateinvoice\generateinvoice.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\generateinvoice\generateinvoice.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\generateinvoice\generateinvoice.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\groupinvoice\groupinvoice.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\groupinvoice\groupinvoice.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\groupinvoice\groupinvoice.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\groupinvoice\groupinvoice.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\groupinvoice\groupinvoice.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\groupinvoice\groupinvoice.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\groupinvoice\groupinvoicedetail.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\groupinvoice\groupinvoicedetail.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\reopenjob\reopenjob.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\reopenjob\reopenjob.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\reopenjob\reopenjob.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\reopenjob\reopenjob.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\uninvoice\uninvoice.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\uninvoice\uninvoice.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\uninvoice\uninvoice.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\finance\uninvoice\uninvoice.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\guard\auth.guard.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\guard\auth.guard.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\agFormHelper.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\agFormHelper.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\agGridHelper.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\agGridHelper.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\AgilityEnum.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\AgilityEnum.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\component\wait-dialog.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\component\wait-dialog.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\component\wait-dialog.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\component\wait-dialog.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\Datepicker\Datepicker.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\Datepicker\Datepicker.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\error\page-not-found.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\error\page-not-found.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\guard\auth.guard.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\guard\auth.guard.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\searchDialog\search-dialog.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\searchDialog\search-dialog.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\service\auth.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\service\auth.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\service\errorInterceptor.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\service\errorInterceptor.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\service\search-dialog.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\service\search-dialog.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\service\wait-dialog.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\helper\service\wait-dialog.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\home\home.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\home\home.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insurance.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insurance.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insurance.routes.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insurance.routes.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insuranceclaim\insuranceclaim.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insuranceclaim\insuranceclaim.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insuranceclaim\insuranceclaim.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insuranceclaim\insuranceclaim.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insuranceclaim\insuranceclaim.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insuranceclaim\insuranceclaim.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insuranceclaim\insuranceclaim3rdparty.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insuranceclaim\insuranceclaim3rdparty.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insuranceclaim\insuranceclaimdocument.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insuranceclaim\insuranceclaimdocument.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insurancepolicy\insurancepolicy.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insurancepolicy\insurancepolicy.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insurancetype\insurancetype.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\insurance\insurancetype\insurancetype.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\inventory\goodsreceiptnote\goodsreceiptnote.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\inventory\goodsreceiptnote\goodsreceiptnote.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\inventory\inventory.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\inventory\inventory.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\inventory\inventory.routes.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\inventory\inventory.routes.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\inventory\invadjustment\invadjustment.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\inventory\invadjustment\invadjustment.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\inventory\invtransfer\invtransfer.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\inventory\invtransfer\invtransfer.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\accessorialcharge\accessorialcharge.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\accessorialcharge\accessorialcharge.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\accessorialcharge\accessorialcharge.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\accessorialcharge\accessorialcharge.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\accessorialcharge\accessorialcharge.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\accessorialcharge\accessorialcharge.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\asset\asset.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\asset\asset.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\asset\asset.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\asset\asset.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\asset\asset.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\asset\asset.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\asset\assettyre.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\asset\assettyre.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\category\category.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\category\category.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\category\category.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\category\category.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\category\category.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\category\category.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\category\categorycllient.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\category\categorycllient.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\client\client.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\client\client.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\client\client.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\client\client.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\client\client.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\client\client.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\common.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\common.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\Consignee\consignee.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\Consignee\consignee.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\Consignee\consignee.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\Consignee\consignee.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\Consignee\consignee.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\Consignee\consignee.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\contoljob\controljob.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\contoljob\controljob.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\contoljob\controljob.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\contoljob\controljob.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\controljob\controljob.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\controljob\controljob.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\controljob\controljob.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\controljob\controljob.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\controljob\controljob.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\controljob\controljob.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\driver.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\driver.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\driver.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\driver.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\driver.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\driver.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\driverdocument.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\driverdocument.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\driverhvtype.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\driverhvtype.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\drivermedicaltype.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\drivermedicaltype.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\driverreference.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\driverreference.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\drivertainingprofile.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\driver\drivertainingprofile.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\expensehead\expensehead.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\expensehead\expensehead.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\expensehead\expensehead.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\expensehead\expensehead.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\expensehead\expensehead.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\expensehead\expensehead.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\FMCity\fmcity.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\FMCity\fmcity.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\FMCity\fmcity.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\FMCity\fmcity.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\FMCity\fmcity.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\FMCity\fmcity.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmproduct\fmproduct.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmproduct\fmproduct.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmproduct\fmproduct.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmproduct\fmproduct.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmproduct\fmproduct.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmproduct\fmproduct.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmproduct\fmproductclient.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmproduct\fmproductclient.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmsupplier\fmsupplier.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmsupplier\fmsupplier.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmsupplier\fmsupplier.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmsupplier\fmsupplier.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmsupplier\fmsupplier.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fmsupplier\fmsupplier.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fuelcard\fuelcard.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fuelcard\fuelcard.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fuelcard\fuelcard.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fuelcard\fuelcard.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fuelcard\fuelcard.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\fuelcard\fuelcard.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\geofence\geofence.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\geofence\geofence.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\geofence\geofence.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\geofence\geofence.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\geofence\geofence.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\geofence\geofence.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\geofence\geofenceemailsetup.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\geofence\geofenceemailsetup.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\hosetype\hose-type.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\hosetype\hose-type.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\hosetype\hosetype.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\hosetype\hosetype.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\hosetype\hosetype.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\hosetype\hosetype.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\master.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\master.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\master.routes.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\master.routes.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\region\region.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\region\region.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\region\region.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\region\region.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\region\region.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\region\region.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\RouteGroup\routegroup.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\RouteGroup\routegroup.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\RouteGroup\routegroup.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\RouteGroup\routegroup.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\RouteGroup\routegroup.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\RouteGroup\routegroup.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\Route\route.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\Route\route.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\Route\route.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\Route\route.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\Route\route.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\Route\route.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\supplierrate\supplierrate.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\supplierrate\supplierrate.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\supplierrate\supplierrate.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\supplierrate\supplierrate.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\supplierrate\supplierrate.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\supplierrate\supplierrate.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\supplierrate\supplierratedetail.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\supplierrate\supplierratedetail.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\usermanagement\usermanagement.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\usermanagement\usermanagement.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\vehicledocument\vehicledocument.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\vehicledocument\vehicledocument.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\vehicledocument\vehicledocument.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\vehicledocument\vehicledocument.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\vehicledocument\vehicledocument.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\vehicledocument\vehicledocument.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\vehicledocument\vehicledocumentdetail.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\vehicledocument\vehicledocumentdetail.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\VehicleGroup\vehiclegroup.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\VehicleGroup\vehiclegroup.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\VehicleGroup\vehiclegroup.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\VehicleGroup\vehiclegroup.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\VehicleGroup\vehiclegroup.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\VehicleGroup\vehiclegroup.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\WarningType\warningtype.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\WarningType\warningtype.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\WarningType\warningtype.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\WarningType\warningtype.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\WarningType\warningtype.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\WarningType\warningtype.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\whtaxexemption\whtaxexemption.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\whtaxexemption\whtaxexemption.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\whtaxexemption\whtaxexemption.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\whtaxexemption\whtaxexemption.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\whtaxexemption\whtaxexemption.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\master\whtaxexemption\whtaxexemption.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\operation.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\operation.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\operation.routes.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\operation.routes.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\servicerequest\servicerequest.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\servicerequest\servicerequest.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\workorderreimbursement\workorderreimbursement.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\workorderreimbursement\workorderreimbursement.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\workorderreimbursement\workorderreimbursement.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\workorderreimbursement\workorderreimbursement.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\workorderreimbursement\workorderreimbursement.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\workorderreimbursement\workorderreimbursement.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\workorder\workorder.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\operation\workorder\workorder.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\inventory.routes.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\inventory.routes.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\invoicesummary\invoicesummary.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\invoicesummary\invoicesummary.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\invoicesummary\invoicesummary.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\invoicesummary\invoicesummary.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\opreportextract\opreportextract.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\opreportextract\opreportextract.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\plreportextract\plreportextract.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\plreportextract\plreportextract.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\report.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\report.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\report.routes.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\report.routes.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\tereportextract\tereportextract.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\tereportextract\tereportextract.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy %282%29 - Copy\woextract.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy %282%29 - Copy\woextract.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy %282%29 - Copy\woextract.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy %282%29 - Copy\woextract.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy %282%29 - Copy\woextract.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy %282%29 - Copy\woextract.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy %282%29\woextract.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy %282%29\woextract.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy %282%29\woextract.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy %282%29\woextract.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy %282%29\woextract.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy %282%29\woextract.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy\woextract.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy\woextract.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy\woextract.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy\woextract.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy\woextract.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder - Copy\woextract.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder\woextract.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder\woextract.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder\woextract.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder\woextract.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder\woextract.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\Report\workorder\woextract.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\service\agToaster.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\service\agToaster.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\service\app.material.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\service\app.material.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\service\auth.interceptor.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\service\auth.interceptor.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\service\auth.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\service\auth.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\service\errorInterceptor.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\service\errorInterceptor.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\shared.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\shared.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\assetstatus\assetstatus.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\assetstatus\assetstatus.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\assetstatus\assetstatus.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\assetstatus\assetstatus.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\assetstatus\assetstatus.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\assetstatus\assetstatus.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\assetswap\assetswap.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\assetswap\assetswap.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\assetswap\assetswap.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\assetswap\assetswap.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\assetswap\assetswap.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\assetswap\assetswap.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents - Copy\cancelrwbevent.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents - Copy\cancelrwbevent.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents - Copy\cancelrwbevents.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents - Copy\cancelrwbevents.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents - Copy\cancelrwbevents.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents - Copy\cancelrwbevents.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents - Copy\rwbevent.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents - Copy\rwbevent.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents - Copy\rwbevents.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents - Copy\rwbevents.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents\cancelrwbevent.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents\cancelrwbevent.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents\cancelrwbevents.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents\cancelrwbevents.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents\cancelrwbevents.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents\cancelrwbevents.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents\cancelrwbevents.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents\cancelrwbevents.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents\rwbevents.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\cancelrwbevents\rwbevents.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopen - Copy\joborderopen.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopen - Copy\joborderopen.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopen - Copy\joborderopen.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopen - Copy\joborderopen.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopen - Copy\joborderopen.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopen - Copy\joborderopen.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopenclose\joborderclose.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopenclose\joborderclose.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopenclose\joborderclose.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopenclose\joborderclose.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopenclose\joborderclose.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopenclose\joborderclose.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopenclose\joborderfuelsupplier.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopenclose\joborderfuelsupplier.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopenclose\workorderactualmanpower - Copy.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopenclose\workorderactualmanpower - Copy.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopenclose\workorderactualmanpower.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopenclose\workorderactualmanpower.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopen\joborderopen.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopen\joborderopen.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopen\joborderopen.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopen\joborderopen.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopen\joborderopen.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\joborderopen\joborderopen.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbevent\cancelrwbevents.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbevent\cancelrwbevents.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbevent\rwbevent.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbevent\rwbevent.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbevent\rwbevent.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbevent\rwbevent.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbevent\rwbevent.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbevent\rwbevent.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbexpense\rwbexpense.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbexpense\rwbexpense.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbexpense\rwbexpense.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbexpense\rwbexpense.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbexpense\rwbexpense.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbexpense\rwbexpense.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbexpense\rwbexpensedetail.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwbexpense\rwbexpensedetail.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwb\rwb.component.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwb\rwb.component.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwb\rwb.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwb\rwb.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwb\rwb.service.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwb\rwb.service.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwb\rwbothercharges.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwb\rwbothercharges.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwb\rwbproduct.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\rwb\rwbproduct.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\transaction.module.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\transaction.module.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\transaction.routes.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\app\transaction\transaction.routes.js.map" />
+    <None Remove="ClientApp\dist\out-tsc\src\main.js" />
+    <None Remove="ClientApp\dist\out-tsc\src\main.js.map" />
+    <None Remove="ClientApp\dist\PMMaintenance.png" />
+    <None Remove="ClientApp\dist\polyfills-es2015.js" />
+    <None Remove="ClientApp\dist\polyfills-es2015.js.map" />
+    <None Remove="ClientApp\dist\polyfills-es5.js" />
+    <None Remove="ClientApp\dist\polyfills-es5.js.map" />
+    <None Remove="ClientApp\dist\Recall.png" />
+    <None Remove="ClientApp\dist\Reject.png" />
+    <None Remove="ClientApp\dist\report-report-module-es2015.js" />
+    <None Remove="ClientApp\dist\report-report-module-es2015.js.map" />
+    <None Remove="ClientApp\dist\report-report-module-es5.js" />
+    <None Remove="ClientApp\dist\report-report-module-es5.js.map" />
+    <None Remove="ClientApp\dist\resolve.PNG" />
+    <None Remove="ClientApp\dist\Return.png" />
+    <None Remove="ClientApp\dist\runtime-es2015.js" />
+    <None Remove="ClientApp\dist\runtime-es2015.js.map" />
+    <None Remove="ClientApp\dist\runtime-es5.js" />
+    <None Remove="ClientApp\dist\runtime-es5.js.map" />
+    <None Remove="ClientApp\dist\Save.png" />
+    <None Remove="ClientApp\dist\Search.png" />
+    <None Remove="ClientApp\dist\styles.css" />
+    <None Remove="ClientApp\dist\styles.css.map" />
+    <None Remove="ClientApp\dist\submit.PNG" />
+    <None Remove="ClientApp\dist\swap.png" />
+    <None Remove="ClientApp\dist\transaction-transaction-module-es2015.js" />
+    <None Remove="ClientApp\dist\transaction-transaction-module-es2015.js.map" />
+    <None Remove="ClientApp\dist\transaction-transaction-module-es5.js" />
+    <None Remove="ClientApp\dist\transaction-transaction-module-es5.js.map" />
+    <None Remove="ClientApp\dist\transfer.png" />
+    <None Remove="ClientApp\dist\Undo.png" />
+    <None Remove="ClientApp\dist\UndoTiny.png" />
+    <None Remove="ClientApp\dist\Upload.png" />
+    <None Remove="ClientApp\dist\vendor-es2015.js" />
+    <None Remove="ClientApp\dist\vendor-es2015.js.map" />
+    <None Remove="ClientApp\dist\vendor-es5.js" />
+    <None Remove="ClientApp\dist\vendor-es5.js.map" />
+    <None Remove="ClientApp\report.20210927.121227.13840.0.001.json" />
+    <None Remove="ClientApp\report.20211013.164735.14104.0.001.json" />
+    <None Remove="ClientApp\src\app\common\footer\footer.component.spec.ts" />
+    <None Remove="ClientApp\src\app\common\login\login.ts" />
+    <None Remove="ClientApp\src\app\common\main\content-container.directive.ts" />
+    <None Remove="ClientApp\src\app\common\main\main.component.css" />
+    <None Remove="ClientApp\src\app\common\main\main.component.html" />
+    <None Remove="ClientApp\src\app\common\main\main.component.js" />
+    <None Remove="ClientApp\src\app\common\main\main.component.js.map" />
+    <None Remove="ClientApp\src\app\common\main\main.component.ts" />
+    <None Remove="ClientApp\src\app\common\main\skeleton.component.ts" />
+    <None Remove="ClientApp\src\app\common\main\tab-content.component.js" />
+    <None Remove="ClientApp\src\app\common\main\tab-content.component.js.map" />
+    <None Remove="ClientApp\src\app\common\main\to be deleted\main-layout.component.css" />
+    <None Remove="ClientApp\src\app\common\main\to be deleted\main-layout.component.html" />
+    <None Remove="ClientApp\src\app\common\main\to be deleted\main-layout.component.js" />
+    <None Remove="ClientApp\src\app\common\main\to be deleted\main-layout.component.ts" />
+    <None Remove="ClientApp\src\app\common\myform\myform.component.js" />
+    <None Remove="ClientApp\src\app\common\myform\myform.component.js.map" />
+    <None Remove="ClientApp\src\app\common\myform\myform.service.js" />
+    <None Remove="ClientApp\src\app\common\myform\myform.service.js.map" />
+    <None Remove="ClientApp\src\app\finance\accessorialinvoice\shared.component.ts" />
+    <None Remove="ClientApp\src\app\finance\clientrate\crdedicatedtolltax.ts" />
+    <None Remove="ClientApp\src\app\finance\clientrate\crfreightklton.ts" />
+    <None Remove="ClientApp\src\app\finance\payment\knockoff.js" />
+    <None Remove="ClientApp\src\app\finance\payment\knockoff.js.map" />
+    <None Remove="ClientApp\src\app\finance\payment\knockoff.ts" />
+    <None Remove="ClientApp\src\app\finance\wf_clientrate\wf_crhandling.ts" />
+    <None Remove="ClientApp\src\app\helper\agDateFormat.js" />
+    <None Remove="ClientApp\src\app\helper\agDateFormat.js.map" />
+    <None Remove="ClientApp\src\app\helper\agDateFormat.ts" />
+    <None Remove="ClientApp\src\app\helper\date\ag-date.component.ts" />
+    <None Remove="ClientApp\src\app\helper\date\ag-editor.component.ts" />
+    <None Remove="ClientApp\src\app\helper\error\page-not-found - Copy.component.ts" />
+    <None Remove="ClientApp\src\app\helper\error\page-not-found.component.ts" />
+    <None Remove="ClientApp\src\app\helper\service\search-dialog.service.ts" />
+    <None Remove="ClientApp\src\app\helper\service\tab.service.ts" />
+    <None Remove="ClientApp\src\environments\environment.js" />
+    <None Remove="ClientApp\src\environments\environment.js.map" />
+    <None Remove="ClientApp\src\__styles.css" />
+    <None Remove="ClientApp\src\__Styles.min.css" />
+    <None Remove="ClientApp\src\__Styles.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\app\common\footer\footer.component.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\common\main\content-container.directive.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\common\main\main.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\common\main\skeleton.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\common\main\tab-content.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\common\main\tab.model.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\common\main\tab.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\finance\accessorialinvoice\shared.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\finance\banktransfer\arinvoicedetail.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\finance\clientrate\crhandling.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\finance\clientrate\wf_clientrate.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\finance\clientrate\wf_clientrate.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\finance\clientrate\wf_clientrate.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\finance\payment\knockoff.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\finance\payment\paymentallocation.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\helper\agDateFormat.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\helper\agGrid-date.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\helper\guard\auth.gl.guard.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\helper\outstandingpiv\outstandingpiv.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\helper\outstandingslip\outstandingslip.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\helper\outstandingtrip\outstandingtrip.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\master\shipper\shipper.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\master\shipper\shipper.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\master\shipper\shipper.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\environments\environment.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_WebToolingArtifacts Remove="Properties\PublishProfiles\TMS UAT Deployment.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\finance\chequebook\" />
+    <Folder Include="ClientApp\src\app\helper\date\" />
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production --base-href /TMS/" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --configuration production --base-href /TMS/" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES2019</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <TypeScriptExperimentalDecorators>True</TypeScriptExperimentalDecorators>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>2</WarningLevel>
+  </PropertyGroup>
+
+</Project>

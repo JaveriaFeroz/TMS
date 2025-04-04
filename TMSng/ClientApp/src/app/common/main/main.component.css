@@ -1,0 +1,11 @@
+@import "../../../assets/CSS/MainLayout.css";
+
+
+.developer {
+  text-align: center;
+  color: #CC3333;
+  font-size: medium;
+  display: inline-block;
+  width: 100vw;
+  font-family: Monotype Corsiva
+}

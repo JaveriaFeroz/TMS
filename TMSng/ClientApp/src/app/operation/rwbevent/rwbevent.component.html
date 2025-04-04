@@ -1,0 +1,337 @@
+<form [formGroup]="frmRWBEvent">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Rwb Events</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <button type="button" id="btnSave" matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb100" color="accent">
+          <mat-label>Rwb #</mat-label>
+          <input formControlName="rwbNo" #rwbNo matTooltip="Rwb #" matInput maxlength="10" numbersOnly (keydown.enter)="get(rwbNo.value)" required>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Status</mat-label>
+          <input formControlName="stateName" matTooltip="Status" matInput disabled>
+          <input formControlName="emptryTrip" hidden>
+        </mat-form-field>
+      </td>
+      <td class="slider">
+        <mat-slide-toggle *ngIf="!frmRWBEvent.get('enablePartialDelivery').value" formControlName="outsourced" color="primary" readonly>Outsourced Vehicle?</mat-slide-toggle>
+      </td>
+      <td></td>    
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb250">
+          <mat-label>Event</mat-label>
+          <mat-select (selectionChange)="onEventChange()" formControlName="eventId" matTooltip="Event" #eventid required>
+            <mat-option *ngFor="let Event of lstEvent" [value]="Event.eventId">
+              {{Event.eventName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--  <mat-error *ngIf="!frmRWBEvent.get('eventId').value && frmRWBEvent.get('eventId').touched">Please Select Event</mat-error>-->
+      </td>
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Event Date</mat-label>
+          <input matInput [matDatepicker]="mdpEvent" [min]="minDate" [max]="maxDate" matTooltip="Event Date" formControlName="eventDate" required>
+          <mat-datepicker-toggle matSuffix [for]="mdpEvent"></mat-datepicker-toggle>
+          <mat-datepicker #mdpEvent></mat-datepicker>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmRWBEvent.get('EventDate').value && frmRWBEvent.get('EventDate').touched">Select Event Date</mat-error>-->
+      </td>
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Event Time</mat-label>
+          <input type="time" matInput matTooltip="Event Time" formControlName="eventTime" required>
+
+        </mat-form-field>
+        <!--  <mat-error *ngIf="!frmRWBEvent.get('EventTime').value && frmRWBEvent.get('EventTime').touched">Select Event Time</mat-error>-->
+      </td>
+      <td *ngIf="!frmRWBEvent.get('outsourced').value">
+        <mat-form-field class="tb100">
+          <mat-label>Current KMs</mat-label>
+          <input type="number" formControlName="currentKMs" min="1" max="9999999999" matTooltip="Enter Current KMs" maxlength="11" matInput oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb250" *ngIf="frmRWBEvent.get('enablePartialDelivery').value
+          && !frmRWBEvent.get('emptryTrip').value && frmRWBEvent.get('eventId').value==8">
+          <mat-label>Consignee</mat-label>
+          <mat-select (selectionChange)="onCosigneeChange()" formControlName="consigneeId" matTooltip="Consignee">
+            <mat-option *ngFor="let c of lstConsignee" [value]="c.consigneeId"> {{c.consigneeName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td colspan="2" rowspan="5" >
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>    
+    </tr>
+
+    <tr>
+      <td>
+        <span>
+          <mat-form-field class="tb100" *ngIf="!frmRWBEvent.get('outsourced').value && !frmRWBEvent.get('enablePartialDelivery').value &&
+                frmRWBEvent.get('changeAsset').value  &&
+                (frmRWBEvent.get('eventId').value==2 || frmRWBEvent.get('eventId').value==4 || frmRWBEvent.get('eventId').value==7)">
+            <mat-label>Asset</mat-label>
+            <mat-select (selectionChange)="onAssetChange($event.value)" formControlName="vehicleId" matTooltip="Asset">
+              <mat-option *ngFor="let Asset of lstAsset" [value]="Asset.assetId">
+                {{Asset.assetNo}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="tb100" *ngIf="!frmRWBEvent.get('outsourced').value &&  !frmRWBEvent.get('changeAsset').value
+                          && (frmRWBEvent.get('eventId').value==2 || frmRWBEvent.get('eventId').value==4
+                          || frmRWBEvent.get('eventId').value==7)">
+            <mat-label>Asset</mat-label>
+            <input type="text" formControlName="vehicleNo" matTooltip="Asset" matInput readonly>
+            <input formControlName="vehicleId" hidden>
+          </mat-form-field>
+
+          <mat-form-field class="tb100" *ngIf="!frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('outsourced').value &&
+                          (frmRWBEvent.get('eventId').value==2 ||frmRWBEvent.get('eventId').value==4 || frmRWBEvent.get('eventId').value==7)">
+            <mat-label>Rented Asset</mat-label>
+            <input type="text" formControlName="rentedVehicleId" matTooltip="Rented Asset" matInput maxlength="8" readonly>
+          </mat-form-field>
+
+          <mat-slide-toggle *ngIf="!frmRWBEvent.get('enablePartialDelivery').value && !frmRWBEvent.get('outsourced').value
+                           && (frmRWBEvent.get('eventId').value==2 || frmRWBEvent.get('eventId').value==4
+                          || frmRWBEvent.get('eventId').value==7)"
+                            formControlName="changeAsset" color="primary" readonly>Change Asset?</mat-slide-toggle>
+        </span>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100" *ngIf="!frmRWBEvent.get('outsourced').value &&
+                        (frmRWBEvent.get('eventId').value==2 ||frmRWBEvent.get('eventId').value==4 || frmRWBEvent.get('eventId').value==7)">
+          <mat-label>TrailerNo</mat-label>
+          <input formControlName="trailerNo" matTooltip="Trailer #" matInput readonly>
+          <input formControlName="trailerId" hidden>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb200" *ngIf="!frmRWBEvent.get('outsourced').value && !frmRWBEvent.get('enablePartialDelivery').value &&
+                        (frmRWBEvent.get('eventId').value==2 || frmRWBEvent.get('eventId').value==4 ||frmRWBEvent.get('eventId').value==7)">
+          <mat-label>Driver 1</mat-label>
+          <input type="text" formControlName="driverName1" matTooltip="Driver 1" maxlength="11" matInput readonly>
+          <input formControlName="driverId1" hidden>
+        </mat-form-field>
+
+        <mat-form-field class="tb150" *ngIf="!frmRWBEvent.get('outsourced').value  && frmRWBEvent.get('enablePartialDelivery').value &&
+                        (frmRWBEvent.get('eventId').value==2 || frmRWBEvent.get('eventId').value==4 ||frmRWBEvent.get('eventId').value==7)">
+          <mat-label>Driver 1</mat-label>
+          <mat-select formControlName="driverId1">
+            <mat-option *ngFor="let Driver of lstDriver" [value]="Driver.driverId">
+              {{Driver.driverName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb200" *ngIf="!frmRWBEvent.get('outsourced').value && !frmRWBEvent.get('enablePartialDelivery').value &&
+                        (frmRWBEvent.get('eventId').value==2 || frmRWBEvent.get('eventId').value==4 ||frmRWBEvent.get('eventId').value==7)">
+          <mat-label>Driver 2</mat-label>
+          <input type="text" formControlName="driverName2" matTooltip="Driver 2" matInput readonly>
+          <input formControlName="driverId2" hidden>
+        </mat-form-field>
+
+        <mat-form-field class="tb150" *ngIf="!frmRWBEvent.get('outsourced').value && frmRWBEvent.get('enablePartialDelivery').value &&
+                        (frmRWBEvent.get('eventId').value==2 || frmRWBEvent.get('eventId').value==4 ||frmRWBEvent.get('eventId').value==7)">
+          <mat-label>Driver 2</mat-label>
+          <mat-select formControlName="driverId2">
+            <mat-option *ngFor="let Driver of lstDriver" [value]="Driver.driverId">
+              {{Driver.driverName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <span>
+          <mat-form-field class="tb150" *ngIf="!frmRWBEvent.get('enablePartialDelivery').value  && frmRWBEvent.get('eventId').value==2 || frmRWBEvent.get('eventId').value==4">
+            <mat-label>Arrival Point</mat-label>
+            <mat-select formControlName="toCityId" matTooltip="City">
+              <mat-option *ngFor="let City of lstCity" [value]="City.cityId">
+                {{City.cityName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>          
+        </span>
+      </td>
+
+      <td>
+        <span>
+          <mat-form-field class="tb150" *ngIf="!frmRWBEvent.get('enablePartialDelivery').value  && frmRWBEvent.get('outsourced').value && frmRWBEvent.get('eventId').value==2 ">
+            <mat-label>Supplier</mat-label>
+            <mat-select formControlName="supplierId" matTooltip="Supplier">
+              <mat-option *ngFor="let Supplier of lstSupplier" [value]="Supplier.supplierId">
+                {{Supplier.supplierName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="tb150" *ngIf="!frmRWBEvent.get('enablePartialDelivery').value && !frmRWBEvent.get('outsourced').value && frmRWBEvent.get('eventId').value==2 && frmRWBEvent.get('leaseTypeId').value !=1">
+            <mat-label>Supplier</mat-label>
+            <input type="text" formControlName="supplierName" matTooltip="SupplierName" matInput readonly>
+          </mat-form-field>
+        </span>
+      </td>
+      
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb250" *ngIf="frmRWBEvent.get('eventId').value==8">
+          <mat-label>Name</mat-label>
+          <input type="text" formControlName="receiverName" maxlength="25" matTooltip="Receiver Name" matInput>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb150" *ngIf="frmRWBEvent.get('eventId').value==8 ">
+          <mat-label>CNIC</mat-label>
+          <input type="text" formControlName="receiverCNIC" maxlength="15" matTooltip="Receiver CNIC" matInput>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb100" *ngIf="!frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 ">
+          <mat-label>Tonnage</mat-label>
+          <input type="number" formControlName="tonnage" min="1" max="999999" matTooltip="Enter Tonnage" maxlength="6" matInput oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb100" *ngIf="!frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 ">
+          <mat-label>Grace Hours</mat-label>
+          <input type="number" formControlName="detGraceHRs" min="0" max="999" matTooltip="Enter Grace Hours" maxlength="6" matInput oninput="validity.valid||(value='');">
+        </mat-form-field>
+        <mat-checkbox *ngIf="!frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 " formControlName="applyDet" matInput>Apply Det</mat-checkbox>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span>
+          <mat-form-field class="tb250" *ngIf="!frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 ">
+            <mat-label>Invoice #</mat-label>
+            <input type="text" formControlName="invoiceNo" maxlength="15" matTooltip="Invoice #" matInput>
+          </mat-form-field>
+
+          <mat-form-field class="tb100" *ngIf="frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 ">
+            <mat-label>Short Qty</mat-label>
+            <input type="number" formControlName="shortQty" (keydown.Tab)="calcShortageAmount(frmRWBEvent.get('shortQty').value, frmRWBEvent.get('shortRate').value)"
+                   min="0" max="999999" matTooltip="Enter short qty here" maxlength="6" matInput
+                   oninput="validity.valid||(value='');">
+          </mat-form-field>
+        </span>
+      </td>
+
+      <td>
+        <span>
+          <mat-form-field class="tb150" *ngIf="!frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 ">
+            <mat-label>OBD #</mat-label>
+            <input type="text" formControlName="deliveryNo" maxlength="15" matTooltip="Delivery #" matInput>
+          </mat-form-field>
+
+          <mat-form-field class="tb100" *ngIf="frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 ">
+            <mat-label>Shortage Rate</mat-label>
+            <input type="number" formControlName="shortRate" min="0" max="999999" matTooltip="Enter material rate here for calculation of short qty value" maxlength="6" 
+                   (keydown.Tab)="calcShortageAmount(frmRWBEvent.get('shortQty').value, frmRWBEvent.get('shortRate').value)" matInput oninput="validity.valid||(value='');">
+          </mat-form-field>
+        </span>            
+      </td>
+
+      <td>
+        <span>
+          <mat-form-field class="tb150" *ngIf="!frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 ">
+            <mat-label>Shpiment#</mat-label>
+            <input type="text" formControlName="shpimentNo" matTooltip="Shpiment#" matInput>
+          </mat-form-field>
+
+          <mat-form-field class="tb100" *ngIf="frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 ">
+            <mat-label>Shortage Amount</mat-label>
+            <input type="number" formControlName="shortAmount" matInput readonly>
+          </mat-form-field>
+        </span>
+      </td>
+
+      <td>
+          <mat-form-field class="tb200" *ngIf="frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 ">
+            <mat-label>Shortage Desc</mat-label>
+            <input formControlName="shortageDesc" #acName matTooltip="Enter Description" matInput maxlength="500">
+          </mat-form-field>       
+      </td>
+    </tr>
+
+    <!--<tr>
+      <td>
+        <mat-form-field class="tb150" *ngIf="frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 ">
+          <mat-label>Arrival Date</mat-label>
+          <input matInput [matDatepicker]="dpArrivalDate" [min]="minDate" [max]="maxDate" matTooltip="Arrival Date" formControlName="arrivalDate">
+          <mat-datepicker-toggle matSuffix [for]="dpArrivalDate"></mat-datepicker-toggle>
+          <mat-datepicker #dpArrivalDate></mat-datepicker>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100" *ngIf="frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 ">
+          <mat-label>Arrival Time</mat-label>
+          <input type="time" matInput matTooltip="Arrival Time" formControlName="arrivalTime">
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb150" *ngIf="frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 ">
+          <mat-label>Next Dept Date</mat-label>
+          <input matInput [matDatepicker]="dpDeptDate" [min]="minDate" [max]="maxDate" matTooltip="Next Dept Date" formControlName="nextDepartureDate">
+          <mat-datepicker-toggle matSuffix [for]="dpDeptDate"></mat-datepicker-toggle>
+          <mat-datepicker #dpDeptDate></mat-datepicker>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100" *ngIf="frmRWBEvent.get('enablePartialDelivery').value && frmRWBEvent.get('eventId').value==8 ">
+          <mat-label>Next Dept Time</mat-label>
+          <input type="time" matInput matTooltip="Next Dept Time" formControlName="nextDepartureTime">
+        </mat-form-field>
+      </td>
+    </tr>-->
+
+    <tr>
+      <td colspan="4" style="position: fixed; padding: 2em;  top: 45%;">      
+        <ag-grid-angular class="ag-theme-balham grdLog" id="grdLog"
+                         [gridOptions]="goLog"
+                         [columnDefs]="colLog"
+                         [rowData]="logData">
+        </ag-grid-angular>
+      </td>
+      
+    </tr>
+  </table>
+</form>
+<footer>
+  <app-footer [items]="footer"></app-footer>
+</footer>

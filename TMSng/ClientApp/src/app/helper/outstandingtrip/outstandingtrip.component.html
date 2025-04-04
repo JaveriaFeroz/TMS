@@ -1,0 +1,9 @@
+<h2 mat-dialog-title class="mcTitle">Outstanding Trips</h2>
+<div mat-dialog-content class="divOTGrid">
+  <ag-grid-angular class="ag-theme-balham grdOT" id="grdOT"
+                   [gridOptions]="goTrip" (cellValueChanged)="onSelected($event)" [columnDefs]="colTrip" [rowData]="tripData"></ag-grid-angular>
+</div>
+<div class="float-right">
+  <button type="button" class="save" *ngIf="!voucherNo" title="Click to tag all selected Trips to this Journal Payment" (click)="onSubmit()"></button>
+  <button type="button" class="exit" title="Click to cancel the process and go back to previous window" (click)="onClose()"></button>
+</div>

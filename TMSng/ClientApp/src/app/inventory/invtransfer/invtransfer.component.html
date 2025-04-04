@@ -1,0 +1,103 @@
+<form [formGroup]="frmInvTransfer">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Inventory Transfer</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnSearch" matTooltip="Search from lookup list" (click)="tbSearch()" class="find"></button>
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnAdd" matTooltip="Click to create new Entry" (click)="tbAdd()" class="add"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <button type="button" id="btnSave"  matTooltip="Click to Save current Entry"  (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb60" color="accent">
+          <mat-label>Trans #</mat-label>
+          <input formControlName="transferId" #transferId matTooltip="Transfer Id, auto generated for new entry" matInput maxlength="6" numbersOnly (keydown.enter)="get(transferId.value)">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Transfer Date</mat-label>
+          <input matInput [matDatepicker]="mdpTransfer" [min]="minDate" [max]="maxDate" matTooltip="Transfer Date" formControlName="transferDate" required>
+          <mat-datepicker-toggle matSuffix [for]="mdpTransfer"></mat-datepicker-toggle>
+          <mat-datepicker #mdpTransfer></mat-datepicker>
+        </mat-form-field>
+      </td>
+      <td></td>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Status</mat-label>
+          <input formControlName="statusName" matTooltip="Transfer status" matInput disabled>
+        </mat-form-field>
+      </td>
+
+      <td colspan="3" rowspan="3">
+        <div *ngIf="errors?.length >0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Branch From</mat-label>
+          <mat-select formControlName="fromBranchId" #branchId required>
+            <mat-option *ngFor="let b of lstFBranch" [value]="b.branchId"> {{b.branchName}} </mat-option>
+          </mat-select>
+          </mat-form-field>     
+      </td>
+
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Branch To</mat-label>
+          <mat-select formControlName="toBranchId" required>
+            <mat-option *ngFor="let b of lstTBranch" [value]="b.branchId"> {{b.branchName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="3">
+        <div class="divInvTranAdjGrid" >
+          <div class="grdToolbar" id="tbGrid">
+            <button type="button" (click)="onAddLine()" id="btnGridAdd" class="add" title="Add Line Item"></button>
+            <button type="button" (click)="onDeleteLine()" id="btnGridDelete" class="delete" title="Remove selected line Item"></button>
+          </div>
+          <ag-grid-angular class="ag-theme-balham grdInvTranAdj" id="grdInvTranAdj"
+            [gridOptions]="goTransfer" [columnDefs]="colTransfer" [rowData]="transferData"></ag-grid-angular>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+<footer style="height: 8vh;">
+  <div class="float-right" *ngIf="frmInvTransfer.get('stateId').value > 0">
+    <button type="button" [disabled]="submissionButtonsStatus" id="btnHistory" matTooltip="Click to view selected Inventory Transfer Transaction Status History" (click)="tbHistory(frmInvTransfer.get('transferId').value)" class="history"></button>
+  </div>
+  <div class="float-right" *ngIf="frmInvTransfer.get('stateId').value==1 &&  !frmInvTransfer.get('completed').value &&
+                            frmInvTransfer.get('owner').value==this.footer.createdBy">
+    <button type="button" [disabled]="submissionButtonsStatus" id="btnCancel" matTooltip="Cancel this request to mark this form as completed (Cancelled). This form can't be used afterwards" (click)="tbFormSubmission(frmInvTransfer.get('transferId').value,99)" class="cancel"></button>
+  </div>
+  <div class="float-right" *ngIf="frmInvTransfer.get('stateId').value==1 && !frmInvTransfer.get('completed').value &&
+                            frmInvTransfer.get('owner').value==this.footer.createdBy">
+    <button type="button" [disabled]="submissionButtonsStatus" id="btnTransfer" matTooltip="Click to mark this Inventory Transfer as In Transit" (click)="tbFormSubmission(frmInvTransfer.get('transferId').value,9)" class="transfer"></button>
+  </div>
+  <div class="float-right" *ngIf="frmInvTransfer.get('stateId').value==9 && frmInvTransfer.get('owner').value==this.currentUserId && !frmInvTransfer.get('completed').value &&
+                frmInvTransfer.get('owner').value!=this.footer.createdBy">
+    <button type="button" [disabled]="submissionButtonsStatus" id="btnReceived" matTooltip="Click to mark this Inventory Transfer as received @ Destination" (click)="tbFormSubmission(frmInvTransfer.get('transferId').value,10)" class="received"></button>
+  </div>
+  <app-footer [items]="footer"></app-footer>
+</footer>

@@ -1,0 +1,83 @@
+@import "../../../assets/CSS/MainLayout.css";
+
+/*border-collapse: collapse;*/
+
+.main_container {
+  /*background-color: rgb(69, 77, 85) !important;*/
+  background: url(../../../assets/images/bg_login.jpg) no-repeat;
+  /* Full height */
+  height: 100vh;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.divVerticalHalf {
+  float: left;
+  display: table;
+  width: 49vw;
+  height: 95.5vh;
+}
+
+.divRow
+{
+    display: table-row;
+}
+
+.divCellLogin {
+  display: table-cell;
+  /*vertical-align: middle;*/
+  padding-top: 10vh;
+  text-align: center;
+  float: none;
+  height: 70vh;
+}
+
+.divAppLogo {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  float: none;
+  height: 75vh;
+  padding-left: 5vw;
+}
+
+.divGILLogo {
+  display: table-cell;
+  vertical-align: top;
+  text-align: right;
+  float: none;
+  height: 15vh;
+}
+
+.divDisclaimer {
+  display: table-cell;
+  vertical-align: bottom;
+  text-align: left;
+  float: none;
+  height: 15vh;
+  text-align: left;
+  color: lightslategrey;
+  font-size: 7pt;
+  padding-bottom: 5px;
+}
+
+.gilLogo {
+  width: 16vw;
+  height: 12vh;
+  padding-top: 5px;
+}
+
+.appLogo {
+  width: 35vw;
+  height: 40vh;
+}
+
+.developer {
+  text-align: center;
+  color: #CC3333;
+  font-size: medium;
+  display: inline-block;
+  width: 100vw;
+  font-family: Monotype Corsiva
+}

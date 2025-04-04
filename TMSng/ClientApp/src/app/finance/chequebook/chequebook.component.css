@@ -1,0 +1,8 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divIAGrid {
+  width: 30vw;
+  height: 60vh;
+  float: left;
+}

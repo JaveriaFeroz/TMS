@@ -1,0 +1,14 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.grdSKU {
+  height: 48vh;
+  width: 25vw;
+  float: left;
+}
+
+.grdConsignee {
+  height: 48vh;
+  width: 38vw;
+  float: left;
+}

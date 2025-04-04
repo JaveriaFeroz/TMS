@@ -1,0 +1,14 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divSAGrid {
+  width: 80vw;
+  height: 75vh;
+ /* float: left;*/
+}
+
+.grdSA {
+  width: 81vw;
+  height: 67vh;
+/*  float: left;*/
+}

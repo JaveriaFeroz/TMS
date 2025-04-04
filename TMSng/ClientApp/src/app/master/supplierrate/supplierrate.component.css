@@ -1,0 +1,15 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+
+.divSRGrid {
+  width: 30vw;
+  height: 40vh;
+  /*float: left;*/
+}
+
+.grdSR {
+  width: 31vw;
+  height: 33vh;
+  /*float: left;*/
+}

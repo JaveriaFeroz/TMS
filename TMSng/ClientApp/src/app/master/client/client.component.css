@@ -1,0 +1,14 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divCIFGrid {
+  width: 25vw;
+  height: 40vh;
+  /*float: left;*/
+}
+
+.grdCIF {
+  width: 26vw;
+  height: 33vh;
+  /*float: left;*/
+}

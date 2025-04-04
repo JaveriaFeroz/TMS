@@ -1,0 +1,58 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divWOGrid {
+  height: 50vh;
+  width: 39vw;
+  float: left;
+}
+
+.grdEstInventory {
+  height: 40vh;
+  width: 45vw;
+}
+
+.grdEstOtherCharges {
+  height: 40vh;
+  width: 38vw;
+}
+
+.grdInventory {
+  height: 40vh;
+  width: 45vw;
+  /*float: left;*/
+}
+
+.grdOtherCharges {
+  height: 40vh;
+  width: 38vw;
+  /*float: left;*/
+}
+
+.grdActivity {
+  padding-top: 4vh;
+  height:46vh;
+  width: 21vw;
+}
+
+
+
+:host ::ng-deep .mat-tab-label {
+  height: 30px;
+  min-width: 10px;
+}
+
+  :host ::ng-deep .mat-tab-label.mat-tab-label-active {
+    height: 30px;
+    min-width: 10px;
+  }
+
+
+::ng-deep .mat-tab-header, .mat-tab-nav-bar {
+  border-bottom: 0;
+  padding: 1px
+}
+
+::ng-deep.mat-tab-group {
+  width: 700px !important;
+}

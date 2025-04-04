@@ -1,0 +1,38 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+
+
+.mat-radio-group {
+  width: 50%;
+  font-size: 10px;
+  text-align: center;
+}
+
+
+mat-radio-button {
+  color: blue;
+  font-weight: bold;
+  /* display: inline; */
+}
+
+
+.site-title {
+  color: #ff5900;
+  font-family: Arial;
+  font-size: 10pt;
+  margin: 0;
+}
+
+.divESFrid {
+  width: 90vw;
+  height: 70vh;
+/*  float: left;*/
+}
+
+
+.grdES {
+  width: 91vw;
+  height: 63vh;
+/*  float: left;*/
+}

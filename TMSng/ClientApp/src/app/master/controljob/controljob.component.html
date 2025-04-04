@@ -1,0 +1,56 @@
+<form [formGroup]="frmControlJob">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Control Job</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnSave" matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Period </mat-label>
+          <input formControlName="period" matTooltip="Financal Period"  matInput disabled>
+        </mat-form-field>
+      </td>
+      <td colspan="3"></td>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Revenue Job # </mat-label>
+          <input formControlName="revenueJobNo" matTooltip=" Enter Revenue Job #"  matInput>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Cost Job # </mat-label>
+          <input formControlName="costJobNo" matTooltip="Enter CostJob #"  matInput>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Maintenance Job #</mat-label>
+          <input formControlName="maintenanceJobNo" matTooltip="Enter Maintenance Job #"  matInput>
+        </mat-form-field>
+      </td>
+    </tr>
+
+
+  </table>
+</form>

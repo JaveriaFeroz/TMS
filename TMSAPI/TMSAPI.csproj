@@ -1,0 +1,107 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>38023dbd-6561-4b90-b3da-4b7d7a29e6af</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Insurance\Models\InsDoc\**" />
+    <Compile Remove="Areas\Master\Models\SubContractorType\**" />
+    <Compile Remove="Areas\Master\Models\SubContractor\**" />
+    <Compile Remove="Areas\Master\Models\TechnicianType\**" />
+    <Compile Remove="Areas\Master\Models\Technician\**" />
+    <Compile Remove="Areas\Master\Models\_NonInventoryProduct\**" />
+    <Content Remove="Areas\Insurance\Models\InsDoc\**" />
+    <Content Remove="Areas\Master\Models\SubContractorType\**" />
+    <Content Remove="Areas\Master\Models\SubContractor\**" />
+    <Content Remove="Areas\Master\Models\TechnicianType\**" />
+    <Content Remove="Areas\Master\Models\Technician\**" />
+    <Content Remove="Areas\Master\Models\_NonInventoryProduct\**" />
+    <EmbeddedResource Remove="Areas\Insurance\Models\InsDoc\**" />
+    <EmbeddedResource Remove="Areas\Master\Models\SubContractorType\**" />
+    <EmbeddedResource Remove="Areas\Master\Models\SubContractor\**" />
+    <EmbeddedResource Remove="Areas\Master\Models\TechnicianType\**" />
+    <EmbeddedResource Remove="Areas\Master\Models\Technician\**" />
+    <EmbeddedResource Remove="Areas\Master\Models\_NonInventoryProduct\**" />
+    <None Remove="Areas\Insurance\Models\InsDoc\**" />
+    <None Remove="Areas\Master\Models\SubContractorType\**" />
+    <None Remove="Areas\Master\Models\SubContractor\**" />
+    <None Remove="Areas\Master\Models\TechnicianType\**" />
+    <None Remove="Areas\Master\Models\Technician\**" />
+    <None Remove="Areas\Master\Models\_NonInventoryProduct\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Finance\Controllers\NoteController.cs" />
+    <Compile Remove="Areas\Finance\Models\ChequeBook\Cheque.cs" />
+    <Compile Remove="Areas\Finance\Models\ClientRate\__ClientRateDetention.cs" />
+    <Compile Remove="Areas\Finance\Models\ClientRate\__ClientRateTripLiter.cs" />
+    <Compile Remove="Areas\Finance\Models\ClientRate\___ClientRateDeliveryTonnage.cs" />
+    <Compile Remove="Areas\Finance\Models\ClientRate\___ClientRateFixedPerTripPlusPerKM.cs" />
+    <Compile Remove="Areas\Finance\Models\FreightRate\__LocalFreightRate.cs" />
+    <Compile Remove="Areas\Finance\Models\FreightRate\__UpCountryFreightRate.cs" />
+    <Compile Remove="Areas\Insurance\Models\InsClaim\__InsClaimRecovery.cs" />
+    <Compile Remove="Areas\Insurance\Models\InsClaim\___InsuranceStatus.cs" />
+    <Compile Remove="Areas\Insurance\Models\InsClaim\___PaymentType.cs" />
+    <Compile Remove="Areas\Insurance\Models\InsPolicy\___InsPolicyDept.cs" />
+    <Compile Remove="Areas\Insurance\Models\InsType\___InsDocs.cs" />
+    <Compile Remove="Areas\Master\Controllers\FMProductController.cs" />
+    <Compile Remove="Areas\Master\Controllers\NonInventoryProductController.cs" />
+    <Compile Remove="Areas\Master\Controllers\SubContractorController.cs" />
+    <Compile Remove="Areas\Master\Controllers\SubContractorTypeController.cs" />
+    <Compile Remove="Areas\Master\Controllers\TechnicianController.cs" />
+    <Compile Remove="Areas\Master\Controllers\TechnicianTypeController.cs" />
+    <Compile Remove="Areas\Master\Models\SKU\Product.cs" />
+    <Compile Remove="Areas\Master\Models\SKU\ProductClient.cs" />
+    <Compile Remove="Areas\Master\Models\SKU\Products.cs" />
+    <Compile Remove="Areas\Master\Models\Driver\DriverHVType.cs" />
+    <Compile Remove="Areas\Operation\Models\WorkOrder\___WOEstSubContractor.cs" />
+    <Compile Remove="Areas\Operation\Models\WorkOrder\___WOSubContractor.cs" />
+    <Compile Remove="Areas\Operation\Models\WorkOrder\___WOTechnician.cs" />
+    <Compile Remove="Areas\Operation\Models\WorkOrder\_____WOEstTechnician.cs" />
+    <Compile Remove="Helper\_legacy.agDateTimeHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_WebToolingArtifacts Remove="Properties\PublishProfiles\TMS API Production Deployment.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EnterpriseLibrary.Data.NetCore" Version="6.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Common\Data\" />
+    <Folder Include="Areas\Common\Views\" />
+    <Folder Include="Areas\Download\Data\" />
+    <Folder Include="Areas\Download\Views\" />
+    <Folder Include="Areas\Finance\Data\" />
+    <Folder Include="Areas\Finance\Views\" />
+    <Folder Include="Areas\Insurance\Data\" />
+    <Folder Include="Areas\Insurance\Views\" />
+    <Folder Include="Areas\Inventory\Data\" />
+    <Folder Include="Areas\Inventory\Views\" />
+    <Folder Include="Areas\Master\Data\" />
+    <Folder Include="Areas\Master\Views\" />
+    <Folder Include="Areas\Operation\Data\" />
+    <Folder Include="Areas\Operation\Views\" />
+  </ItemGroup>
+
+
+</Project>

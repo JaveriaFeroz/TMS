@@ -1,0 +1,52 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divTab{
+    width: 78vw;
+    height: 67vh;
+}
+
+mat-tab-group {
+  width: 76vw;
+  height: 64vh;
+}
+
+.mtPersonalInfo {
+  width: 75vw;
+}
+
+.tblPersonalInfo {
+  padding-bottom: 30px;
+  width: 75vw;
+}
+
+.divToolbarDoc {
+  height: 35px;
+  width: 100%;
+}
+
+.divGrid {
+  width: 60vw;
+  height: 60vh;
+  float: left;
+}
+
+.grdTraining {
+  width: 68vw;
+  height: 33vh;
+}
+
+.grdMedical {
+  width: 75vw;
+  height: 33vh;
+}
+
+.grdReference {
+  width: 75vw;
+  height: 33vh;
+}
+
+.grdDocument {
+  width: 70vw;
+  height: 30vh;
+}

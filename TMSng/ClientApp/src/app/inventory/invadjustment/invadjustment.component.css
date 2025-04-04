@@ -1,0 +1,12 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divInvAdjGrid {
+  height: 60vh;
+  width: 58vw;
+}
+
+.grdInvAdj {
+  height: 53vh;
+  width: 56vw;
+}

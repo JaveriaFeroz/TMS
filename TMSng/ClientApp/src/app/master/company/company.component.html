@@ -1,0 +1,187 @@
+<form [formGroup]="frmCompany">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Company</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnSearch" matTooltip="Search from lookup list" (click)="tbSearch()" class="find"></button>
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnAdd" matTooltip="Click to create new Entry" (click)="tbAdd()" class="add"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <button type="button" id="btnSave" matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb60" color="accent">
+          <mat-label>Company Id</mat-label>
+          <input type="text" formControlName="companyId" #companyId matTooltip="Company ID, auto generated for new entry" matInput maxlength="3" numbersOnly (keydown.enter)="get(companyId.value)">
+        </mat-form-field>
+      </td>
+      <!--<td class="slider">
+        <mat-slide-toggle formControlName="isActive" color="primary" readonly>Is Active</mat-slide-toggle>
+      </td>-->
+      <td colspan="3"></td>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td  >
+        <mat-form-field class="tb150">
+          <mat-label>Name</mat-label>
+          <input formControlName="companyName" #acName matTooltip="Enter Company description" matInput maxlength="50" required>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmCompany.get('CompanyName').value && frmCompany.get('CompanyName').touched">Company description is a required field</mat-error>-->
+      </td>
+
+      <td  colspan="3">
+        <mat-form-field class="tb350">
+          <mat-label>Address</mat-label>
+          <input formControlName="companyAddress"  matTooltip="Enter Company Address" matInput maxlength="150" required>
+        </mat-form-field>
+       <!-- <mat-error *ngIf="!frmCompany.get('CompanyName').value && frmCompany.get('CompanyName').touched">Company description is a required field</mat-error>-->
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Bank Account</mat-label>
+          <mat-select name="BankAccountId" formControlName="bankAccountId">
+            <mat-option *ngFor="let Account of lstBankAccount" [value]="Account.accountId">
+              {{Account.accountName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>AR Account</mat-label>
+          <mat-select name="ARAccountId" formControlName="arAccountId">
+            <mat-option *ngFor="let Account of lstARAccount" [value]="Account.accountId">
+              {{Account.accountName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>AP Account</mat-label>
+          <mat-select name="APAccountId" formControlName="apAccountId">
+            <mat-option *ngFor="let Account of lstAPAccount" [value]="Account.accountId">
+              {{Account.accountName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Revenue Account</mat-label>
+          <mat-select name="RWBRevenueAccountId" formControlName="tripRevenueAccountId">
+            <mat-option *ngFor="let Account of lstAccount" [value]="Account.accountId">
+              {{Account.accountName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </td>
+
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Fuel Expense Account</mat-label>
+          <mat-select name="CostFuelAccountId" formControlName="fuelExpenseAccountId">
+            <mat-option *ngFor="let Account of lstAccount" [value]="Account.accountId">
+              {{Account.accountName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </td>
+
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Distance Threshold</mat-label>
+          <input type="number" formControlName="distanceThreshold" min="1" matTooltip="Enter Distance Threshold" matInput maxlength="9" required>
+        </mat-form-field>
+       <!-- <mat-error *ngIf="!frmCompany.get('DistanceThreshold').value && frmCompany.get('DistanceThreshold').touched">Distance Threshold cannot be Equal or Less then Zero</mat-error>-->
+      </td>
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Hours Allowed Before Report</mat-label>
+          <input type="number" formControlName="reportGraceHRs" min="0" matTooltip="Enter Hours Allowed Before Report" matInput maxlength="9">
+        </mat-form-field>
+
+      </td>
+
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Advance Payable Expense</mat-label>
+          <mat-select name="AdvancePayableExpenseAccountId" formControlName="advanceAccountId">
+            <mat-option *ngFor="let Account of lstAccount" [value]="Account.accountId">
+              {{Account.accountName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </td>
+
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>NTN</mat-label>
+          <input formControlName="ntn" #acName matTooltip="Enter NTN" matInput maxlength="15" required>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmCompany.get('NTN').value && frmCompany.get('NTN').touched">NTN is a required field</mat-error>-->
+      </td>
+
+
+    </tr>
+    <tr>
+      <td class="slider">
+        <mat-slide-toggle formControlName="enableGL" color="primary" readonly>Allow GL Entries</mat-slide-toggle>
+      </td>
+      <td class="slider">
+        <mat-slide-toggle formControlName="routeByConsignee" color="primary" readonly>Route By Consignee</mat-slide-toggle>
+      </td>
+      <td class="slider">
+        <mat-slide-toggle formControlName="enablePartialDelivery" color="primary" readonly>Allow Multiple Shippment</mat-slide-toggle>
+      </td>
+      
+    </tr>
+    <tr>
+      <td class="slider">
+        <mat-slide-toggle formControlName="separateFixedInvoice" color="primary" readonly>Seperate Fixed Cost Invoice</mat-slide-toggle>
+      </td>
+      <td class="slider">
+        <mat-slide-toggle formControlName="isMandatoryDriver2" color="primary" readonly>Is Driver 2 Mandatory</mat-slide-toggle>
+      </td>
+      <td class="slider">
+        <mat-slide-toggle formControlName="allowTrailer" color="primary" readonly>Allow Trailer for Tractor Head</mat-slide-toggle>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="3" rowspan="3">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+
+  </table>
+</form>
+

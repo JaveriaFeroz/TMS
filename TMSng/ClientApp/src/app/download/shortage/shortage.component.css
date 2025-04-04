@@ -1,0 +1,15 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+
+
+.divShorageGrid {
+  width: 85vw;
+  height: 65vh;
+/*  float: left;*/
+}
+
+.grdShortage {
+  width: 86vw;
+  height: 57vh;
+}

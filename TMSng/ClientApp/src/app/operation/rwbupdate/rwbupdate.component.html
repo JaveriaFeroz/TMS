@@ -1,0 +1,115 @@
+<form [formGroup]="frmRwbUpdate">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Update RWB Accessorial Info</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <button type="button" id="btnSave" matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb100" color="accent">
+          <mat-label>RWB #</mat-label>
+          <input formControlName="rwbNo" #rwbno matTooltip="Rwb #" matInput maxlength="10" numbersOnly (keydown.enter)="get(rwbno.value)">
+        </mat-form-field>
+      </td>
+      <td colspan="3"></td>
+      <td colspan="2"></td>        
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Customer Order #</mat-label>
+          <input type="text" formControlName="customerOrderNo" #customerOrderNo matTooltip="Customer Order #" matInput maxlength="30">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Client Ref #</mat-label>
+          <input type="text" formControlName="gatePassNo" #rwbid matTooltip="Client Ref #" matInput maxlength="20">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Vehicle Capacity</mat-label>
+          <input type="number" formControlName="vehicleCapacity" matTooltip="Vehicle carriage capacity" matInput readonly tabindex="-1">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb150" *ngIf="!frmRwbUpdate.get('enablePartialDelivery').value">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="categoryId">
+            <mat-option *ngFor="let Category of lstCategory" [value]="Category.categoryId">
+              {{Category.categoryName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb150" *ngIf="!frmRwbUpdate.get('enablePartialDelivery').value">
+          <mat-label>Consginee</mat-label>
+          <mat-select formControlName="consigneeId">
+            <mat-option *ngFor="let Consignee of lstConsignee" [value]="Consignee.consigneeId">
+              {{Consignee.consigneeName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb100" *ngIf="!frmRwbUpdate.get('enablePartialDelivery').value">
+          <mat-label>Carried Weight</mat-label>
+          <input type="number" formControlName="weight_Carried" step="0.01" min="0" max="99999" matTooltip="Enter Carried  Weight" maxlength="9" matInput oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100" *ngIf="!frmRwbUpdate.get('enablePartialDelivery').value">
+          <mat-label>Delivered Weight</mat-label>
+          <input type="number" formControlName="weight_Delivered" step="0.01" min="0" max="99999" matTooltip="Enter Delivered Weight" maxlength="9" matInput oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="3" >
+        <div class="grdToolbar" id="tbGrid" *ngIf="!frmRwbUpdate.get('enablePartialDelivery').value">
+          <button type="button" (click)="onAddSKULine()" id="btnGridSKUAdd" class="add" title="Add Line Item"></button>
+          <button type="button" (click)="onDeleteSKULine()" id="btnGridSKUDelete" class="delete" title="Remove selected line item"></button>
+        </div>
+        <ag-grid-angular *ngIf="!frmRwbUpdate.get('enablePartialDelivery').value"  class="ag-theme-balham grdSKU" id="grdSKU" 
+                         [gridOptions]="goSKU"
+                         [columnDefs]="colSKU"
+                         [rowData]="skuData"></ag-grid-angular>
+
+        <div class="grdToolbar" id="tbGrid" *ngIf="frmRwbUpdate.get('enablePartialDelivery').value" >
+          <button type="button" (click)="onAddConsigneeLine()" id="btnGridConsigneeAdd" class="add" title="Add Line Item"></button>
+          <button type="button" (click)="onDeleteConsigneeLine()" id="btnGridConsigneeDelete" class="delete" title="Remove selected line item"></button>
+        </div>
+        <ag-grid-angular *ngIf="frmRwbUpdate.get('enablePartialDelivery').value==true"  class="ag-theme-balham grdConsignee" id="grdConsignee" 
+                         [gridOptions]="goConsignee" (cellValueChanged)="onConsigneeCellValueChanged($event)"
+                         [columnDefs]="colConsignee"
+                         [rowData]="consigneeData"></ag-grid-angular>
+
+      </td>
+      <td colspan="2" rowspan="3">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>

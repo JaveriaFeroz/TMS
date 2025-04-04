@@ -1,0 +1,47 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.grdOption {
+  width: 30vw;
+  height: 45vh;
+}
+
+.grdBranch{
+    width: 25vw;
+    height: 45vh;
+}
+
+.grdCity {
+  width: 25vw;
+  height: 45vh;
+}
+
+.grdRole {
+  width: 25vw;
+  height: 45vh;
+}
+
+.grdCompany {
+  width: 25vw;
+  height: 45vh;
+}
+
+:host ::ng-deep .mat-tab-label {
+  height: 30px;
+  min-width: 10px;
+}
+
+  :host ::ng-deep .mat-tab-label.mat-tab-label-active {
+    height: 30px;
+    min-width: 10px;
+  }
+
+
+::ng-deep .mat-tab-header, .mat-tab-nav-bar {
+  border-bottom: 0;
+  padding: 1px
+}
+
+::ng-deep.mat-tab-group {
+  width: 500px !important;
+}

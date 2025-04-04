@@ -1,0 +1,13 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divDoc {
+  height: 60vh;
+  width: 37vw;
+  float: left;
+}
+
+.grdDoc {
+  height: 37vh;
+  width: 34vw;
+}

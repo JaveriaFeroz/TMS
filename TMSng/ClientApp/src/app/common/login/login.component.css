@@ -1,0 +1,77 @@
+@import "../../../assets/css/mainlayout.css";
+
+label
+{
+    font-weight: bold;
+    font-family: 'Century Gothic'; 
+    font-size: 10pt;
+}
+
+body {
+  font-family: 'Century Gothic' !important;
+}
+
+
+.div_position {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.div_style {
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+  position: relative;
+  padding: 16px;
+  border-radius: 4px;
+
+}
+
+
+.main_heading {
+  font-family: century gothic;
+  font-size: 23pt;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #6a6a6a;
+  line-height: 34px;
+}
+
+.login_field_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+
+}
+
+.field_group {
+ /* background: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;*/
+  margin-bottom:10px;
+}
+
+.field_style {
+  background: white;
+  padding: 0px 10px;
+  border-radius: 10px;
+  border: 1px solid #e1e1e1;
+  
+}
+
+.mat-form-field-flex {
+  display: inline-flex;
+  align-items: baseline;
+  box-sizing: border-box;
+  width: 100%;
+  background: white;
+  padding: 0px 10px;
+  border-radius: 10px;
+  border: 1px solid #e1e1e1;
+  
+}
+
+

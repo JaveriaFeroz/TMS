@@ -1,0 +1,65 @@
+<form [formGroup]="frmOperational">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Operational Mis Report</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+         
+          <button type="button" id="btnExtract" matTooltip="Click To Start Extraction Process" (click)="tbExport()" class="export"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Back to Mian Page" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Date From</mat-label>
+          <input matInput [matDatepicker]="mdpDateFrom" [min]="MinDate" [max]="MaxDate" matTooltip="Enter From Date" formControlName="dateFrom" required>
+          <mat-datepicker-toggle matSuffix [for]="mdpDateFrom"></mat-datepicker-toggle>
+          <mat-datepicker #mdpDateFrom></mat-datepicker>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmOperational.get('DateFrom').value && frmOperational.get('DateFrom').touched">Select Date From </mat-error>-->
+      </td>
+
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Date To</mat-label>
+          <input matInput [matDatepicker]="mdpDateTo" [min]="MinDate" [max]="MaxDate" matTooltip="Enter To Date" formControlName="dateTo"  required>
+          <mat-datepicker-toggle matSuffix [for]="mdpDateTo"></mat-datepicker-toggle>
+          <mat-datepicker #mdpDateTo></mat-datepicker>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmOperational.get('DateFrom').value && frmOperational.get('DateFrom').touched">Select Date From </mat-error>-->
+      </td>
+      <td>
+        <button type="button" id="btnLoad" matTooltip="Load"
+                (click)="tbLoad()" class="load float-left"></button>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="8">
+        <div class="divOperationalGrid">
+          <ag-grid-angular class="ag-theme-balham grdOperational" id="grdOperational"
+                           [gridOptions]="goOperational"
+                           [columnDefs]="colOperational"
+                           [rowData]="operationalData"></ag-grid-angular>
+        </div>
+      </td>
+    </tr>
+  </table>
+  </form>
+
+
+
+
+
+
+
+
+
+
+

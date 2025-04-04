@@ -1,0 +1,13 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divAIGrid {
+  height: 60vh;
+  width: 50vw;
+  float: left;
+}
+
+.grdAI {
+  height: 52vh;
+  width: 47vw;
+}

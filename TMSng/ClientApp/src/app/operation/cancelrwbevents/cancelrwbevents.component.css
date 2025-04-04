@@ -1,0 +1,7 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.grdLog {
+  height: 63vh;
+  width: 72vw;
+}

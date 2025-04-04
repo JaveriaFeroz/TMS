@@ -1,0 +1,10 @@
+<h2 mat-dialog-title class="mcTitle">Outstanding Payments</h2>
+<div mat-dialog-content class="divOPGrid">
+  <ag-grid-angular id="grdAllocation" class="ag-theme-balham grdAllocation" [gridOptions]="goAllocation"
+    [columnDefs]="colAllocation" (cellValueChanged)="onCellValueChanged($event)" [rowData]="allocData">
+  </ag-grid-angular>
+</div>
+<div class="float-right">
+  <button type="button" class="save" *ngIf="!pyNo" title="Click to knock off selected outstanding PIVs" (click)="onSubmit()"></button>
+  <button type="button" class="exit" title="Click to cancel the process and go back to previous window" (click)="onClose()"></button>
+</div>

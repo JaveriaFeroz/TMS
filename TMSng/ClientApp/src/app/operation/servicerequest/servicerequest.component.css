@@ -1,0 +1,17 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+
+#watermark {
+  width: 400px;
+  /*height: 100px;*/
+  color: Red;
+  font-weight: bold;
+  font-size: 40px;
+  transform: rotateZ(-45deg);
+}
+
+maintHistory{
+    padding-top: 40px;
+    background-color: green;
+}

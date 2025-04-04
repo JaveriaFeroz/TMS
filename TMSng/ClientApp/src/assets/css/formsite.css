@@ -1,0 +1,524 @@
+body {
+    background: radial-gradient(circle, #f1eded, lightyellow);
+    height: 96vh;
+    width: 98vw;
+    color: #333;
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    left: 0;
+}
+
+footer {
+  width: 98vw;
+  height: 4vh;
+  position: absolute;
+  margin-left: 1vw;
+  margin-bottom: 1vh;
+  bottom: 0px;
+  vertical-align: bottom;
+  text-align: center;
+}
+
+.mainTable {
+  background-color: #f4f6f9;
+  margin: 0px;
+  padding: 0px;
+  width: 99vw;
+  column-count: 10;
+  border-collapse: collapse;
+}
+
+.mainTable tr td:first-child {
+  padding-left: 20px;
+}
+
+.mainTable tr:first-child td:first-child{
+    padding-left: 3px;
+}
+
+.mainTable tr td:nth-child(odd){
+    width: 8vw;
+}
+
+.mainTable tr td:nth-child(even){
+    width: 11.50vw;
+}
+
+.grdToolbar {
+  padding-top: 20px;
+  height: 35px;
+  width: 30vw;
+}
+
+.slider {
+  padding-top: 30px;
+  padding-right: 10px;
+}
+
+a {
+    color: #333;
+    outline: none;
+    padding-left: 3px;
+    padding-right: 3px;
+    text-decoration: underline;
+}
+
+a:link, a:visited,
+a:active, a:hover {
+    color: #333;
+}
+
+a:hover {
+    background-color: none;
+}
+
+header, footer, hgroup,
+nav, section {
+    display: block;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+    vertical-align: bottom;
+}
+
+.clear-fix:after {
+    content: ".";
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+    color: #000;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.75em;
+}
+
+h3 {
+    font-size: 1em;
+    margin-left: 5px;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+h5, h6 {
+    font-size: 1em;
+}
+
+h5 a:link, h5 a:visited, h5 a:active {
+    padding: 0;
+    text-decoration: none;
+}
+
+/* main layout
+----------------------------------------------------------*/
+.content-wrapper {
+    margin: 0 auto;
+}
+
+.main-content {
+    padding-left: 2px;
+}
+
+/* site title
+----------------------------------------------------------*/
+.form-title-bg {
+  height: 50px;
+  background-color: #fff;
+  font-family: Century Gothic;
+  text-align: left;
+  color: #fff;
+  font-weight: 700;
+}
+
+.form-title {
+  color: rgba(0,0,0,.5);
+  font-family: 'Century Gothic' !important;
+  font-size: 18pt;
+  margin: 0;
+  text-align: left;
+  margin-left: 20px
+}
+
+/*mat-checkbox {
+  font-size: small;
+}*/
+
+/*mat-form-field.mat-form-field {
+  font-size: 14px;
+}
+*/
+.tbRA {
+    text-align: right;
+}
+
+.tb30, .form-control.tb30 {
+    width: 30px;
+}
+
+.tb40, .form-control.tb40 {
+    width: 40px;
+}
+
+.tb50, .form-control.tb50 {
+    width: 50px;
+}
+
+.tb60, .form-control.tb60 {
+    width: 60px;
+}
+
+.tb70, .form-control.tb70 {
+    width: 70px;
+}
+
+.tb80, .form-control.tb80 {
+    width: 80px;
+}
+
+.tb90, .form-control.tb90 {
+    width: 90px;
+}
+
+.tb100, .form-control.tb100 {
+    width: 100px;
+}
+
+.tb120, .form-control.tb120 {
+    width: 120px;
+}
+
+.tb130, .form-control.tb130 {
+    width: 130px;
+}
+
+.tb150, .form-control.tb150 {
+    width: 150px;
+}
+
+.tb170, .form-control.tb170 {
+    width: 170px;
+}
+
+.tb190, .form-control.tb190 {
+    width: 190px;
+}
+
+.tb200, mat-form-field.tb200 {
+  width: 200px;
+}
+
+.tb220, .form-control.tb220 {
+  width: 220px;
+}
+
+.tb250, .form-control.tb250 {
+    width: 250px;
+}
+
+.tb270, .form-control.tb270 {
+    width: 270px;
+}
+
+.tb300, .form-control.tb300 {
+    width: 300px;
+}
+
+.tb350, .form-control.tb350 {
+    width: 350px;
+}
+
+.tb400, .form-control.tb400 {
+    width: 400px;
+}
+
+.tb450, .form-control.tb450 {
+    width: 450px;
+}
+
+.tb500, .form-control.tb500 {
+    width: 500px;
+}
+
+.redBold
+{
+    font-size: 11px;
+    color: red;
+    font-weight:bold
+}
+
+.blueBold
+{
+    font-size: 11px;
+    color: blue;
+    font-weight:bold
+}
+
+.rotate45_red
+{
+    transform: rotate(-45deg);
+    font-family: Arial;
+    font-size: 16pt;
+    font-weight: bold;
+    text-align: center;
+    width: 40px;
+    vertical-align:middle;
+    color: red;
+}
+
+.rotate45_red_bold
+{
+    transform: rotate(-45deg);
+    font-family: Arial;
+    font-size: 32pt;
+    font-weight: bolder;
+    text-align: center;
+    vertical-align:middle;
+    color: red;
+}
+
+.rotate45_blue
+{
+    transform: rotate(-45deg);
+    font-family: Arial;
+    font-size: 16pt;
+    font-weight: bold;
+    text-align: center;
+    width: 40px;
+    vertical-align:middle;
+    color: blue;
+}
+
+.rotate45_blue_bold
+{
+    transform: rotate(-45deg);
+    font-family: Arial;
+    font-size: 32pt;
+    font-weight: bolder;
+    vertical-align:middle;
+    color: blue;
+    text-align:left;
+}
+
+.deleteAlertImg
+{
+    height: 100px;
+    width: 100px;
+    vertical-align:middle;
+}
+
+.agGridSelect {
+    color: blue;
+    background-color: lightblue;
+    font-weight: bolder;
+    height: 32px;
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border: 2px yellow solid;
+}
+
+.ag-row-even
+{
+    background-color: lightcyan;
+    color: darkcyan;
+}
+
+.ag-row-odd
+{
+    background-color: mistyrose;
+    color: brown;
+}
+
+.ag-disabled {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: not-allowed;
+    word-wrap: hyphenate;
+}
+
+.ag-cell.ag-cell-with-height
+{
+    height: 32px;
+    border: lightgray 1px dotted;
+}
+
+.ag-row-selected {
+    background-color: yellow;
+    color: blue;
+}
+
+.md-label {
+    overflow-wrap: break-word;
+    max-width: 50px;
+}
+
+.md-success-toast-theme .md-toast-content {
+    background-color: white;
+    color: green;
+    border: 3px solid darkgreen;
+    border-radius: 25px;
+}
+
+.md-error-toast-theme .md-toast-content {
+    background-color: white;
+    color: red;
+    border: red solid 3px;
+    border-radius: 25px;
+}
+
+.ag-header-group-cell-label {
+    justify-content: center;
+    background-color: blue;
+    color: white;
+    font-weight: bolder;
+}
+
+.ag-no-data-msg {
+    padding: 10px;
+    border: 2px solid #444;
+    background: lightgoldenrodyellow;
+    color: red;
+}
+
+
+/*mat-tab {
+    min-width: 75px !important;
+    padding: 5px;
+    background-color: transparent;
+    color: red;
+    height: 1px;
+    font-size: xx-small;
+}
+
+mat-tab-label {
+    min-width: 75px !important;
+    padding: 5px;
+    background-color: transparent;
+    color: red;
+    min-height: 5px;
+    font-size: xx-small;
+}*/
+
+/* Styles for the active tab label */
+/*mat-tab-label.mat-tab-label-active {
+    min-width: 25px !important;
+    padding: 5px;
+    background-color: transparent;
+    color: red;
+    min-height: 5px;
+    font-size: small;
+}*/
+
+/*.mat-form-field.mat-form-field {
+  font-size: 12px;
+}
+
+.mat-form-field label {
+  font-size: 15px;
+}
+
+.mat-form-field.mat-form-field-should-float label {
+  font-size: 12px;
+}*/
+
+/*.mat-error {
+  font-size: 10px;
+}*/
+
+.field-validation-error {
+  color: red;
+  font-family: 'Comic Sans MS'; /*'Monotype Corsiva';*/
+  font-weight: normal;
+  font-size: 11px;
+}
+
+.field-validation-valid {
+  display: none;
+}
+
+.input-validation-error {
+  border: 1px solid #ff0000 !important;
+  background-color: #ffdb00;
+}
+
+.validation-summary-errors {
+  font-family: 'Comic Sans MS';
+  vertical-align: top;
+  text-align: left;
+  color: red;
+  font-size: 11px;
+  font-weight: bold;
+  border: groove 2px darkgray;
+  height: 25vh;
+  width: 18.5vw;
+  margin: 10px;
+  text-wrap: normal;
+  word-wrap: hyphenate;
+  overflow: auto;
+}
+
+.validation-summary-errors span {
+  font-weight: normal;
+}
+
+.validation-summary-valid {
+  display: none;
+}
+
+
+md-input-container {
+  margin-bottom: 0px;
+  margin-left: 5px;
+  padding: 0px;
+  max-height: 30px;
+}
+
+/*  md-input-container.md-input-has-value label:not(.md-no-float) {
+    color: darkgoldenrod;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0;
+  }*/
+
+ /* md-input-container label {
+    color: gray;
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+md-input-container label.md-required {
+  color: maroon;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+*/
+
+.ag-disabled {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: not-allowed;
+  word-wrap: hyphenate;
+}

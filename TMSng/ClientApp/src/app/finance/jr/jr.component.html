@@ -1,0 +1,144 @@
+<form [formGroup]="frmJR">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Journal Receipt</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnReverse" matTooltip="Click to Reverse current Entry" *ngIf="frmJR.get('voucherNo').value && frmJR.get('periodId').value &&
+                  !frmJR.get('reversedJRNo').value && !frmJR.get('sourceJRNo').value" (click)="tbReverse(frmJR.get('voucherNo').value)" class="reverse"></button>
+          <button type="button" id="btnSearch" matTooltip="Search from lookup list" (click)="tbSearch()" class="find"></button>
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnAdd" matTooltip="Click to create new Entry" (click)="tbAdd()" class="add"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <div id="divSave" class="float-left">
+            <button type="button" id="btnSave" matTooltip="Click to Save current Entry" *ngIf="!frmJR.get('voucherNo').value" (click)="tbSave()" class="save"></button>
+          </div>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb120" color="accent">
+          <mat-label>Voucher #</mat-label>
+          <input formControlName="voucherNo" #voucherNo matTooltip="Voucher #, auto generated for new entry" matInput maxlength="10" (keydown.enter)="get(voucherNo.value)">
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Voucher Date</mat-label>
+          <input matInput [matDatepicker]="mdpVoucher" [min]="minDate" [max]="maxDate" matTooltip="Voucher Date" formControlName="voucherDate" required>
+          <mat-datepicker-toggle matSuffix [for]="mdpVoucher"></mat-datepicker-toggle>
+          <mat-datepicker #mdpVoucher></mat-datepicker>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Period</mat-label>
+          <mat-select formControlName="periodId" #periodId required *ngIf="!frmJR.get('voucherNo').value">
+            <mat-option *ngFor="let p of lstPeriod" [value]="p.periodId">
+              {{p.periodName}}
+            </mat-option>
+          </mat-select>
+          <input formControlName="periodName" matInput readonly *ngIf="frmJR.get('voucherNo').value" />
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb120" *ngIf="frmJR.get('reversedJRNo').value">
+          <mat-label>Reversed Voucher #</mat-label>
+          <input formControlName="reversedJRNo" matInput readonly />
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb120" *ngIf="frmJR.get('sourceJRNo').value">
+          <mat-label>Source Voucher #</mat-label>
+          <input formControlName="sourceJRNo" matInput readonly />
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <mat-form-field class="tb300">
+          <mat-label>Bank Account</mat-label>
+          <mat-select formControlName="bankAccountId" #bankAccountId required (selectionChange)="onBankChanged()">
+            <mat-option *ngFor="let b of lstBankAccount" [value]="b.accountId">
+              {{b.accountName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb120 tbRA">
+          <mat-label>Amount</mat-label>
+          <input type="number" formControlName="amount" min="0" step="0.10" max="99999999999" maxlength="14" matInput required (blur)="onBankAmountChanged()" />
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Cheque #</mat-label>
+          <input formControlName="chequeNo" matTooltip="deposited cheque #" matInput maxlength="15">
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Cheque Date</mat-label>
+          <input matInput [matDatepicker]="mdpCheque" [max]="maxDate" matTooltip="Cheque Date" formControlName="chequeDate">
+          <mat-datepicker-toggle matSuffix [for]="mdpCheque"></mat-datepicker-toggle>
+          <mat-datepicker #mdpCheque></mat-datepicker>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb250">
+          <mat-label>Payer Name</mat-label>
+          <input formControlName="payerName" matTooltip="Payer Name" matInput maxlength="100">
+        </mat-form-field>
+      </td>
+
+      <td colspan="2">
+        <mat-form-field class="tb500">
+          <mat-label>Narration</mat-label>
+          <textarea matInput formControlName="narration" matTooltip="Enter Remarks" maxlength="500"
+            cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="2"></textarea>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="8">
+        <div class="divJRGrid">
+          <div class="grdToolbar" id="tbGrid">
+            <button type="button" (click)="onAddLine()" id="btnGridAdd" class="add" title="Add Line Item"></button>
+            <button type="button" (click)="onDeleteLine()" id="btnGridDelete" class="delete" title="Remove selected Line Item"></button>
+          </div>
+          <ag-grid-angular class="ag-theme-balham grdDetail" id="agGrid" (cellValueChanged)="grdDetailCellValueChanged($event)"
+                [gridOptions]="goDetail" [columnDefs]="colDetail" [rowData]="detailData"></ag-grid-angular>
+        </div>
+      </td>
+      <td colspan="2" rowspan="3">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+<footer>
+  <app-footer [items]="footer"></app-footer>
+</footer>

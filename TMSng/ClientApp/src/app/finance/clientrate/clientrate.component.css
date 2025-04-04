@@ -1,0 +1,98 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.mat-tab-group {
+  max-width: 78vw;
+  min-width: 78vw;
+}
+
+.divRateGrid {
+  height: 65vh;
+  width: 70vw;
+  float: left;
+}
+
+
+.divFRCGrid {
+  height: 60vh;
+  width: 20vw;
+  float: left;
+}
+
+.divFRGrid {
+  height: 60vh;
+  width: 20vw;
+  float: left;
+}
+
+.divTrip {
+  height: 60vh;
+  width: 60vw;
+  float: left;
+}
+
+.divDTGrid {
+  height: 60vh;
+  width: 30vw;
+  float: left;
+}
+
+divDedicatedOther {
+  height: 55vh;
+  width: 66vw;
+  float: left;
+}
+
+.grdDedicatedRent {
+  height: 54vh;
+  width: 39vw;
+  float: left;
+}
+
+.grdDedicatedVar {
+  height: 54vh;
+  width: 30.5vw;
+  float: left;
+}
+
+.grdDedicatedKM {
+  height: 54vh;
+  width: 30vw;
+  float: left;
+}
+
+.grdDedicatedToll {
+  height: 54vh;
+  width: 14vw;
+  float: left;
+}
+
+.grdTrip {
+  height: 54vh;
+  width: 42vw;
+  float: left;
+}
+
+.grdDetention{
+    height: 54vh;
+    width: 35vw;
+    float: left;
+}
+
+.grdHandling {
+  height: 54vh;
+  width: 35vw;
+  float: left;
+}
+
+.grdTripTon {
+  height: 54vh;
+  width: 55vw;
+  float: left;
+}
+
+.grdKLTon {
+  height: 54vh;
+  width: 36vw;
+  float: left;
+}

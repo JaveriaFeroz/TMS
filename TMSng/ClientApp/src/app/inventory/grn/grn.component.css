@@ -1,0 +1,17 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divGRNGrid {
+  width: 80vw;
+  height: 55vh;
+  float: left;
+}
+
+.grdGRN {
+  width: 81vw;
+  height: 48vh;
+}
+
+.validation-summary-errors {
+  height: 20vh;
+}

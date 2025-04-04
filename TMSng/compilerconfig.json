@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "ClientApp/src/assets/theme/agility-theme.css",
+    "inputFile": "ClientApp/src/assets/theme/agility-theme.scss"
+  },
+  {
+    "outputFile": "ClientApp/src/Styles.css",
+    "inputFile": "ClientApp/src/Styles.scss"
+  }
+]

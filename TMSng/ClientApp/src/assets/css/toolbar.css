@@ -1,0 +1,540 @@
+button {
+  cursor: pointer;
+  border: none;
+  height: 35px;
+  width: 35px;
+  background-color: transparent;
+  float: left;
+}
+
+  button:hover {
+    -moz-box-shadow: inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow: inset 0 0 10px #000000;
+  }
+
+  button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+    button[disabled]:hover {
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+
+  button.recall {
+    background: url(../images/Recall.png) no-repeat center;
+    background-size: 20px;
+    background-position-x: 75px;
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    width: 100px;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-right: 10px;
+  }
+   
+  button.view {
+    background: url(../images/View.png) no-repeat center;
+    background-size: 20px;
+    background-position-x: 75px;
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    width: 100px;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-right: 10px;
+  }
+
+  button.transfer {
+    background: url(../images/transfer.png) no-repeat center center;
+    background-size: 20px;
+    background-position-x: 75px;
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    width: 100px;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-right: 10px;
+  }
+
+  button.received {
+    background: url(../images/resolve.PNG) no-repeat center center;
+    background-size: 20px;
+    background-position-x: 75px;
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    width: 100px;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-right: 10px;
+  }
+
+  button.add {
+    background: url(../images/Add.png) no-repeat center;
+    background-size: 20px;
+    background-position-x: 75px;
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    width: 100px;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-right: 10px;
+  }
+
+  button.delete {
+    background: url(../images/Delete.png) no-repeat;
+    background-size: 20px;
+    background-position-x: 75px;
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    width: 100px;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-right: 10px;
+  }
+
+  button.edit {
+    background: url(../images/Edit.png) no-repeat;
+    border-radius: 3px;
+    background-color: #ffc107;
+    background-size: 20px;
+    background-position-x: 75px;
+    border: 1px solid #ddd;
+    color: #fff;
+    font-size: 1rem;
+    /* height: 60px; */
+    margin: 0 10px 0px 0px;
+    min-width: 100px;
+    position: relative;
+    text-align: center;
+  }
+
+  button.find {
+    background: url(../images/Search.png) no-repeat;
+    background-size: 20px;
+    background-position-x: 75px;
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    width: 100px;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-right: 10px;
+  }
+
+  button.save {
+    background: url(../images/Save.png) no-repeat;
+    background-size: 20px;
+    background-position-x: 75px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    width: 100px;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-right: 10px;
+  }
+
+  button.close {
+    background: url(../images/Close.png) no-repeat center center;
+    /*height: 30px;
+    width: 50px;*/
+    background-size: 20px;
+    background-position-x: 75px;
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    width: 100px;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-right: 10px;
+  }
+
+  button.undo {
+    background: url(../images/Undo.png) no-repeat;
+    /*text-indent: -9999px;*/
+    background-size: 20px;
+    background-position-x: 75px;
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    width: 100px;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-right: 10px;
+  }
+
+  button.exit {
+    background: url(../images/Exit.png) no-repeat;
+    background-size: 20px;
+    background-position-x: 75px;
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    width: 100px;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-right: 10px;
+  }
+
+  button.swap {
+    background: url(../images/swap.png) no-repeat;
+    background-size: 20px;
+    background-position-x: 75px;
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    width: 100px;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-right: 10px;
+  }
+
+
+  button.load {
+    background: url(../images/Options.png) no-repeat center center;
+    /* background-size: contain;
+    height: 27px;
+    width: 25px;
+    margin-left: 1px;
+    margin-top: 6px;*/
+    background-size: 20px;
+    background-position-x: 75px;
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    width: 100px;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-right: 10px;
+  }
+
+  button.go {
+    background: url(../images/go_ahead.png) no-repeat;
+    text-indent: -9999px;
+    width: 50px; /*standard width override due to larger icon*/
+    height: 45px; /*standard height override due to larger icon*/
+  }
+
+  button.back {
+    background: url(../images/go_back.png) no-repeat;
+    text-indent: -9999px;
+    width: 50px; /*standard width override due to larger icon*/
+    height: 45px; /*standard height override due to larger icon*/
+  }
+
+  button.load {
+    background: url(../images/Options.png) no-repeat center center;
+    background-size: contain;
+    height: 27px;
+    width: 25px;
+    margin-left: 1px;
+    margin-top: 6px;
+  }
+
+  /*button.clear {
+    background: url(../images/clear.jpg) no-repeat center center;
+    background-size: contain;
+    height: 27px;
+    width: 25px;
+    margin-left: 1px;
+    margin-top: 6px;
+  }*/
+
+  button.home {
+    background: url(../images/home.png) no-repeat;
+    height: 40px;
+    width: 40px;
+    align-content: center;
+  }
+
+  button.upload {
+    background: url(../images/Upload.png) no-repeat center center;
+    height: 40px;
+  }
+
+  button.cancel {
+    background: url(../images/cancelled.jpg) no-repeat center center;
+    background-size: contain;
+  }
+
+  button.export {
+    background: url(../images/exporticon.png) no-repeat;
+    height: 30px;
+    width: 75px;
+  }
+
+  button.editLineTiny {
+    background: url(../images/EditTiny.png) no-repeat;
+    height: 25px;
+    width: 23px;
+  }
+
+  button.UndoLineTiny {
+    background: url(../images/UndoTiny.png) no-repeat;
+    height: 25px;
+    width: 23px;
+  }
+
+  button.deleteLineTiny {
+    background: url(../images/deletetiny.png) no-repeat;
+    height: 25px;
+    width: 23px;
+  }
+
+  button.addLineTiny {
+    background: url(../images/AddTiny.png) no-repeat;
+    height: 25px;
+    width: 23px;
+  }
+
+  button.history {
+    background: url(../images/history.png) no-repeat center center;
+    height: 30px;
+    width: 50px;
+  }
+
+  button.submit {
+    background: url(../images/submit.PNG) no-repeat center center;
+    background-size: contain;
+  }
+
+  button.approve {
+    background: url(../images/approve.png) no-repeat center center;
+    background-size: contain;
+  }
+
+  button.reject {
+    background: url(../images/Reject.png) no-repeat center center;
+    background-size: contain;
+  }
+
+  button.return {
+    background: url(../images/Return.png) no-repeat center center;
+    background-size: contain;
+  }
+
+  button.forward {
+    background: url(../images/Forward.png) no-repeat center center;
+    background-size: contain;
+  }
+
+  button.resolve {
+    background: url(../images/resolve.PNG) no-repeat center center;
+    background-size: contain;
+  }
+
+  button.acknowledge {
+    background: url(../images/acknowledge.PNG) no-repeat center center;
+    background-size: contain;
+  }
+
+  button.reverse {
+    background: url(../images/reverse.png) no-repeat center center;
+    background-size: contain;
+  }
+
+  button.Actual {
+    background: url(../images/Actual.jpg) no-repeat;
+    height: 50px;
+    width: 50px;
+    align-content: center;
+  }
+
+  button.Estimate {
+    background: url(../images/Estimate.png) no-repeat;
+    height: 50px;
+    width: 50px;
+    align-content: center;
+  }
+
+  button.PMMaintenance {
+    background: url(../images/PMMaintenance.png) no-repeat;
+    height: 50px;
+    width: 50px;
+    align-content: center;
+  }
+
+a[disabled] {
+  pointer-events: none !important;
+  opacity: 0.4;
+  background-color: rgba(128,128,128, 0.7);
+}
+
+a:hover {
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000;
+}
+
+a[disabled]:hover {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+a:focus {
+  border: 1px groove #FF3334;
+}
+
+a.history {
+  background: url(../images/history.png) no-repeat center center;
+  height: 20px;
+  width: 40px;
+}
+
+a.Template {
+  display: block;
+  width: 12vw;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  color: darkblue;
+  text-indent: 1px;
+  padding-top: 2px;
+  float: inherit;
+  background: rgba(0,0,0,0);
+}
+
+.classic {
+  background: #FFFFAA;
+  border: 1px solid #FFAD33;
+}
+
+.critical {
+  background: #FFCCAA;
+  border: 1px solid #FF3334;
+}
+
+.help {
+  background: #9FDAEE;
+  border: 1px solid #2BB0D7;
+}
+
+.info {
+  background: #9FDAEE;
+  border: 1px solid #2BB0D7;
+}
+
+.warning {
+  background: #FFFFAA;
+  border: 1px solid #FFAD33;
+}
+
+/*mat-checkbox {
+  font-size: 10px;
+}*/
+/*
+:host ::ng-deep .mat-tab-label {
+  height: 30px;
+  min-width: 10px;
+}
+
+  :host ::ng-deep .mat-tab-label.mat-tab-label-active {
+    height: 30px;
+    min-width: 10px;
+  }
+
+
+
+::ng-deep .mat-tab-header, .mat-tab-nav-bar {
+  border-bottom: 0;
+  padding: 1px
+}
+*/
+
+button.recall::before {
+  content: "Recall ";
+}
+button.find::before {
+  content: "Find ";
+}
+button.add::before {
+  content: "Add ";
+}
+button.edit::before {
+  content: "Edit ";
+}
+button.save::before {
+  content: "Save ";
+}
+button.return::before {
+  content: "Return ";
+}
+button.close::before {
+  content: "Close ";
+}
+button.exit::before {
+  content: "Exit ";
+}
+button.delete::before {
+  content: "Delete ";
+}
+button.undo::before {
+  content: "Undo ";
+}
+input.form-control {
+  display: block;
+  width: 100%;
+  height: calc(2.25rem + 2px);
+  padding: 0.2rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-bottom: 2px solid #3898fe;
+  border-radius: 0.25rem;
+  box-shadow: inset 0 0 0 transparent;
+  /* transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
+}

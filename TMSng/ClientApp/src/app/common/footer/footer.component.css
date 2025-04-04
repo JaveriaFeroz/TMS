@@ -1,0 +1,39 @@
+.tblFooter {
+  border: lightyellow thin solid;
+  border-radius: 4px 4px;
+  width: 95vw;
+  max-height: 20px;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  left: 0px;
+}
+
+.tblFooter tr{
+    position: absolute;
+    bottom: 0px;
+}
+
+  .tblFooter input[type=text][readonly] {
+    max-height: 20px;
+    font-family: Tahoma;
+    font-size: 9pt;
+    width: 7vw;
+    overflow: hidden;
+    color: darkblue;
+    text-size-adjust: auto;
+    background-color: transparent;
+    border: none;
+  }
+
+  .tblFooter input[type=text][disabled] {
+    max-height: 20px;
+    font-family: Tahoma;
+    font-weight: bold;
+    font-size: 10pt;
+    overflow: hidden;
+    border: 1px groove blue;
+    text-size-adjust: auto;
+    text-align: left;
+    width: 15vw;
+  }

@@ -1,0 +1,368 @@
+<form [formGroup]="frmDriver">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Driver</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnSearch" matTooltip="Search from lookup list" (click)="tbSearch()" class="find"></button>
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnAdd" matTooltip="Click to create new Entry" (click)="tbAdd()" class="add"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <button type="button" id="btnSave" matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb60" color="accent">
+          <mat-label>Driver Id</mat-label>
+          <input formControlName="driverId" #driverId matTooltip="Driver Id, auto generated for new entry" matInput maxlength="3" numbersOnly (keydown.enter)="get(driverId.value)">
+        </mat-form-field>
+      </td>
+      <td class="slider">
+        <mat-slide-toggle formControlName="isActive" color="primary">Is Active</mat-slide-toggle>
+      </td>
+      <td colspan="2"></td>
+      <td colspan="4"></td>
+      <td rowspan="2" colspan="2">
+        <img [src]="driverImg" height="100" width="200" style="display: inline-block;" alt="Driver Latest Picture" id="imgLogo" />
+        <input [disabled]="!allowImgUpload" type="file" #drvPicture name="fileImage" (change)="getDriverImage($event)"
+               accept="image/jpeg"
+               data-val="true" id="fileImage"
+               data-val-accept="Sorry, we only accept image jpeg format."
+               title="Click to upload Image for this Driver" />
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb250">
+          <mat-label>Driver Name</mat-label>
+          <input formControlName="driverName" #driverName matTooltip="Enter Driver Name" matInput maxlength="50" required>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmDriver.get('DriverName').value && frmDriver.get('DriverName').touched">Driver Name is a required field</mat-error>-->
+      </td>
+
+      <td>
+        <mat-form-field class="tb250">
+          <mat-label>Father Name</mat-label>
+          <input formControlName="fatherName" matTooltip="Enter Father Name" matInput maxlength="50" required>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmDriver.get('FatherName').value && frmDriver.get('FatherName').touched">Father Name is a required field</mat-error>-->
+      </td>
+
+      <td colspan="3">
+        <mat-form-field class="tb500">
+          <mat-label>Address</mat-label>
+          <textarea matInput formControlName="address" matTooltip="Driver's permanent address" maxlength="200"
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5" re></textarea>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmDriver.get('DriverAddress').value && frmDriver.get('DriverAddress').touched">Enter Address</mat-error>-->
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="8">
+        <div class="divTab">
+          <mat-tab-group (selectedTabChange)="validateGridStatus();">
+            <mat-tab label="Personal Info" class="mtPersonalInfo">
+              <table class="tblPersonalInfo">
+                <tr>
+                  <td>
+                    <mat-form-field class="tb150">
+                      <mat-label>CNIC</mat-label>
+                      <input formControlName="cnic" matTooltip="Enter CNIC" placeholder="CNIC" matInput maxlength="15" required>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('CNIC').value && frmDriver.get('CNIC').touched">CNIC is a required field</mat-error>-->
+                  </td>
+
+                  <td>
+                    <mat-form-field class="tb150">
+                      <mat-label>CNIC Expiry</mat-label>
+                      <input matInput [matDatepicker]="mdpCExp" matTooltip="CNIC Date" formControlName="cnicExpiry" required>
+                      <mat-datepicker-toggle matSuffix [for]="mdpCExp"></mat-datepicker-toggle>
+                      <mat-datepicker #mdpCExp></mat-datepicker>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('CNICExpiry').value && frmDriver.get('CNICExpiry').touched">Select CNIC Date</mat-error>-->
+                  </td>
+
+                  <td>
+                    <mat-form-field class="tb150">
+                      <mat-label>License #</mat-label>
+                      <input formControlName="licenseNo" matTooltip="Enter License #" matInput maxlength="20" required>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('LicenseNo').value && frmDriver.get('LicenseNo').touched">License # is a required field</mat-error>-->
+                  </td>
+
+                  <td>
+                    <mat-form-field class="tb150">
+                      <mat-label>License Expiry</mat-label>
+                      <input matInput [matDatepicker]="mdpLExp" matTooltip="License Expiry Date" formControlName="licenseExpiry" required>
+                      <mat-datepicker-toggle matSuffix [for]="mdpLExp"></mat-datepicker-toggle>
+                      <mat-datepicker #mdpLExp></mat-datepicker>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('LicenseExpiry').value && frmDriver.get('LicenseExpiry').touched">Select License Date</mat-error>-->
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <mat-form-field class="tb150">
+                      <mat-label>DoB</mat-label>
+                      <input matInput [matDatepicker]="mdpDOB" [min]="DOBMinDate" [max]="DOBMaxDate" matTooltip="Date of Birth" formControlName="doB" placeholder="Date of Birth" required>
+                      <mat-datepicker-toggle matSuffix [for]="mdpDOB"></mat-datepicker-toggle>
+                      <mat-datepicker #mdpDOB></mat-datepicker>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('DateofBirth').value && frmDriver.get('DateofBirth').touched">Select DOB</mat-error>-->
+                  </td>
+
+                  <td>
+                    <mat-form-field class="tb150">
+                      <mat-label>Cell #</mat-label>
+                      <input formControlName="cellNo" matTooltip="Enter Cell #" placeholder="cellNo" matInput maxlength="12" required>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('CellNo').value && frmDriver.get('CellNo').touched">Cell # is a required field</mat-error>-->
+                  </td>
+
+
+                  <td>
+                    <mat-form-field class="tb170">
+                      <mat-label>Qualification</mat-label>
+                      <mat-select formControlName="qualificationId" matTooltip="Qualification" required>
+                        <mat-option *ngFor="let q of lstQualification" [value]="q.qualificationId">
+                          {{q.qualificationName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('Qualification').value && frmDriver.get('Qualification').touched">Please Select Qualification</mat-error>-->
+                  </td>
+
+                  <td>
+                    <mat-form-field class="tb200">
+                      <mat-label>Branch</mat-label>
+                      <mat-select formControlName="branchId" matTooltip="Branch" required>
+                        <mat-option *ngFor="let Branch of lstBranch" [value]="Branch.branchId">
+                          {{Branch.branchName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('BranchCode').value && frmDriver.get('BranchCode').touched">Please Select Branch</mat-error>-->
+                  </td>
+
+                </tr>
+
+                <tr>
+                  <td>
+                    <mat-form-field class="tb150">
+                      <mat-label>EmployeeNo</mat-label>
+                      <input formControlName="employeeNo" matTooltip="Enter Employee #" placeholder="EmployeeNo" matInput maxlength="25" required>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('EmployeeNo').value && frmDriver.get('EmployeeNo').touched">Employee  is a required field</mat-error>-->
+                  </td>
+                  <td>
+                    <mat-form-field class="tb200">
+                      <mat-label>Designation</mat-label>
+                      <input formControlName="designation" matTooltip="Enter Designation" placeholder="Designation" matInput maxlength="25" required>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('Designation').value && frmDriver.get('Designation').touched">Designation is a required field</mat-error>-->
+                  </td>
+
+                  <td>
+                    <mat-form-field class="tb200">
+                      <mat-label>NoK Name</mat-label>
+                      <input formControlName="noKName" matTooltip="Enter NoK Name" placeholder="NoKName" matInput maxlength="25" required>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('NoKName').value && frmDriver.get('NoKName').touched">NoKName  is a required field</mat-error>-->
+                  </td>
+
+                  <td>
+                    <mat-form-field class="tb200">
+                      <mat-label>NoK Relation</mat-label>
+                      <mat-select formControlName="noKRelationId" matTooltip="Relation" required>
+                        <mat-option *ngFor="let Relation of lstRelation" [value]="Relation.relationId">
+                          {{Relation.relationName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('NoKRelationId').value && frmDriver.get('NoKRelationId').touched">Please Select Insurance Type</mat-error>-->
+                  </td>
+
+                </tr>
+
+                <tr>
+                  <td>
+                    <mat-form-field class="tb150">
+                      <mat-label>Joining Date</mat-label>
+                      <input matInput [matDatepicker]="mdpJDate" [max]="CurrentDate" matTooltip="Joining Date" formControlName="joiningDate" placeholder="Choose Joining Date" required>
+                      <mat-datepicker-toggle matSuffix [for]="mdpJDate"></mat-datepicker-toggle>
+                      <mat-datepicker #mdpJDate></mat-datepicker>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('JoiningDate').value && frmDriver.get('JoiningDate').touched">Pleas Select Joining Date</mat-error>-->
+                  </td>
+
+                  <td>
+                    <mat-form-field class="tb200">
+                      <mat-label>Contractor</mat-label>
+                      <mat-select formControlName="contractorId" matTooltip="Contractor" required>
+                        <mat-option *ngFor="let Contractor of lstContractor" [value]="Contractor.contractorId">
+                          {{Contractor.contractorName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('ContractorId').value && frmDriver.get('ContractorId').touched">Please Select Contractor</mat-error>-->
+                  </td>
+                  <td>
+                    <mat-form-field class="tb100">
+                      <mat-label>Work Experience</mat-label>
+                      <input type="number" formControlName="workExperience" min="1" step="0.1" matTooltip="Experience in Year(s)" maxlength="5" matInput oninput="validity.valid||(value='');" required>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('WorkingExperience').value && frmDriver.get('WorkingExperience').touched">WorkingExperience Less then Zero</mat-error>-->
+                  </td>
+
+                  <td>
+                    <mat-form-field class="tb100">
+                      <mat-label>Monthly Salary</mat-label>
+                      <input type="number" formControlName="monthlySalary" min="1" step="1" matTooltip="Enter MonthlySalary" maxlength="9" matInput oninput="validity.valid||(value='');" required>
+                    </mat-form-field>
+                    <!--<mat-error *ngIf="!frmDriver.get('MonthlySalary').value && frmDriver.get('MonthlySalary').touched">Monthly Salary Less then Zero</mat-error>-->
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <mat-form-field class="tb200">
+                      <mat-label>Prev. Employer(s)</mat-label>
+                      <input formControlName="previousEmployer" matTooltip="Previous Employer(s) details" placeholder="Previous Employers" matInput maxlength="100">
+                    </mat-form-field>
+                  </td>
+
+                  <!--<td>
+    <mat-form-field class="tb150">
+      <mat-label>Prev. Employer 2</mat-label>
+      <input formControlName="EmployeeNo" matTooltip="Enter Employee Name 2 " placeholder="Employee2" matInput maxlength="50">
+    </mat-form-field>
+  </td>-->
+
+                  <td>
+                    <mat-form-field class="tb200">
+                      <mat-label>Separation Type</mat-label>
+                      <mat-select formControlName="separationTypeId" matTooltip="Separation Type">
+                        <mat-option *ngFor="let st of lstSeparationType" [value]="st.typeId">
+                          {{st.typeName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+
+                  <td>
+                    <mat-form-field class="tb150">
+                      <mat-label>Separation Date</mat-label>
+                      <input matInput [matDatepicker]="mdpSDate" [max]="CurrentDate" matTooltip="Separation Date" formControlName="separationDate" placeholder="Choose Separation Date">
+                      <mat-datepicker-toggle matSuffix [for]="mdpSDate"></mat-datepicker-toggle>
+                      <mat-datepicker #mdpSDate></mat-datepicker>
+                    </mat-form-field>
+                  </td>
+
+                  <td>
+                    <mat-form-field class="tb250">
+                      <mat-label>Separation Reason</mat-label>
+                      <textarea matInput formControlName="separationReason" matTooltip="Enter Separation Reason" maxlength="500"
+                                cdkTextareaAutosize
+                                cdkAutosizeMinRows="1"
+                                cdkAutosizeMaxRows="2" re></textarea>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+            </mat-tab>
+
+            <mat-tab label="Training">
+              <div class="grdToolbar" id="tbGrid">
+                <button  type="button" (click)="onAddTraining()" id="btnAddTraining" class="add" title="Add Line Item"></button>
+                <button  type="button" (click)="onDeleteTraining()" id="btnDeleteTraining" class="delete" title="Remove selected line item"></button>
+              </div>
+              <ag-grid-angular class="ag-theme-balham grdTraining" id="grdTraining"
+                [gridOptions]="goTraining" [frameworkComponents]="frameworkComponents" [columnDefs]="colTraining"
+                [rowData]="trainingData"></ag-grid-angular>
+            </mat-tab>
+
+            <mat-tab label="Medical Test(s)">
+              <div class="grdToolbar" id="tbGrid">
+                <button  type="button" (click)="onAddMedical()" id="btnAddMedical" class="add" title="Add Line Item"></button>
+                <button  type="button" (click)="onDeleteMedical()" id="btnDeleteMedical" class="delete" title="Remove selected line item"></button>
+              </div>
+              <ag-grid-angular class="ag-theme-balham grdMedical" id="grdMedical"
+                [gridOptions]="goMedical" [frameworkComponents]="frameworkComponents" [columnDefs]="colMedical"
+                [rowData]="medicalData"></ag-grid-angular>
+            </mat-tab>
+
+            <mat-tab label="Reference">
+              <div class="grdToolbar" id="tbGrid">
+                <button  type="button" (click)="onAddReference()" id="btnAddReference" class="add" title="Add Line Item"></button>
+                <button  type="button" (click)="onDeleteReference()" id="btnDeleteReference" class="delete" title="Remove selected line item"></button>
+              </div>
+              <ag-grid-angular class="ag-theme-balham grdReference" id="grdReference"
+                [gridOptions]="goReference" [columnDefs]="colReference" [rowData]="referenceData"></ag-grid-angular>
+            </mat-tab>
+            
+            <mat-tab label="Documents" *ngIf="frmDriver.get('driverId').value >0 ">
+              <div class="divToolbarDoc" id="tbGrid">
+                <button  type="button" (click)="onAddDocument()" class="add" title="Upload new Attachment" id="btnAddDocument"></button>
+                <button  type="button" (click)="onDeleteDocument()" class="delete" title="Remove Line Item" id="btnDeleteDocument"></button>
+              </div>
+              <div *ngIf="frmDriver.get('addNew').value ==true " style="width: 15vw; height: 4vw;">
+                <table>
+                  <tr>
+                    <td>
+                      <mat-form-field class="tb250">
+                        <mat-label>Document Type</mat-label>
+                        <mat-select formControlName="documentTypeId" matTooltip="Driver Document Type" placeholder="Select Document Type">
+                          <mat-option *ngFor="let dt of lstDocumentType" [value]="dt.typeId">
+                            {{dt.typeName}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <input type="file" name="fUpload" (change)="setWIPDocument($event)"
+                             accept="application/pdf, image/gif, image/jpeg"
+                             data-val="true" id="fuAttachment"
+                             data-val-accept="Sorry, we only accept image & PDF format."
+                             title="Click to upload supporting document for this Driver" />
+                    </td>
+                    <td>
+                      <button  type="button"  id="btnUpload" (click)="onUploadDocument()" title="Click to upload the Selected Driver Document" class="upload"></button>
+                    <td>
+                      <button  type="button" (click)="onUndoDocument()" class="undo" title="Cancel Document Upload"></button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <ag-grid-angular class="ag-theme-balham grdDocument" id="grdDocument" 
+                [gridOptions]="goDocument" [columnDefs]="colDocument" [rowData]="documentData" (cellClicked)="onCellClicked($event)"></ag-grid-angular>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </td>
+
+      <td style="vertical-align:text-top" colspan="2" rowspan="3">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+<footer>
+  <app-footer [items]="footer"></app-footer>
+</footer>

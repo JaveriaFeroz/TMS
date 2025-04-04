@@ -1,0 +1,140 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.mat-tab-group {
+  max-width: 75vw; 
+  min-width: 75vw;
+}
+
+footer{
+    height: 9vh;
+    vertical-align: bottom;
+}
+
+.divDetHandling {
+  height: 50vh;
+  width: 75vw;
+  float: left;
+}
+
+.divHandling {
+  height: 44vh;
+  width: 37vw;
+  float: left;
+}
+
+.grdHandling {
+  height: 39vh;
+  width: 37vw;
+  float: left;
+}
+
+.divDetention {
+  height: 44vh;
+  width: 37vw;
+  float: left;
+}
+
+.grdDetention {
+  height: 39vh;
+  width: 37vw;
+  float: left;
+}
+
+.divDedicated {
+  height: 50vh;
+  width: 74.5vw;
+  float: left;
+}
+
+.divDedicatedRent {
+  height: 44vh;
+  width: 36vw;
+  float: left;
+}
+
+.divDedicatedOther {
+  height: 50vh;
+  width: 74.5vw;
+  float: left;
+}
+
+.grdDedicatedRent {
+  height: 39vh;
+  width: 37vw;
+}
+
+.divVariable {
+  height: 44vh;
+  width: 29.5vw;
+  float: left;
+}
+
+.grdDedicatedVar {
+  height: 39vh;
+  width: 29.5vw;
+  float: left;
+}
+
+.divKM {
+  height: 44vh;
+  width: 30vw;
+  float: left;
+}
+
+.grdDedicatedKM {
+  height: 39vh;
+  width: 30vw;
+  float: left;
+}
+
+.divToll {
+  height: 44vh;
+  width: 15vw;
+  float: left;
+}
+
+.grdDedicatedToll {
+  height: 39vh;
+  width: 15vw;
+  float: left;
+}
+
+.divTrip {
+  height: 50vh;
+  width: 41vw;
+  float: left;
+}
+
+.grdTrip {
+  height: 39vh;
+  width: 41vw;
+  float: left;
+}
+
+.divTripTon {
+  height: 50vh;
+  width: 57vw;
+  float: left;
+}
+
+.grdTripTon {
+  height: 39vh;
+  width: 57vw;
+}
+
+.divKLTon {
+  height: 50vh;
+  width: 38vw;
+  float: left;
+}
+
+.grdKLTon {
+  height: 39vh;
+  width: 38vw;
+}
+
+mat-radio-button {
+  color: blue;
+  font-weight: bold;
+}

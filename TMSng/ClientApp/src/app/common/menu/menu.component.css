@@ -1,0 +1,191 @@
+.mat-toolbar {
+  height: 50px;
+  background-color: #00B0F0;
+  font-family: 'Century Gothic';
+  text-align: left;
+  color: white;
+  font-weight: bold;
+}
+
+.mat-expansion-panel-header span a div {
+  padding: 0 !important;
+}
+
+.cust_sidenav_close {
+  position: fixed;
+  right: 0;
+  background-color: white;
+  left: 300px;
+  top: 12px;
+}
+
+.cust_sidenav {
+  width: auto;
+  top: 0;
+  bottom: 20px;
+  transform: none;
+  visibility: visible;
+  height: 100vh;
+  background: white;
+}
+
+.mat-list-item-content {
+  padding-left: 0px !important;
+  font-size: 11pt;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 0px 0px !important;
+}
+
+.mat-drawer-container {
+  position: inherit;
+  z-index: 1;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  display: block;
+  overflow: hidden;
+}
+
+  .mat-menu-content {
+  background-color: red !important;
+}
+
+.mat-menu-panel.my-full-width-menu {
+  background-color: lawngreen;
+  margin: 0;
+  padding: 0;
+  border: groove red 5px;
+}
+
+.custom__menu + * .cdk-overlay-pane > div.mat-menu-panel > div.mat-menu-content {
+  background-color: cadetblue;
+}
+
+.mat-menu-panel > div.mat-menu-content {
+  background-color: pink !important;
+  margin: 0;
+}
+
+.cdk-overlay-pane{
+    background-color: ivory;
+    margin: 0;
+    padding: 0;
+    border: groove red 5px;
+    top: 10px;
+}
+
+button.mat-button:focus {
+  outline: none;
+  font-size: 12px;
+}
+
+button.mat-menu-item {
+  height: 32px;
+  font-size: 12px;
+  background-color: lightgoldenrodyellow;
+}
+
+button.mat-menu-item:hover {
+  background-color: blue;
+  color: #fff !important;
+  vertical-align: top;
+  font-weight: bold;
+  text-align: center;
+  font-size: 12px;
+  padding-bottom: 12px;
+  outline: white;
+}
+
+button.mat-menu-item:focus{
+    outline: yellow;
+}
+
+.mat-menu-item
+{
+    height: 35px;
+    font-size: 12px;
+    text-align: left;
+    background-color: papayawhip;
+    color: black ;
+    font-style: italic;   
+}
+
+mat-expansion-panel {
+  background-color: white;
+  width: auto;
+  padding-left:5px;
+}
+
+mat-expansion-panel-header {
+  background-color: white;
+  color: #6A6A6A;
+  font-weight: 700;
+  width: 100%;
+  font-family: century gothic;
+  padding: 5px 17px 0 5px;
+}
+
+.mat-expansion-panel .mat-expansion-panel-header.cdk-keyboard-focused:not([aria-disabled=true]), .mat-expansion-panel .mat-expansion-panel-header.cdk-program-focused:not([aria-disabled=true]), .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled=true]) {
+  background: rgba(0,0,0,.04);
+  border-left: 5px solid #EE1922;
+}
+
+.mat-list-item-content {
+
+  padding: 0 0px !important
+}
+
+
+mat-expansion-panel-header mat-expanded {
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  width: auto;
+  max-width: 15vw;
+}
+
+mat-expansion-panel-header.mat-expanded {
+  color: #00B0F0;
+  width: auto;
+  border-left: 5px solid #EE1922;
+  height: 45px;
+}
+
+  mat-expansion-panel-header.mat-expanded:hover {
+    color: #6A6A6A
+  }
+
+mat-panel-title {
+  background-color: darkgoldenrod;
+  border: none;
+}
+
+mat-nav-list.a {
+  color: indianred;
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+
+a.mat-list-item {
+  word-wrap: break-word;
+  color: #6a6a6a;
+  font-family: Century Gothic;
+}
+
+mat-nav-list mat-list-base{
+    border: double blue 2px;
+}
+
+mat-sidenav{
+    background-color: lightgoldenrodyellow;
+}
+
+.ddCompany {
+  width: 20vw;
+  color: white;
+}

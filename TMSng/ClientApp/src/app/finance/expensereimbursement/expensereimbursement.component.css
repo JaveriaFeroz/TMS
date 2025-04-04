@@ -1,0 +1,14 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+
+.divERGrid {
+  height: 60vh;
+  width: 90vw;
+  float: left;
+}
+
+.grdDetail {
+  height: 58vh;
+  width: 88vw;
+}

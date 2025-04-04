@@ -1,0 +1,180 @@
+<form [formGroup]="frmJobClose">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Job Closure</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnSearch" matTooltip="Search from lookup list" (click)="tbSearch()" class="find"></button>
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <button type="button" id="btnSave"  matTooltip="Click to Save and Close current Entry"   (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb100" color="accent">
+          <mat-label>Job No</mat-label>
+          <input formControlName="jobNo" #jobNo matTooltip="Job #" matInput maxlength="10" numbersOnly (keydown.enter)="get(jobNo.value)">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Status</mat-label>
+          <input formControlName="stateName" matTooltip="Job Status" matInput readonly tabindex="-1">
+        </mat-form-field>
+      </td>
+      <td class="slider">
+        <mat-slide-toggle formControlName="closed" color="primary" title="Turn on this flag to mark job as closed upon next Save event">Job Closed</mat-slide-toggle>
+      </td>
+      <td class="slider">
+        <!--*ngIf="frmJobClose.get('enablePartialDelivery').value==false"-->
+        <mat-slide-toggle formControlName="outsourced" (change)="onOutsourcedVehicle($event)" color="primary">Outsourced Vehicle</mat-slide-toggle>
+      </td>
+      <td class="slider">
+        <!--*ngIf="frmJobClose.get('enablePartialDelivery').value==false"-->
+        <mat-slide-toggle formControlName="hasGenset" (change)="onGensetFuel($event)" color="primary">Genset Fuel</mat-slide-toggle>
+      </td>
+      <td class="slider">
+        <!--*ngIf="frmJobClose.get('enablePartialDelivery').value==false"-->
+        <mat-slide-toggle formControlName="allowFuel" (change)="onAllowFuel($event)"   color="primary">Allow Fuel</mat-slide-toggle>
+      </td>
+      <td colspan="3"></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Job Date</mat-label>
+          <input matInput [matDatepicker]="mdpJobDate"  matTooltip="Job Date" formControlName="jobDate" readonly tabindex="-1">
+          <mat-datepicker-toggle matSuffix [for]="mdpJobDate"></mat-datepicker-toggle>
+          <mat-datepicker #mdpJobDate></mat-datepicker>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Job Advance</mat-label>
+          <input formControlName="advance" matTooltip="Job Advance" matInput readonly tabindex="-1">
+        </mat-form-field>
+      </td>
+     
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Job Start Date</mat-label>
+          <input matInput [matDatepicker]="mdpJobSDate" matTooltip="Job Start Date" formControlName="jobStartDate" readonly tabindex="-1">
+          <mat-datepicker-toggle matSuffix [for]="mdpJobSDate"></mat-datepicker-toggle>
+          <mat-datepicker #mdpJobSDate></mat-datepicker>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Job Start Time</mat-label>
+          <input type="time" formControlName="jobStartTime" matTooltip="Start Time" matInput readonly tabindex="-1">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Close Date</mat-label>
+          <input matInput [matDatepicker]="mdpJobCDate" [min]="minDate" [max]="maxDate" matTooltip="Close Date" formControlName="jobCloseDate" #jobCloseDate required>
+          <mat-datepicker-toggle matSuffix [for]="mdpJobCDate"></mat-datepicker-toggle>
+          <mat-datepicker #mdpJobCDate></mat-datepicker>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Close Time</mat-label>
+          <input type="time" matInput matTooltip="close Time" formControlName="jobCloseTime"  required>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>End KMs</mat-label>
+          <input type="number" formControlName="closeKMs" min="1" max="999999999" matTooltip="Enter End KMs" maxlength="9" matInput oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>     
+    <!--</tr>
+    <tr>-->
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Fuel Litres</mat-label>
+          <input type="number" formControlName="fuelLtrs" min="1" step="0.01" max="9999" matTooltip="Enter Litre" maxlength="6" matInput oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Cash Returned</mat-label>
+          <input type="number" formControlName="cashReturned" min="0" max="99999999" matTooltip="Enter Cash Returned" maxlength="9" matInput oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+      <td>
+        <!--*ngIf="!frmJobClose.get('enablePartialDelivery').value"-->
+        <mat-form-field class="tb100">
+          <mat-label>Genset Fuel Ltrs</mat-label>
+          <input type="number" formControlName="gensetFuelLtrs" min="1" step="0.01" max="9999" matTooltip="Enter Genset Litre" maxlength="6" matInput oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+      <td>
+        <!--*ngIf="!frmJobClose.get('enablePartialDelivery').value"-->
+        <mat-form-field class="tb100">
+          <mat-label>Genset Cash Returned</mat-label>
+          <input type="number" formControlName="gensetCashReturned" min="0" max="99999999" matTooltip="Enter Genset Cash Returned" maxlength="9" matInput oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="7">
+        <mat-tab-group (selectedTabChange)="validateGridStatus()" *ngIf="!frmJobClose.get('outsourced').value">
+          <mat-tab label="Vehicle Fuel">
+            <div>
+              <div class="grdToolbar" id="tbGrid">
+                <button type="button" (click)="onAddVFLine()" id="btnGridAdd" class="add" title="Add Line Item"></button>
+                <button type="button" (click)="onDeleteVFLine()" id="btnGridDelete" class="delete" title="Remove selected line item"></button>
+              </div>
+              <ag-grid-angular class="ag-theme-balham grdVehicleFuel" id="grdVehicleFuel"
+                  [gridOptions]="goVehicleFuel" [frameworkComponents]="frameworkComponents" (cellValueChanged)="onVehicleFuelCellValueChanged($event)"
+                  [columnDefs]="colVehicleFuel" [rowData]="vehiclefuelData"></ag-grid-angular>
+            </div>
+          </mat-tab>
+          <!--!frmJobClose.get('enablePartialDelivery').value &&-->
+          <mat-tab label="Genset Fuel" *ngIf="frmJobClose.get('hasGenset').value">
+            <div>
+              <div class="grdToolbar" id="tbGrid">
+                <button type="button" (click)="onAddGFLine()" id="btnGridAdd" class="add" title="Add Line Item"></button>
+                <button type="button" (click)="onDeleteGFLine()" id="btnGridDelete" class="delete" title="Remove selected line item"></button>
+              </div>
+              <ag-grid-angular class="ag-theme-balham grdGensetFuel" id="grdGensetFuel"
+                               [gridOptions]="goGensetFuel" [frameworkComponents]="frameworkComponents" (cellValueChanged)="onGensetFuelCellValueChanged($event)"
+                               [columnDefs]="colGensetFuel" [rowData]="gensetFuelData"></ag-grid-angular>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </td>
+      <td colspan="3">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+<footer>
+  <app-footer [items]="footer"></app-footer>
+</footer>

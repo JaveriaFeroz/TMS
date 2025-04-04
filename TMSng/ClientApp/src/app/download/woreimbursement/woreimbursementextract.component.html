@@ -1,0 +1,194 @@
+<form [formGroup]="frmWOReImbursementExtract">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Extract WO Reimbursement</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnExtract" matTooltip="Click To Start Extraction Process" (click)="tbExport()" class="export"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Back to Mian Page" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Period From</mat-label>
+          <mat-select formControlName="periodFrom" required>
+            <mat-option *ngFor="let Period of lstPeriod" [value]="Period.periodId">
+              {{Period.periodName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmShortage.get('PeriodFrom').value && frmShortage.get('PeriodFrom').touched">Select Period From </mat-error>-->
+      </td>
+
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Period To</mat-label>
+          <mat-select formControlName="periodTo" required>
+            <mat-option *ngFor="let Period of lstPeriod" [value]="Period.periodId">
+              {{Period.periodName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmShortage.get('PeriodTo').value && frmShortage.get('PeriodTo').touched">Select Period To</mat-error>-->
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <mat-form-field class="tb200">
+          <mat-label>Supplier</mat-label>
+          <mat-select name="Supplier" #supplier formControlName="supplierId">
+            <mat-option *ngFor="let Supplier of lstSupplier" [value]="Supplier.supplierId">
+              {{Supplier.supplierName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Branch</mat-label>
+          <mat-select name="Branch" formControlName="branchId" required>
+            <mat-option *ngFor="let Branch of lstBranch" [value]="Branch.branchId">
+              {{Branch.branchName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Sub Category </mat-label>
+          <mat-select name="SubCategory" formControlName="subCategoryId">
+            <mat-option *ngFor="let SubCategory of lstSubCategory" [value]="SubCategory.subCategoryId">
+              {{SubCategory.subCategoryName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" rowspan="3">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+  </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--<form >
+    <table class="mainTable">
+      <tr class="form-title-bg">
+        <td colspan="5">
+          <p class="form-title">List of Work Orders & Service Request</p>
+        </td>
+        <td colspan="5">
+          <div id="divHToolbar" class="float-right">
+            <button type="button" id="btnExtract" matTooltip="Click To Start Extraction Process" (click)="tbExport()" class="export"></button>
+            <button type="button" id="btnExit" matTooltip="Back to Mian Page" (click)="tbExit()" class="exit"></button>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div style="float: left;">
+
+            <span class="site-title">Select an Option</span>
+
+            <mat-radio-group label="Select an option">
+              <mat-radio-button value="1" checked value="0" id="rdoCurrent" [(ngModel)]="model.readioSelected" ng-disabled="readOnly">Pending complaint</mat-radio-button>
+              <mat-radio-button value="2" [(ngModel)]="model.readioSelected" ng-disabled="readOnly">Pending Work Orders</mat-radio-button>
+              <mat-radio-button value="3" [(ngModel)]="model.readioSelected" ng-disabled="readOnly">Closed Work Orders</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td *ngIf="model.readioSelected!='3'">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" matTooltip="Enter Date" [(ngModel)]="model.DateFrom" placeholder="Choose Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
+
+        <td *ngIf="model.readioSelected=='3'">
+          <mat-form-field class="tb100">
+            <mat-label>Period From</mat-label>
+            <input [(ngModel)]="model.PeriodFrom" matTooltip="Enter Period From" matInput maxlength="6">
+          </mat-form-field>
+        </td>
+        <td *ngIf="model.readioSelected!='3'">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" matTooltip="Enter Date" [(ngModel)]="model.DateTo" placeholder="Choose Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td *ngIf="model.readioSelected=='3'">
+          <mat-form-field class="form-control tb100">
+            <mat-label>Period To</mat-label>
+            <input [(ngModel)]="model.PeriodTo" matTooltip="Enter Period To" matInput maxlength="6">
+          </mat-form-field>
+        </td>
+
+        <td></td>
+        <td></td>
+
+        <td colspan="3">
+          <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+            <span>Validation:</span>
+            <ul>
+              <li *ngFor="let error of errors">{{error}}</li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <mat-form-field class="tb200">
+            <mat-label>Department </mat-label>
+            <mat-select name="Department" [(ngModel)]="model.DepartmentCode">
+              <mat-option *ngFor="let Department of lstDepartment" [value]="Department.departmentCode">
+                {{Department.departmentName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  </form>-->
+  <!--<div *ngIf="readioSelected=='radio1'">
+      Radio Button 1 Content new
+      </div>-->
+

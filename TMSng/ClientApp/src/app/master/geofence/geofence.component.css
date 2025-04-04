@@ -1,0 +1,16 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+
+
+.divFCEGrid {
+  width: 45vw;
+  height: 50vh;
+  /*float: left;*/
+}
+
+.grdFCE {
+  width: 46vw;
+  height: 43vh;
+  /*float: left;*/
+}

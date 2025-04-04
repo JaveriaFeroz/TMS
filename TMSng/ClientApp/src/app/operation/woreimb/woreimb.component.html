@@ -1,0 +1,114 @@
+<form [formGroup]="frmWOReImb">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Work Order Reimbursement</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnClose" *ngIf="frmWOReImb.get('requestId').value > 0 && frmWOReImb.get('closed').value== 0 "
+                  matTooltip="Click to close work order ReImbursement" (click)="tbClose(frmWOReImb.get('requestId').value)" class="close"></button>
+          <button type="button" id="btnSearch" matTooltip="Search from lookup list" (click)="tbSearch()" class="find"></button>
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnAdd" matTooltip="Click to create new Entry" (click)="tbAdd()" class="add"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <button type="button" id="btnSave"  matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb60" color="accent">
+          <mat-label>Request Id</mat-label>
+          <input formControlName="requestId" #requestId matTooltip="Work Order ReImbursement Id, auto generated for new entry" matInput maxlength="6" numbersOnly (keydown.enter)="get(requestId.value)">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb250">
+          <mat-label>Supplier</mat-label>
+          <mat-select name="Supplier" #supplierId formControlName="supplierId">
+            <mat-option *ngFor="let s of lstSupplier" [value]="s.supplierId"> {{s.supplierName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Branch</mat-label>
+          <mat-select name="Branch" formControlName="branchId">
+            <mat-option *ngFor="let b of lstBranch" [value]="b.branchId"> {{b.branchName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Status</mat-label>
+          <input formControlName="status" matTooltip="Status" matInput disabled>
+        </mat-form-field>
+      </td>   
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Period From</mat-label>
+          <mat-select formControlName="periodFromId">
+            <mat-option *ngFor="let p of lstPeriod" [value]="p.periodId"> {{p.periodName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Period To</mat-label>
+          <mat-select formControlName="periodToId">
+            <mat-option *ngFor="let p of lstPeriod" [value]="p.periodId"> {{p.periodName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Lease </mat-label>
+          <mat-select formControlName="leaseTypeId">
+            <mat-option *ngFor="let l of lstLeaseType" [value]="l.typeId"> {{l.typeName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb150" *ngIf="frmWOReImb.get('leaseTypeId').value ==1">
+          <mat-label>Sub Category </mat-label>
+          <mat-select formControlName="subCategoryId">
+            <mat-option *ngFor="let s of lstSubCategory" [value]="s.subCategoryId"> {{s.subCategoryName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <button type="button" id="btnLoad" matTooltip="Load" *ngIf="!frmWOReImb.get('requestId').value"
+                (click)="tbLoad()" class="load"></button>
+      </td>     
+    </tr>
+
+    <tr>
+      <td colspan="6">
+        <div class="grdToolbar" id="tbGrid">
+        </div>
+        <ag-grid-angular class="ag-theme-balham grdWOReImb" id="grdWOReImb"
+          [gridOptions]="goWOReImb" [columnDefs]="colWOReImb" [rowData]="woReImbData"></ag-grid-angular>
+      </td>
+      <td rowspan="3">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  
+  </table>
+</form>
+<footer style="height: 8vh;">
+  <app-footer [items]="footer"></app-footer>
+</footer>

@@ -1,0 +1,13 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divGIGrid {
+  height: 40vh;
+  width: 50vw;
+  float: left;
+}
+
+.grdDetail {
+  height: 40vh;
+  width: 41vw;
+}

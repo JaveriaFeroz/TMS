@@ -1,0 +1,28 @@
+<table class="tblFooter" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>       
+            <input type="text"  value="Created By" readonly tabindex="-1"/>
+        </td>
+        <td>
+            <input type="text" [(ngModel)]="items.createdBy" disabled />
+        </td>
+        <td>
+            <input type="text" value="Created On" readonly tabindex="-1"/>
+        </td>
+        <td>
+            <input type="text" [ngModel]="items.createdOn | date: 'dd-MMM-yy hh:mm:ss a'" disabled />
+        </td>
+        <td>
+            <input type="text" value="Updated By" readonly tabindex="-1"/>
+        </td>
+        <td>
+            <input type="text" [(ngModel)] ="items.updatedBy" disabled />
+        </td>
+        <td>
+            <input type="text" value="Updated On" readonly tabindex="-1"/>
+        </td>
+        <td>
+            <input type="text" [ngModel]="items.updatedOn | date: 'dd-MMM-yy hh:mm:ss a'" disabled />
+        </td>
+    </tr>
+</table>

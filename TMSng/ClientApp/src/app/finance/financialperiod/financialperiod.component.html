@@ -1,0 +1,61 @@
+<form [formGroup]="frmFinancialPeriod">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Financial Period</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnSave" matTooltip="Click to Save current Entry" (click)="tbSave()" class="close"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Period </mat-label>
+          <input formControlName="periodName" matTooltip="Financal Period" matInput disabled>
+        </mat-form-field>
+      </td>
+      <td colspan="3"></td>
+      <td colspan="2"></td>
+    </tr>
+
+
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Period Type</mat-label>
+          <mat-select name="Period Type" formControlName="periodTypeId"  (selectionChange)="onPeriodChanged($event.value)" required>
+            <mat-option *ngFor="let cc of lstPeriodType" [value]="cc.periodTypeId">
+              {{cc.periodTypeName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <!--<tr>
+    <td>
+      <mat-form-field class="tb200">
+        <mat-label>Current Month </mat-label>
+        <input formControlName="currentMonth" matTooltip="Current Financal Month"  matInput disabled>
+      </mat-form-field>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <mat-form-field class="tb200">
+        <mat-label>Current Year </mat-label>
+        <input formControlName="currentYear" matTooltip="Current Financal Year"   matInput disabled>
+      </mat-form-field>
+    </td>
+  </tr>-->
+
+
+  </table>
+</form>

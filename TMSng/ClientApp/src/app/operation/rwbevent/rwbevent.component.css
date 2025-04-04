@@ -1,0 +1,33 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+/*.divRWEGrid {
+  width: 30vw;
+  height: 60vh;
+  float: left;
+}
+*/
+
+.grdLog {
+  width: 65vw;
+  height: 35vh;
+  /*float: left;*/
+}
+
+
+.validation-summary-errors {
+white-space: pre-wrap;
+font-family: 'Comic Sans MS';
+  vertical-align: top;
+  text-align: left;
+  color: red;
+  font-size: 11px;
+  font-weight: bold;
+  border: groove 2px darkgray;
+  height: 30vh;
+  width: 20vw;
+  margin: 10px;
+  text-wrap: normal;
+  word-wrap: hyphenate;
+  overflow: auto;
+}

@@ -1,0 +1,12 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.grdVehicleFuel {
+  height: 40vh;
+  width: 65vw;
+}
+
+.grdGensetFuel {
+  height: 40vh;
+  width: 65vw;
+}

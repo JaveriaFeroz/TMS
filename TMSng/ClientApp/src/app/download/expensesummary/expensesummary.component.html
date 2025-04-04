@@ -1,0 +1,73 @@
+<Form [formGroup]="frmExpenseSummary">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Profit and Loss</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnExtract" matTooltip="Click To Start Extraction Process" (click)="tbExport()" class="export"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Back to Mian Page" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span class="site-title">Select an Option</span>
+        <mat-radio-group formControlName="DateBasicId">
+          <mat-radio-button value="0" id="rdoRR" ng-disabled="readOnly">Job Close Date</mat-radio-button>
+          <mat-radio-button value="1" class="mat-primary" id="rdoJC" ng-disabled="readOnly">Departure Date</mat-radio-button>
+          <mat-radio-button value="2" id="rdoOP" ng-disabled="readOnly">Transaction Date</mat-radio-button>
+        </mat-radio-group>
+      </td>
+
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Date From</mat-label>
+          <input matInput [matDatepicker]="mdpDateFrom" [min]="MinDate" [max]="MaxDate" matTooltip="Enter From Date" formControlName="dateFrom" >
+          <mat-datepicker-toggle matSuffix [for]="mdpDateFrom"></mat-datepicker-toggle>
+          <mat-datepicker #mdpDateFrom></mat-datepicker>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Date To</mat-label>
+          <input matInput [matDatepicker]="mdpDateTo" [min]="MinDate" [max]="MaxDate" matTooltip="Enter To Date" formControlName="dateTo" >
+          <mat-datepicker-toggle matSuffix [for]="mdpDateTo"></mat-datepicker-toggle>
+          <mat-datepicker #mdpDateTo></mat-datepicker>
+        </mat-form-field>
+      </td>
+      <td>
+        <button type="button" id="btnLoad" matTooltip="Load"
+                (click)="tbLoad()" class="load float-left"></button>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="8">
+        <div class="divESGrid">
+          <ag-grid-angular class="ag-theme-balham grdES" id="grdES"
+                           [gridOptions]="goExpenseSummary"
+                           [columnDefs]="colExpenseSummary"
+                           [rowData]="expensesummaryData"></ag-grid-angular>
+        </div>
+      </td>
+    </tr>
+  </table>
+</Form>
+
+<!--style="width: 99%; height: 525px; "-->
+
+
+
+
+
+
+
+
+
+
+

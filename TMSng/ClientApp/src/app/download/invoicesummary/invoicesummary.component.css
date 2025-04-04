@@ -1,0 +1,15 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+
+
+.divSummaryGrid {
+  width: 90vw;
+  height: 85vh;
+/*  float: left;*/
+}
+
+.grdSummary {
+  width: 91vw;
+  height: 77vh;
+}

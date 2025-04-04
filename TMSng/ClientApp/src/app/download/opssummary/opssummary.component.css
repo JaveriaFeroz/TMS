@@ -1,0 +1,15 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+
+
+.divOperationalGrid {
+  width: 95vw;
+  height: 75vh;
+  /*  float: left;*/
+}
+
+.grdOperational {
+  width: 96vw;
+  height: 67vh;
+}

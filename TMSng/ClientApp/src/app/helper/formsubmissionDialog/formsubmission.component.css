@@ -1,0 +1,39 @@
+@import "../../../assets/css/toolbar.css";
+
+.mcTitle {
+  color: darkgoldenrod;
+  border-bottom: 2px maroon solid;
+}
+
+select {
+  width: 200px;
+  border: 1px dotted #808080;
+}
+
+select option {
+  background-color: #e4faf1;
+  color: blue;
+}
+
+select:focus {
+  border: 2px double #FF0000;
+  animation-direction: alternate-reverse;
+}
+
+.tblSubmission {
+  height: 26vh;
+  width: 30vw;
+}
+
+.tblSubmission tr td:nth-child(odd) {
+  width: 8vw;
+}
+
+.tblSubmission tr td:nth-child(even) {
+  width: 10vw;
+}
+
+.lbTitle {
+  font-family: Tahoma;
+  font-size: 10pt;
+}

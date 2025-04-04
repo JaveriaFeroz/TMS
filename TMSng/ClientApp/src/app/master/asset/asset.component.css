@@ -1,0 +1,13 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divTyres {
+  width: 25vw;
+  height: 40vh;
+  float: left;
+}
+
+.grdTyre{
+    width: 25vw;
+    height: 32vh;
+}

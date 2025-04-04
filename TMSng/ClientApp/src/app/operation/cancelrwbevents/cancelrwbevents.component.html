@@ -1,0 +1,47 @@
+<form [formGroup]="frmCancelEvent">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Cancel Rwb Events</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <button type="button" id="btnSave" matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb100" color="accent">
+          <mat-label>RWB #</mat-label>
+          <input formControlName="rwbNo" #rwbNo matTooltip="Road waybill number for which you want to cancel event(s)"  matInput maxlength="10" numbersOnly (keydown.enter)="get(rwbNo.value)">
+        </mat-form-field>
+      </td>
+      <td colspan="3"></td>
+      <td colspan="3"></td>
+    </tr>
+
+    <tr>
+      <td colspan="5">
+        <label class="mat-subheader">Please select the event row from where you want to cancel all subsequent events including selected Event</label>
+        <ag-grid-angular class="ag-theme-balham grdLog" id="grdLog"
+            [gridOptions]="goLog" [columnDefs]="colLog" [rowData]="logData" (cellClicked)="onCellClicked($event)">
+        </ag-grid-angular>
+      </td>     
+    
+      <td colspan="3" rowspan="3">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>

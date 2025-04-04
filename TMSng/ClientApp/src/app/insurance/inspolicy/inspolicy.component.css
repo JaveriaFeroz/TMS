@@ -1,0 +1,12 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divAssetGrid {
+  height: 40vh;
+  width: 33vw;
+}
+
+.grdAsset {
+  height: 33vh;
+  width: 31vw;
+}

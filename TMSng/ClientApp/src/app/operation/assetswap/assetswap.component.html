@@ -1,0 +1,140 @@
+<form [formGroup]="frmAssetSwap">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Asset Swap</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+
+          <button type="button" id="btnAdd" matTooltip="Click to create new Entry" (click)="tbAdd()" class="add"></button>
+          <button type="button" id="btnSave" matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <h3>Asset From Detail</h3>
+      </td>
+      <td></td>
+      <td>
+        <h3>Asset To Detail</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>From Asset</mat-label>
+          <mat-select (selectionChange)="fromAssetChanged($event.value)" formControlName="fromAssetId" matTooltip="From Asset" required>
+            <mat-option *ngFor="let Asset of lstAsset" [value]="Asset.assetId">
+              {{Asset.assetNo}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmAssetSwap.get('FromAssetId').value && frmAssetSwap.get('FromAssetId').touched">Please Select From Asset</mat-error>-->
+      </td>
+      <td></td>
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>To Asset</mat-label>
+          <mat-select  (selectionChange)="toAssetChanged($event.value)" formControlName="toAssetId" matTooltip="To Asset" required>
+            <mat-option *ngFor="let Asset of lstAsset" [value]="Asset.assetId">
+              {{Asset.assetNo}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmAssetSwap.get('ToAssetId').value && frmAssetSwap.get('ToAssetId').touched">Please Select To Asset</mat-error>-->
+      </td>
+
+      <td style="vertical-align:text-top" colspan="3" rowspan="7">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Trailer From</mat-label>
+          <input formControlName="fromTrailerNo" placeholder="From Trailer " matInput readonly>
+        </mat-form-field>
+        <input type="hidden" formControlName="fromTrailerId">
+      </td>
+
+      <td>
+        <button type="button" id="tbSwapTrailer" matTooltip="Click to Swap Trailer" (click)="tbSwapTrailer()" class="swap"></button>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Trailer To</mat-label>
+          <input formControlName="toTrailerNo" placeholder="To Trailer" matInput readonly>
+        </mat-form-field>
+        <input type="hidden" formControlName="toTrailerId">
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <h3>Driver's for this Asset</h3>
+      </td>
+      <td></td>
+      <td>
+        <h3>Driver's for this Asset</h3>
+      </td>
+    </tr>
+    <tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Driver 1</mat-label>
+          <input formControlName="fromDriverName1" placeholder="Driver Name" matInput readonly>
+        </mat-form-field>
+        <input type="hidden" formControlName="fromDriverId1">
+      </td>
+
+      <td>
+        <button type="button" id="tbSwapDriver1" matTooltip="Click to Swap Driver 1" (click)="tbSwapDriver1()" class="swap"></button>
+      </td>
+
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Driver 1</mat-label>
+          <input formControlName="toDriverName1" placeholder="Driver Name" matInput readonly>
+        </mat-form-field>
+        <input type="hidden" formControlName="toDriverId1">
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Driver 2</mat-label>
+          <input formControlName="fromDriverName2" placeholder="Driver Name" matInput readonly>
+        </mat-form-field>
+        <input type="hidden" formControlName="fromDriverId2">
+      </td>
+
+      <td>
+        <button type="button" id="tbSwapDriver2" matTooltip="Click to Swap Driver 1" (click)="tbSwapDriver2()" class="swap"></button>
+      </td>
+
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Driver 2</mat-label>
+          <input formControlName="toDriverName2" placeholder="Driver Name" matInput readonly>
+        </mat-form-field>
+        <input type="hidden" formControlName="toDriverId2">
+      </td>
+    </tr>
+  </table>
+</form>

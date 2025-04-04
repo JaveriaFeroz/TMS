@@ -1,0 +1,39 @@
+<h2 class="mcTitle">{{data.header}}</h2>
+<table class="tblSubmission">
+  <tr>
+    <td colspan="2">
+      <label class="lbTitle">Submit To</label>
+    </td>
+    <td colspan="3">
+      <label class="lbTitle">Next State</label>
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align:top;" colspan="2">
+      <select name="selected" id="ddRecipient" class="form-control tb200" [(ngModel)]="data.recipientId">
+        <option *ngFor="let r of lstRecipient" [value]="r.recipientId">{{r.recipientName}}</option>
+      </select>
+    </td>
+    <td style="vertical-align:top;" colspan="2">
+      <input type="text" [(ngModel)]="data.DocumentStatus" disabled class="tb350" />
+      <div class="float-right">
+        <button type="button" class="go" title="Click to go ahead with submission to selected recipient" (click)="onSubmit(data)"></button>
+        <button type="button" class="back" title="Click to cancel the submission process and go back to previous window" (click)="onClose()"></button>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      <label>Submission Comments</label>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <textarea rows="6" cols="68" maxlength="500" [(ngModel)]="data.submissionComment" class="form-control tb450"></textarea>
+    </td>
+  </tr>
+</table>
+
+
+

@@ -1,0 +1,132 @@
+<form [formGroup]="frmGRN">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Goods Receipt Note</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnSearch" matTooltip="Search from lookup list" (click)="tbSearch()" class="find"></button>
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnAdd" matTooltip="Click to create new Entry" (click)="tbAdd()" class="add"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <button type="button" id="btnSave"  matTooltip="Click to Save current Entry"  (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb150" color="accent">
+          <mat-label>GRN #</mat-label>
+          <input formControlName="grnNo" #grnNo matTooltip="GRN #, auto generated for new entry" matInput maxlength="12" numbersOnly (keydown.enter)="get(grnNo.value)">
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>GRN Date</mat-label>
+          <input matInput [matDatepicker]="mdpGRN" [min]="minDate" [max]="maxDate" matTooltip="GRN Date" formControlName="grnDate" required>
+          <mat-datepicker-toggle matSuffix [for]="mdpGRN"></mat-datepicker-toggle>
+          <mat-datepicker #mdpGRN></mat-datepicker>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <div class="float-left">
+          <mat-form-field class="tb60" color="accent">
+            <mat-label>PO #</mat-label>
+            <input formControlName="poNo" matTooltip="PO #" matInput>
+          </mat-form-field>
+        </div>
+        <div class="float-left">
+          <button id="tbPOSearch" matTooltip="Click to select Approved PO for GRN" (click)="tbPOSearch()" class="find"></button>
+        </div>
+      </td>
+
+      <td></td>
+
+      <td colspan="3" rowspan="3">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+       
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Branch</mat-label>
+          <mat-select formControlName="branchId" #branchId required>
+            <mat-option *ngFor="let b of lstBranch" [value]="b.branchId" > {{b.branchName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td >
+        <mat-form-field class="tb300">
+          <mat-label>Supplier</mat-label>
+          <mat-select formControlName="supplierId" required>
+            <mat-option *ngFor="let s of lstSupplier" [value]="s.supplierId"> {{s.supplierName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td >
+        <mat-form-field class="tb150">
+          <mat-label>Receipt Type</mat-label>
+          <mat-select formControlName="grnTypeId" required>
+            <mat-option *ngFor="let rt of lstGRNType" [value]="rt.typeId"> {{rt.typeName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td >
+        <mat-form-field class="tb150">
+          <mat-label>Payment Mode</mat-label>
+          <mat-select formControlName="moPId" required>
+            <mat-option *ngFor="let p of lstMoP" [value]="p.paymentModeId"> {{p.paymentModeName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>    
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Ref #</mat-label>
+          <input formControlName="refNo" matTooltip="Enter Ref #" matInput maxlength="50">
+        </mat-form-field>
+      </td>
+
+      <td >
+        <mat-form-field class="tb150">
+          <mat-label>Ref Date </mat-label>
+          <input matInput [matDatepicker]="mdpReference" matTooltip="Ref Date" formControlName="refDate" placeholder="Choose Reference Date">
+          <mat-datepicker-toggle matSuffix [for]="mdpReference"></mat-datepicker-toggle>
+          <mat-datepicker #mdpReference></mat-datepicker>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="6">
+        <div class="divGRNGrid">
+          <div class="grdToolbar" id="tbGrid">
+            <button  type="button"  (click)="onDeleteLine()" id="btnGridDelete" class="delete" title="Remove selected line item"></button>
+          </div>
+            <ag-grid-angular class="ag-theme-balham grdGRN" id="grdGRN" (cellValueChanged)="onGRNCellValueChanged($event)"
+              [gridOptions]="goGRN" [columnDefs]="colGRN" [rowData]="grnData"></ag-grid-angular>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+<footer>
+  <app-footer [items]="footer"></app-footer>
+</footer>

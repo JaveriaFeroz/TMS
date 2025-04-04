@@ -1,0 +1,99 @@
+<form [formGroup]="frmAssetStatus">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Change Asset Status</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <button type="button" id="btnSave" matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Asset #</mat-label>
+          <input formControlName="assetNo" #assetNo matTooltip="Enter Asset #" matInput maxlength="10" required (keydown.enter)="get(assetNo.value)">
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmAssetStatus.get('AssetNo').value && frmAssetStatus.get('AssetNo').touched">Asset # is a required field</mat-error>-->
+      </td>
+      <td colspan="3"></td>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Asset Type</mat-label>
+          <mat-select formControlName="assetTypeId">
+            <mat-option *ngFor="let AssetType of lstAssetType" [value]="AssetType.typeId">
+              {{AssetType.typeName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmAssetStatus.get('AssetTypeId').value && frmAssetStatus.get('AssetTypeId').touched">Select Asset Type</mat-error>-->
+      </td>
+     
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Current Status</mat-label>
+          <mat-select formControlName="statusId">
+            <mat-option *ngFor="let AssetStatus of lstAssetStatus" [value]="AssetStatus.statusId">
+              {{AssetStatus.statusName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmAssetStatus.get('AssetStatusId').value && frmAssetStatus.get('AssetStatusId').touched">Select Current Status</mat-error>-->
+      </td>
+
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Changed Status</mat-label>
+          <mat-select formControlName="newstatusId" #newstatusId required>
+            <mat-option *ngFor="let NewAssetStatus of lstNewAssetStatus" [value]="NewAssetStatus.statusId">
+              {{NewAssetStatus.statusName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmAssetStatus.get('CAssetStatusId').value && frmAssetStatus.get('CAssetStatusId').touched">Select Changed Status</mat-error>-->
+      </td>
+    </tr>
+
+    <tr>
+      <td  colspan="2">
+        <mat-form-field class="tb500">
+          <mat-label>Remarks</mat-label>
+          <textarea matInput formControlName="remarks" matTooltip="Enter Remarks" maxlength="500"
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="2"
+                    cdkAutosizeMaxRows="5" re></textarea>
+        </mat-form-field>
+       <!-- <mat-error *ngIf="!frmAssetStatus.get('Remarks').value && frmAssetStatus.get('Remarks').touched">Enter Remarks</mat-error>-->
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" rowspan="3">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+
+
+  </table>
+</form>
+<footer>
+  <app-footer [items]="footer"></app-footer>
+</footer>

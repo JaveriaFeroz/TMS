@@ -1,0 +1,36 @@
+<form [formGroup]="frmReOpenJob">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title" >Re Open Job</p>        
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnSave" matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb200" color="accent">
+          <mat-label>Job #</mat-label>
+          <input formControlName="jobNo" matTooltip="Please enter Job Order #" placeholder="Job Order #" matInput maxlength="10" numbersOnly>
+        </mat-form-field>
+      </td>
+      <td colspan="3"></td>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <mat-form-field class="tb500">
+          <mat-label>Reason</mat-label>
+          <textarea matInput formControlName="reason" matTooltip="Enter reason why you need to reopen job" maxlength="500"
+                    cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" required></textarea>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+</form>

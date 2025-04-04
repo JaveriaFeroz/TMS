@@ -1,0 +1,88 @@
+<Form [formGroup]="frmPLReport">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Profit and Loss</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+       
+          <button type="button" id="btnExtract" matTooltip="Click To Start Extraction Process" (click)="tbExport()" class="export"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Back to Mian Page" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span class="site-title">Select an Option</span>
+        <mat-radio-group formControlName="dataBasisId">
+          <mat-radio-button value="0" id="rdoRR" ng-disabled="readOnly">Rwb Data</mat-radio-button>
+          <mat-radio-button value="1" id="rdoOP" ng-disabled="readOnly">Open Jobs</mat-radio-button>
+          <mat-radio-button value="2" class="mat-primary" id="rdoJC" ng-disabled="readOnly">Job Closed Period</mat-radio-button>
+
+        </mat-radio-group>
+      </td>
+
+      <td >
+        <mat-form-field class="tb200" *ngIf="frmPLReport.get('dataBasisId').value !=2 ">
+          <mat-label>Date From</mat-label>
+          <input matInput [matDatepicker]="mdpDataFrom" [min]="MinDate" [max]="MaxDate" matTooltip="Enter From Date" formControlName="dateFrom">
+          <mat-datepicker-toggle matSuffix [for]="mdpDataFrom"></mat-datepicker-toggle>
+          <mat-datepicker #mdpDataFrom></mat-datepicker>
+        </mat-form-field>
+   
+        <mat-form-field class="tb100" *ngIf="frmPLReport.get('dataBasisId').value==2">
+          <mat-label>Period</mat-label>
+          <mat-select formControlName="jobPeriod" >
+            <mat-option *ngFor="let p of lstPeriod" [value]="p.periodId">
+              {{p.periodName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td >
+        <mat-form-field class="tb200" *ngIf="frmPLReport.get('dataBasisId').value!=2">
+          <mat-label>Date To</mat-label>
+          <input matInput [matDatepicker]="mdpDataTo" [min]="MinDate" [max]="MaxDate" matTooltip="Enter To Date" formControlName="dateTo">
+          <mat-datepicker-toggle matSuffix [for]="mdpDataTo"></mat-datepicker-toggle>
+          <mat-datepicker #mdpDataTo></mat-datepicker>
+        </mat-form-field>
+      </td>
+      <td>
+        <button type="button" id="btnLoad" matTooltip="Load"
+                (click)="tbLoad()" class="load float-left"></button>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="8">
+        <div class="divPLGrid">
+          <ag-grid-angular *ngIf="!frmPLReport.get('enablePartialDelivery').value" class="ag-theme-balham grdPL" id="grdPL"
+                           [gridOptions]="goRoutePL"
+                           [columnDefs]="colRoutePL"
+                           [rowData]="routePLData"></ag-grid-angular>
+        
+          <ag-grid-angular *ngIf="frmPLReport.get('enablePartialDelivery').value" class="ag-theme-balham grdPL" id="grdPL"
+                           [gridOptions]="goConsigneePL"
+                           [columnDefs]="colConsigneePL"
+                           [rowData]="consigneePLData"></ag-grid-angular>
+        </div>
+      </td>
+    </tr>
+  </table>
+</Form>
+
+
+
+
+
+
+
+
+
+
+
+

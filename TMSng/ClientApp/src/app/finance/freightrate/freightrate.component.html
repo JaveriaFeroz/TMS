@@ -1,0 +1,93 @@
+<form [formGroup]="frmFreightRate">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Freight Rate</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <button type="button" id="btnSave" matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <h3>Local Freight Rate </h3>
+      </td>
+      <td></td>
+      <td colspan="2">
+        <h3>Up Country Freight Rate</h3>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Local 0 to 64</mat-label>
+          <input type="number" #localRate0To64 formControlName="localRate0To64" min="1" step="0.01" max="99999.9999" matTooltip="Local 0 to 64" matInput maxlength="9" required oninput="validity.valid||(value='');" >
+        </mat-form-field>
+      </td>
+      <td></td>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Up Country 0 to 77</mat-label>
+          <input type="number" formControlName="upCountryRate0To77" min="1" step="0.01" max="99999.9999" matTooltip="Up Country 0 to 77" matInput maxlength="9" required oninput="validity.valid||(value='');" >
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Local 65 to 1980</mat-label>
+          <input type="number" formControlName="localRate65To1980" min="1" step="0.01" max="99999.9999" matTooltip="Local 65 to 1980" matInput maxlength="9" required oninput="validity.valid||(value='');" >
+        </mat-form-field>
+      </td>
+      <td></td>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Up Country 78 to 560</mat-label>
+          <input type="number" formControlName="upCountryRate78To560" min="1" step="0.01" max="99999.9999" matTooltip="Up Country 78 to 560" matInput maxlength="9" required oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Local Above 1980</mat-label>
+          <input type="number" formControlName="localRateAbove1980" min="1" step="0.01" max="99999.9999" matTooltip="Local Above 1980" matInput maxlength="9" required oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+      <td></td>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Up Country Above 560 </mat-label>
+          <input type="number" formControlName="upCountryRateAbove560" min="1" step="0.01" max="99999.9999" matTooltip="Up Country Above 560" matInput maxlength="9" required oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Local Hilly</mat-label>
+          <input type="number" formControlName="localRateHilly" min="1" step="0.01" max="99999.9999" matTooltip="Local Hilly" matInput maxlength="9" required oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+      <td></td>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>UP Country Hilly</mat-label>
+          <input type="number" formControlName="upCountryHilly" min="1" max="99999.9999" matTooltip="UP Country Hilly" matInput maxlength="9" required oninput="validity.valid||(value='');">
+        </mat-form-field>
+      </td>
+    </tr>
+
+  </table>
+</form>
+<footer>
+  <app-footer [items]="footer"></app-footer>
+</footer>

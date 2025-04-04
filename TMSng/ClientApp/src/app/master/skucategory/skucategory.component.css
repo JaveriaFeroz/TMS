@@ -1,0 +1,12 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+.divClientGrid {
+  height: 40vh;
+  width: 30vw;
+}
+
+.grdClient {
+  height: 33vh;
+  width: 25vw;
+}

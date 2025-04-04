@@ -1,0 +1,135 @@
+<form [formGroup]="frmRoute">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Route</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnSearch" matTooltip="Search from lookup list" (click)="tbSearch()" class="find"></button>
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnAdd" matTooltip="Click to create new Entry" (click)="tbAdd()" class="add"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <button type="button" id="btnSave" matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb60" color="accent">
+          <mat-label>Route Id</mat-label>
+          <input formControlName="routeId" #routeId matTooltip="Route ID, auto generated for new entry" matInput maxlength="3" numbersOnly (keydown.enter)="get(routeId.value)">
+        </mat-form-field>
+      </td>
+      <td class="slider">
+        <mat-slide-toggle formControlName="isActive" color="primary">Is Active</mat-slide-toggle>
+      </td>
+      <td class="slider">
+        <mat-slide-toggle *ngIf="frmRoute.get('enablePartialDelivery').value" formControlName="tollTaxApplicable"  color="primary">Is Toll Tax Applied</mat-slide-toggle>
+      </td>
+
+      <td colspan="3"></td>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td colspan="3">
+        <mat-form-field class="tb350">
+          <mat-label>Route Name</mat-label>
+          <input formControlName="routeName" #routeName matTooltip="Enter Route Name" matInput maxlength="50" required>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmRoute.get('RouteName').value && frmRoute.get('RouteName').touched">Route description is a required field</mat-error>-->
+      </td>
+    </tr>
+
+    <tr>
+
+      <td >
+        <span>
+          <mat-form-field class="tb200" *ngIf="!frmRoute.get('enablePartialDelivery').value">
+            <mat-label>Origin</mat-label>
+            <mat-select formControlName="originId">
+              <mat-option *ngFor="let City of lstCity" [value]="City.cityId">
+                {{City.cityName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="tb200" *ngIf="frmRoute.get('enablePartialDelivery').value">
+            <mat-label>Origin</mat-label>
+            <mat-select formControlName="consigneeStartPoint">
+              <mat-option *ngFor="let shipper of lstShipper" [value]="shipper.shipperId">
+                {{shipper.shipperName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </span>
+
+      </td>
+
+      <td>
+        <span>
+          <mat-form-field class="tb200" *ngIf="!frmRoute.get('enablePartialDelivery').value">
+            <mat-label>Destination</mat-label>
+            <mat-select formControlName="destinationId">
+              <mat-option *ngFor="let City of lstCity" [value]="City.cityId">
+                {{City.cityName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="tb200" *ngIf="frmRoute.get('enablePartialDelivery').value">
+            <mat-label>Destination</mat-label>
+            <mat-select formControlName="consigneeFinishPoint">
+              <mat-option *ngFor="let Consignee of lstConsignee" [value]="Consignee.consigneeId">
+                {{Consignee.consigneeName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </span>
+       
+      </td>     
+
+    </tr>
+    
+
+    <tr>
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Std Kms</mat-label>
+          <input type="number" formControlName="stdKMs" min="1" max="5000" matTooltip="Enter Std KMs" maxlength="4" matInput oninput="validity.valid||(value='');" required>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmRoute.get('DistanceKms').value && frmRoute.get('DistanceKms').touched">Distance Kms cannot be Equal or Less then Zero</mat-error>-->
+      </td>
+
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Std Time (Hrs)</mat-label>
+          <input type="number" formControlName="stdTT" min="1" max="200" matTooltip="Enter Std TT" maxlength="3" matInput oninput="validity.valid||(value='');" required>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmRoute.get('TravelTime').value && frmRoute.get('TravelTime').touched">TravelTime cannot be Equal or Less then Zero</mat-error>-->
+      </td>
+
+      <td>
+        <mat-form-field class="tb100" *ngIf="frmRoute.get('enablePartialDelivery').value">
+          <mat-label>Hilly Kms</mat-label>
+          <input type="number" formControlName="hillyKMs" min="0" max="5000" matTooltip="Enter TravelTime" maxlength="4" matInput oninput="validity.valid||(value='');">
+        </mat-form-field>
+
+      </td>
+
+
+    </tr>
+
+
+  </table>
+</form>
+<footer>
+  <app-footer [items]="footer"></app-footer>
+</footer>

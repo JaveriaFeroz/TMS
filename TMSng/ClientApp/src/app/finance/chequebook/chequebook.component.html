@@ -1,0 +1,97 @@
+<form [formGroup]="frmCB">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Cheque Book</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnSearch" matTooltip="Search from lookup list" (click)="tbSearch()" class="find"></button>
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnAdd" matTooltip="Click to create new Entry" (click)="tbAdd()" class="add"></button>
+          <div id="divSave" class="float-left">
+            <button type="button" id="btnSave" matTooltip="Click to Save current Entry" *ngIf="!frmCB.get('bookId').value" (click)="tbSave()" class="save"></button>
+          </div>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb80" color="accent">
+          <mat-label>Book Id</mat-label>
+          <input formControlName="bookId" #bookId matTooltip="Cheque Book Id, auto generated for new entry" matInput maxlength="6" numbersOnly (keydown.enter)="get(bookId.value)">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Issue Date</mat-label>
+          <input matInput [matDatepicker]="mdpCheque" [min]="minDate" [max]="maxDate" matTooltip="Cheque Book Issue Date" formControlName="issueDate" required>
+          <mat-datepicker-toggle matSuffix [for]="mdpCheque"></mat-datepicker-toggle>
+          <mat-datepicker #mdpCheque></mat-datepicker>
+        </mat-form-field>
+      </td>
+      <td colspan="3"></td>
+      <td colspan="2"></td>
+      <td colspan="3"></td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <mat-form-field class="tb250">
+          <mat-label>Book Name</mat-label>
+          <input formControlName="bookName" #bookName matTooltip="Cheque Book Name, free text field to capture any info" matInput maxlength="50" required>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <mat-form-field class="tb400">
+          <mat-label>Bank Account</mat-label>
+          <mat-select formControlName="accountId" #accountId required>
+            <mat-option *ngFor="let b of lstBankAccount" [value]="b.accountId">
+              {{b.accountName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Prefix</mat-label>
+          <input formControlName="prefix" matTooltip="Enter Cheque # Prefix" matInput maxlength="8">
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>First Chq #</mat-label>
+          <input type="number" formControlName="startChqNo" matTooltip="Enter First Cheque # of the book - without any prefix" placeholder="Cheque #" matInput numbersonly maxlength="10" required>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Last Chq #</mat-label>
+          <input type="number" formControlName="endChqNo" matTooltip="Enter Last Cheque # of the book - without any prefix" placeholder="Cheque #" matInput numbersonly maxlength="10" required>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="5" rowspan="3">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>

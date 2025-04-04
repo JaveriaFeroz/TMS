@@ -1,0 +1,92 @@
+<form [formGroup]="frmShortage">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Shortage</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnExtract" matTooltip="Click To Start Extraction Process" (click)="tbExport()" class="export"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Back to Mian Page" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Period From</mat-label>
+          <mat-select formControlName="periodFrom">
+            <mat-option *ngFor="let Period of lstPeriod" [value]="Period.periodId">
+              {{Period.periodName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmShortage.get('PeriodFrom').value && frmShortage.get('PeriodFrom').touched">Select Period From </mat-error>-->
+      </td>
+
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Period To</mat-label>
+          <mat-select formControlName="periodTo">
+            <mat-option *ngFor="let Period of lstPeriod" [value]="Period.periodId">
+              {{Period.periodName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--<mat-error *ngIf="!frmShortage.get('PeriodTo').value && frmShortage.get('PeriodTo').touched">Select Period To</mat-error>-->
+      </td>
+
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field class="tb250">
+          <mat-label>Client</mat-label>
+          <mat-select formControlName="clientId">
+            <mat-option *ngFor="let Client of lstClient" [value]="Client.clientId">
+              {{Client.clientName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td >
+        <mat-form-field class="tb120">
+          <mat-label>Asset</mat-label>
+          <mat-select formControlName="assetId">
+            <mat-option *ngFor="let Asset of lstAsset" [value]="Asset.assetId">
+              {{Asset.assetNo}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <button type="button" id="btnLoad" matTooltip="Load"
+                (click)="tbLoad()" class="load float-left"></button>
+      </td>
+
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="divShortageGrid">
+          <ag-grid-angular class="ag-theme-balham grdShortage" id="grdShortage" 
+                           [gridOptions]="goShortage"
+                           [columnDefs]="colShortage"
+                           [rowData]="shortageData"></ag-grid-angular>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+<h2 mat-dialog-title class="mcTitle">Outstanding Slips</h2>
+<div class="divOSGrid">
+  <ag-grid-angular class="ag-theme-balham grdOS" id="grdOS"
+    [gridOptions]="goSlip" (cellValueChanged)="onSelected($event)" [columnDefs]="colSlip" [rowData]="slipData"></ag-grid-angular>
+</div>
+<div class="float-right">
+  <button type="button" class="save" *ngIf="!pivNo" title="Click to tag all selected slips to this purchase invoice" (click)="onSubmit()"></button>
+  <button type="button" class="exit" title="Click to cancel the  process and go back to previous window" (click)="onClose()"></button>
+</div>

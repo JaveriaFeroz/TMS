@@ -1,0 +1,15 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+
+
+.divTEGrid {
+  width: 94vw;
+  height: 75vh;
+/*  float: left;*/
+}
+
+.grdTE {
+  width: 95vw;
+  height: 67vh;
+}

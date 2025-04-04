@@ -1,0 +1,255 @@
+<form [formGroup]="frmWorkOrder">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Work Order</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnSearch" matTooltip="Search from lookup list" (click)="tbSearch()" class="find"></button>
+          <button type="button" id="btnRecall" matTooltip="Click to Recall existing Entry" (click)="tbRecall()" class="recall"></button>
+          <button type="button" id="btnAdd" matTooltip="Click to create new Entry" (click)="tbAdd()" class="add"></button>
+          <button type="button" id="btnEdit" matTooltip="Click to Edit current Entry" (click)="tbEdit()" class="edit"></button>
+          <button type="button" id="btnSave" *ngIf="frmWorkOrder.get('stateId').value==0 || frmWorkOrder.get('stateId').value==1  || frmWorkOrder.get('stateId').value==5"
+                  matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb100" color="accent">
+          <mat-label>WO #</mat-label>
+          <input formControlName="woNo" #woNo matTooltip="WO #, auto generated for new entry" matInput maxlength="12" numbersOnly (keydown.enter)="get(woNo.value)">
+        </mat-form-field>
+        <input formControlName="woId" hidden>
+      </td>
+
+      <td>
+        <mat-form-field class="tb120">
+          <input matInput [matDatepicker]="mdpWODate" [min]="MinDate" [max]="MaxDate" matTooltip="WO Date" formControlName="woDate"  required>
+          <mat-datepicker-toggle matSuffix [for]="mdpWODate"></mat-datepicker-toggle>
+          <mat-datepicker #mdpWODate></mat-datepicker>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <div class="float-left">
+          <mat-form-field class="tb60">
+            <mat-label>SR #</mat-label>
+            <input formControlName="requestId" matTooltip="Service Request #" matInput maxlength="5" disabled required>
+          </mat-form-field>
+        </div>
+
+        <div class="float-left">
+          <button id="btnSearchSR" matTooltip="Search Service Reuquest" (click)="tbSRSearch()" class="find"></button>
+        </div>
+      </td>
+
+      <td>
+        <div class="float-left">
+          <mat-form-field class="tb100">
+            <mat-label>Asset</mat-label>
+            <mat-select name="Asset" formControlName="vehicleId" #assetId required>
+              <mat-option *ngFor="let a of lstAsset" [value]="a.assetId"> {{a.assetNo}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="float-left">
+          <button id="btnAsset" matTooltip="click to view maintenance history" *ngIf=" frmWorkOrder.get('stateId').value==2"
+            (click)="tbAssetSearch(frmWorkOrder.get('vehicleId').value)" class="find"></button>
+        </div>
+      </td>
+
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Vendor</mat-label>
+          <mat-select formControlName="supplierId" required>
+            <mat-option *ngFor="let s of lstSupplier" [value]="s.supplierId"> {{s.supplierName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb170">
+          <mat-label>Status</mat-label>
+          <input formControlName="stateName" matTooltip="Work Order current status" matInput disabled>
+        </mat-form-field>
+        <input formControlName="stateId" hidden>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb150">
+          <mat-label>Branch</mat-label>
+          <mat-select formControlName="branchId" required>
+            <mat-option *ngFor="let b of lstBranch" [value]="b.branchId"> {{b.branchName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>Priority</mat-label>
+          <mat-select formControlName="priorityId" required>
+            <mat-option *ngFor="let p of lstPriority" [value]="p.priorityId"> {{p.priorityName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb100">
+          <mat-label>KMs Reading</mat-label>
+          <input type="number" formControlName="kMsReading" matTooltip="current KMs reading" matInput maxlength="10" oninput="validity.valid||(value='');" required />
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Est Duration</mat-label>
+          <input type="number" formControlName="estDuration" matTooltip="Estimated duration (in HRs)" matInput maxlength="10" oninput="validity.valid||(value='');" required />
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>WO Type</mat-label>
+          <mat-select name="WOType" formControlName="woTypeId" required>
+            <mat-option *ngFor="let wot of lstWOType" [value]="wot.typeId"> {{wot.typeName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb200" *ngIf="frmWorkOrder.get('woTypeId').value>1">
+          <mat-label>Sub Category</mat-label>
+          <mat-select name="SubCategory" formControlName="subCategoryId">
+            <mat-option *ngFor="let sc of lstSubCategory" [value]="sc.subCategoryId"> {{sc.subCategoryName}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="4">
+        <mat-form-field class="tb500">
+          <mat-label>Activity Detail</mat-label>
+          <textarea matInput formControlName="activityDetail" matTooltip="Enter ActivityDetail" maxlength="500"
+            cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" required></textarea>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="5">
+        <mat-tab-group (selectedTabChange)="validateGridStatus()">
+          <mat-tab label="Est. Inventory">
+            <div class="divWOGrid">
+              <div class="grdToolbar" id="tbGrid">
+                <button  type="button" (click)="onAddEstInventory()" *ngIf="frmWorkOrder.get('stateId').value<=2" class="add" title="Add Line Item"></button>
+                <button  type="button" (click)="onDeleteEstInventory()" *ngIf="frmWorkOrder.get('stateId').value<=2" class="delete" title="Remove selected line item"></button>
+              </div>
+              <ag-grid-angular class="ag-theme-balham grdEstInventory" id="grdEstInventory" 
+                [gridOptions]="goEstInventory" [columnDefs]="colEstInv" [rowData]="estInventoryData"></ag-grid-angular>
+            </div>
+          </mat-tab>
+          <mat-tab label="Est. Other Charges">
+            <div class="divWOGrid">
+              <div class="grdToolbar" id="tbGrid">
+                <button  type="button" (click)="onAddEstOtherCharge()" *ngIf="frmWorkOrder.get('stateId').value <=2" class="add" title="Add Line Item"></button>
+                <button  type="button" (click)="onDeleteEstOtherCharge()" *ngIf="frmWorkOrder.get('stateId').value <=2" class="delete" title="Remove selected line item"></button>
+              </div>
+              <ag-grid-angular class="ag-theme-balham grdEstOtherCharges" id="grdEstOtherCharges"
+                [gridOptions]="goEstOtherChgs" [columnDefs]="colEstOtherChgs" [rowData]="estOtherChgsData"></ag-grid-angular>
+            </div>
+          </mat-tab>
+          <mat-tab label="Act. Inventory" *ngIf="frmWorkOrder.get('stateId').value==3 ||
+              frmWorkOrder.get('stateId').value==6 || frmWorkOrder.get('stateId').value==8 || frmWorkOrder.get('stateId').value==7">
+            <div class="divWOGrid">
+              <div class="grdToolbar" id="tbGrid">
+                <button  type="button" (click)="onAddInventory()" class="add" title="Add Line Item"></button>
+                <button  type="button" (click)="onDeleteInventory()" class="delete" title="Remove Selected Line Item"></button>
+              </div>
+              <ag-grid-angular class="ag-theme-balham grdInventory" id="grdInventory" 
+                [gridOptions]="goInventory" [columnDefs]="colInventory" [rowData]="inventoryData"></ag-grid-angular>
+            </div>
+          </mat-tab>
+          <mat-tab label="Act. Other Charges" *ngIf="frmWorkOrder.get('stateId').value==3 ||
+              frmWorkOrder.get('stateId').value==6 || frmWorkOrder.get('stateId').value==8 || frmWorkOrder.get('stateId').value==7">
+            <div class="divWOGrid">
+              <div class="grdToolbar" id="tbGrid">
+                <button type="button" (click)="onAddOtherCharge()" class="add" title="Add Line Item"></button>
+                <button type="button" (click)="onDeleteOtherCharge()" class="delete" title="Remove selected line item"></button>
+              </div>
+              <ag-grid-angular class="ag-theme-balham grdOtherCharges" id="grdOtherCharges" 
+                [gridOptions]="goOtherChgs" [columnDefs]="colOtherChgs" [rowData]="otherChgsData"></ag-grid-angular>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </td>
+      <td>
+        <ag-grid-angular class="ag-theme-balham grdActivity" id="grdActivity"
+          [gridOptions]="goWOActivity" [columnDefs]="colActivity" [rowData]="activityData"></ag-grid-angular>
+      </td>
+      
+      <td colspan="2" style="align-items:start;">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+<footer style="height: 8vh;">
+  <div id="FooterButtons" class="float-right" *ngIf=" frmWorkOrder.get('stateId').value!=0  ">
+    <button type="button" [disabled]="submissionButtonsStatus" id="btnHistory" matTooltip="Click to view selected Work Order Status History" (click)="tbHistory(frmWorkOrder.get('woId').value)" class="history"></button>
+  </div>
+  <div class="float-right" *ngIf="(frmWorkOrder.get('stateId').value==1 || frmWorkOrder.get('stateId').value==5) && !frmWorkOrder.get('completed').value &&
+                            frmWorkOrder.get('owner').value==this.footer.createdBy">
+    <button type="button" [disabled]="submissionButtonsStatus" id="btnSubmit" matTooltip="Click to submit this WO to workshop for action" (click)="tbFormSubmission(frmWorkOrder.get('woId').value,2, frmWorkOrder.get('woTypeId').value)" class="submit"></button>
+  </div>
+  <div class="float-right" *ngIf="frmWorkOrder.get('stateId').value==2  && frmWorkOrder.get('owner').value==this.currentUserId && !frmWorkOrder.get('completed').value &&
+                frmWorkOrder.get('owner').value!=this.footer.createdBy">
+    <button type="button" [disabled]="submissionButtonsStatus" id="btnApprove" matTooltip="Click to mark this WO as Approve" (click)="tbFormSubmission(frmWorkOrder.get('woId').value,2, frmWorkOrder.get('woTypeId').value)" class="approve"></button>
+  </div>
+
+  <div class="float-right" *ngIf="(frmWorkOrder.get('stateId').value==2  && frmWorkOrder.get('owner').value==this.currentUserId) && !frmWorkOrder.get('completed').value &&
+                            frmWorkOrder.get('owner').value!=this.footer.createdBy">
+    <button type="button" [disabled]="submissionButtonsStatus" id="btnReturn" matTooltip="Click to return this WO to Operations again" (click)="tbFormSubmission(frmWorkOrder.get('woId').value,5, frmWorkOrder.get('woTypeId').value)" class="return"></button>
+  </div>
+
+  <div class="float-right" *ngIf="(frmWorkOrder.get('stateId').value==6 && frmWorkOrder.get('owner').value==this.currentUserId) && !frmWorkOrder.get('completed').value &&
+                            frmWorkOrder.get('owner').value!=this.footer.createdBy">
+    <button type="button" [disabled]="submissionButtonsStatus" id="btnReturn" matTooltip="Click to return this WO to WorkShop Staff again"
+      (click)="tbFormSubmission(frmWorkOrder.get('woId').value, 8, frmWorkOrder.get('woTypeId').value)" class="return"></button>
+  </div>
+
+  <div class="float-right" *ngIf="frmWorkOrder.get('stateId').value==6 && frmWorkOrder.get('owner').value==this.currentUserId && !frmWorkOrder.get('completed').value &&
+                frmWorkOrder.get('owner').value!=this.footer.createdBy">
+    <button type="button" [disabled]="submissionButtonsStatus" id="btnAcknowledge" matTooltip="Click to Acknowledge that work done against this work order is satisfactory!" (click)="tbFormSubmission(frmWorkOrder.get('woId').value,7, frmWorkOrder.get('woTypeId').value)" class="acknowledge"></button>
+  </div>
+
+  <div class="float-right" *ngIf="(frmWorkOrder.get('stateId').value==3 || frmWorkOrder.get('stateId').value==8) && frmWorkOrder.get('owner').value==this.currentUserId && !frmWorkOrder.get('completed').value">
+    <button type="button" [disabled]="submissionButtonsStatus" id="btnResolve" matTooltip="Click to mark this Work order as resolved" (click)="tbResolve(frmWorkOrder.get('woId').value,6, frmWorkOrder.get('woTypeId').value)" class="resolve"></button>
+  </div>
+
+  <div class="float-right" *ngIf="(frmWorkOrder.get('stateId').value==1 ||frmWorkOrder.get('stateId').value==2) &&
+                (this.currentUserRoleId!=5 && this.currentUserRoleId!=23) &&
+                frmWorkOrder.get('owner').value==this.currentUserId && !frmWorkOrder.get('completed').value &&
+                frmWorkOrder.get('owner').value!=this.footer.createdBy">
+    <button type="button" [disabled]="submissionButtonsStatus" id="btnFoward" matTooltip="Click to Forward this work order to one level up in hierarchy" (click)="tbFormSubmission(frmWorkOrder.get('woId').value, 11, frmWorkOrder.get('woTypeId').value)" class="forward"></button>
+  </div>
+
+  <div class="float-right" *ngIf="frmWorkOrder.get('stateId').value==2 && frmWorkOrder.get('owner').value==this.currentUserId && !frmWorkOrder.get('completed').value &&
+                frmWorkOrder.get('owner').value!=this.footer.createdBy">
+    <button type="button" [disabled]="submissionButtonsStatus" id="btnReject" matTooltip="Click to reject this WO. This  WO will no longer be actionable once you reject it!" (click)="tbFormSubmission(frmWorkOrder.get('woId').value,4, frmWorkOrder.get('woTypeId').value)" class="reject"></button>
+  </div>
+
+  <app-footer [items]="footer"></app-footer>
+</footer>

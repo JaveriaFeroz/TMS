@@ -1,0 +1,59 @@
+<mat-toolbar color="accent">
+  <a mat-icon-button matTooltip="Application Menu" (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </a>
+
+
+  <span style="flex: 1.00;"></span>
+  <span style="flex: 0.20;"></span>
+  <div>
+    Welcome {{model.UserName}}
+  </div>
+  <!--<mat-select (selectionChange)="onChange($event.value)" [(ngModel)]="model.CompanyId" class="ddCompany">
+    <mat-option *ngFor="let Comp of Company" [value]="Comp.companyId">
+      {{Comp.companyName}}
+    </mat-option>
+  </mat-select>-->
+  <button mat-icon-button matTooltip="Log out from the system" (click)="LogOut()">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-sidenav-container style="height:auto; margin: 0; width:auto; background-color: #fbf9f9;" [hasBackdrop]="true">
+  <mat-sidenav class="cust_sidenav" #sidenav mode="over" [class.mat-elevation-z4]="true" style="width:auto"
+               [fixedInViewport]="true" [fixedTopGap]="2"
+               [fixedBottomGap]="20">
+    <button class="cust_sidenav_close" mat-icon-button matTooltip="Closes the side Navigation bar" (click)="sidenav.toggle()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <div>
+      <img src="https://techmatically.com/images/logo.png" style="width: 13vw;text-align: center;margin: auto;display: flex;" />
+
+    </div>
+    <mat-nav-list dense>
+      <mat-expansion-panel *ngFor="let m of MenuAccess" [class.mat-elevation-z0]="true" dense>
+        <mat-expansion-panel-header *ngIf="m.parentId === null && m.route !== null">
+          <a mat-list-item [routerLink]="m.route" style="padding:0px">{{m.menuName}}</a>
+        </mat-expansion-panel-header>
+        <mat-expansion-panel-header *ngIf="m.parentId === null && m.route === null">
+          {{m.menuName}}
+        </mat-expansion-panel-header>
+        <mat-nav-list dense>
+          <div *ngFor="let c of MenuAccess | numFilter: m.menuId : 'parentId'">
+            <a mat-list-item [routerLink]="c.route"><mat-icon>subdirectory_arrow_right</mat-icon>{{c.menuName}}</a>
+          </div>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>
+
+
+<!--<mat-sidenav-content>
+  Welcome to Agility TMS!
+  <router-outlet></router-outlet>-->
+<!--<router-outlet>
+  <div class="container mat-body-1">
+    Welcome to Agililty TMS
+  </div>
+</router-outlet>-->
+<!--</mat-sidenav-content>-->

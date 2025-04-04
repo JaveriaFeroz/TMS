@@ -1,0 +1,87 @@
+<form [formGroup]="frmCreditFuel">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Credit Fuel</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnExtract" matTooltip="Click To Start Extraction Process" (click)="tbExport()" class="export"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Back to Mian Page" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Date From</mat-label>
+          <input matInput [matDatepicker]="mdpDateFrom" [min]="MinDate" [max]="MaxDate" matTooltip="Enter From Date" formControlName="dateFrom" required>
+          <mat-datepicker-toggle matSuffix [for]="mdpDateFrom"></mat-datepicker-toggle>
+          <mat-datepicker #mdpDateFrom></mat-datepicker>
+        </mat-form-field>
+       <!-- <mat-error *ngIf="!frmCreditFuel.get('DateFrom').value && frmCreditFuel.get('DateFrom').touched">Select Date From </mat-error>-->
+      </td>
+
+      <td>
+        <mat-form-field class="tb120">
+          <mat-label>Date To</mat-label>
+          <input matInput [matDatepicker]="mdpDateTo" [min]="MinDate" [max]="MaxDate" matTooltip="Enter To Date" formControlName="dateTo"  required>
+          <mat-datepicker-toggle matSuffix [for]="mdpDateTo"></mat-datepicker-toggle>
+          <mat-datepicker #mdpDateTo></mat-datepicker>
+        </mat-form-field>
+       <!-- <mat-error *ngIf="!frmCreditFuel.get('DateTo').value && frmCreditFuel.get('DateTo').touched">Select Date To</mat-error>-->
+      </td>  
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Client</mat-label>
+          <mat-select formControlName="clientId">
+            <mat-option *ngFor="let Client of lstClient" [value]="Client.clientId">
+              {{Client.clientName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="tb200">
+          <mat-label>Supplier</mat-label>
+          <mat-select formControlName="supplierId">
+            <mat-option *ngFor="let Supplier of lstSupplier" [value]="Supplier.supplierId">
+              {{Supplier.supplierName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <button type="button" id="btnLoad" matTooltip="Load"
+                (click)="tbLoad()" class="load float-left"></button>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="4">
+        <div class="divFuelGrid">
+          <ag-grid-angular class="ag-theme-balham grdFuel" id="grdFuel"
+                           [gridOptions]="goFuel"
+                           [columnDefs]="colFuel"
+                           [rowData]="fuelData"></ag-grid-angular>
+        </div>
+      </td>
+    </tr>
+  </table>
+  </form>
+
+
+
+
+
+
+
+
+
+
+

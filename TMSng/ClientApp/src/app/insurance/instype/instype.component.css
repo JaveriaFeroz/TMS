@@ -1,0 +1,13 @@
+@import "../../../assets/css/formsite.css";
+@import "../../../assets/css/toolbar.css";
+
+
+.divDocGrid {
+  height: 40vh;
+  width: 43vw;
+}
+
+.grdDoc {
+  height: 33vh;
+  width: 31vw;
+}

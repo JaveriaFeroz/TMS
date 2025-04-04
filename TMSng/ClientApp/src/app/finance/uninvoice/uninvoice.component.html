@@ -1,0 +1,27 @@
+<form [formGroup]="frmUnInvoice">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Un - Invoice</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnSave" matTooltip="Click to Save current Entry" (click)="tbSave()" class="save"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Click to go back to main menu" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="tb150" color="accent">
+          <mat-label>Invoice #</mat-label>
+          <input formControlName="invoiceNo" matTooltip="Please enter Invoice #" placeholder="Invoice  #" matInput maxlength="10" numbersOnly>
+        </mat-form-field>
+      </td>
+      <td colspan="3"></td>
+      <td colspan="2"></td>
+    </tr>
+  </table>
+</form>

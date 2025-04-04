@@ -1,0 +1,185 @@
+<form [formGroup]="frmWOExtract">
+  <table class="mainTable">
+    <tr class="form-title-bg">
+      <td colspan="5">
+        <p class="form-title">Extract WO & SR</p>
+      </td>
+      <td colspan="5">
+        <div id="divHToolbar" class="float-right">
+          <button type="button" id="btnExtract" matTooltip="Click To Start Extraction Process" (click)="tbExport()" class="export"></button>
+          <button type="button" id="btnUndo" matTooltip="Click to discard changes made since last save operation" (click)="tbUndo()" class="undo"></button>
+          <button type="button" id="btnExit" matTooltip="Back to Mian Page" (click)="tbExit()" class="exit"></button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div style="float: left;">
+          <span class="site-title">Select an Option</span>
+
+          <mat-radio-group formControlName="selection">
+            <mat-radio-button value="1" class="mat-primary" checked value="1" id="rdoSR" ng-disabled="readOnly">Pending Service Request</mat-radio-button>
+            <mat-radio-button value="2" id="rdoPWO" ng-disabled="readOnly">Pending Work Orders</mat-radio-button>
+            <mat-radio-button value="3" id="rdoCWO" ng-disabled="readOnly" ng-class="tb300">Closed Work Orders</mat-radio-button>
+            <section></section>
+          </mat-radio-group>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td  *ngIf="frmWOExtract.get('selection').value!=3 ">
+        <mat-form-field class="tb200">
+          <mat-label>Date From</mat-label>
+          <input matInput [matDatepicker]="mdpDateFrom" [min]="MinDate"  [max]="MaxDate" matTooltip="Enter From Date" formControlName="dateFrom" >
+          <mat-datepicker-toggle matSuffix [for]="mdpDateFrom"></mat-datepicker-toggle>
+          <mat-datepicker #mdpDateFrom></mat-datepicker>
+        </mat-form-field>
+      </td>
+
+      <td *ngIf="frmWOExtract.get('selection').value==3">
+        <mat-form-field class="tb200">
+          <mat-label>Period From</mat-label>
+          <mat-select formControlName="periodFrom">
+            <mat-option *ngFor="let Period of lstPeriod" [value]="Period.periodId">
+              {{Period.periodName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td *ngIf="frmWOExtract.get('selection').value!=3">
+        <mat-form-field class="tb200">
+          <mat-label>Date To</mat-label>
+          <input matInput [matDatepicker]="mdpDateTo" [min]="MinDate"  [max]="MaxDate" matTooltip="Enter To Date" formControlName="dateTo">
+          <mat-datepicker-toggle matSuffix [for]="mdpDateTo"></mat-datepicker-toggle>
+          <mat-datepicker #mdpDateTo></mat-datepicker>
+        </mat-form-field>
+      </td>
+      <td *ngIf="frmWOExtract.get('selection').value==3">
+        <mat-form-field class="tb200">
+          <mat-label>Period To</mat-label>
+          <mat-select formControlName="periodTo">
+            <mat-option *ngFor="let Period of lstPeriod" [value]="Period.periodId">
+              {{Period.periodName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" rowspan="4">
+        <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+          <span>Validation:</span>
+          <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+  </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--<form >
+    <table class="mainTable">
+      <tr class="form-title-bg">
+        <td colspan="5">
+          <p class="form-title">List of Work Orders & Service Request</p>
+        </td>
+        <td colspan="5">
+          <div id="divHToolbar" class="float-right">
+            <button type="button" id="btnExtract" matTooltip="Click To Start Extraction Process" (click)="tbExport()" class="export"></button>
+            <button type="button" id="btnExit" matTooltip="Back to Mian Page" (click)="tbExit()" class="exit"></button>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div style="float: left;">
+
+            <span class="site-title">Select an Option</span>
+
+            <mat-radio-group label="Select an option">
+              <mat-radio-button value="1" checked value="0" id="rdoCurrent" [(ngModel)]="model.readioSelected" ng-disabled="readOnly">Pending complaint</mat-radio-button>
+              <mat-radio-button value="2" [(ngModel)]="model.readioSelected" ng-disabled="readOnly">Pending Work Orders</mat-radio-button>
+              <mat-radio-button value="3" [(ngModel)]="model.readioSelected" ng-disabled="readOnly">Closed Work Orders</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td *ngIf="model.readioSelected!='3'">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" matTooltip="Enter Date" [(ngModel)]="model.DateFrom" placeholder="Choose Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
+
+        <td *ngIf="model.readioSelected=='3'">
+          <mat-form-field class="tb100">
+            <mat-label>Period From</mat-label>
+            <input [(ngModel)]="model.PeriodFrom" matTooltip="Enter Period From" matInput maxlength="6">
+          </mat-form-field>
+        </td>
+        <td *ngIf="model.readioSelected!='3'">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" matTooltip="Enter Date" [(ngModel)]="model.DateTo" placeholder="Choose Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td *ngIf="model.readioSelected=='3'">
+          <mat-form-field class="form-control tb100">
+            <mat-label>Period To</mat-label>
+            <input [(ngModel)]="model.PeriodTo" matTooltip="Enter Period To" matInput maxlength="6">
+          </mat-form-field>
+        </td>
+
+        <td></td>
+        <td></td>
+
+        <td colspan="3">
+          <div *ngIf="errors?.length > 0" class="validation-summary-errors">
+            <span>Validation:</span>
+            <ul>
+              <li *ngFor="let error of errors">{{error}}</li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <mat-form-field class="tb200">
+            <mat-label>Department </mat-label>
+            <mat-select name="Department" [(ngModel)]="model.DepartmentCode">
+              <mat-option *ngFor="let Department of lstDepartment" [value]="Department.departmentCode">
+                {{Department.departmentName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  </form>-->
+  <!--<div *ngIf="readioSelected=='radio1'">
+      Radio Button 1 Content new
+      </div>-->
+

@@ -1,0 +1,33 @@
+<form class="cust_form" name="Login" (ngSubmit)="login()" #f="ngForm" style="opacity: 0.75;">
+ 
+  <mat-card class="div_poistion div_style">
+    <img src="https://techmatically.com/images/logo.png" class="m-auto d-flex" />
+    <mat-card-title class="main_heading text-center">Hello There <br /> Welcome Back..!</mat-card-title>
+    <mat-card-content>
+      <div class="login_field_div">
+        <mat-form-field class="field_group">
+         
+            <mat-label>User ID</mat-label>
+            <input matInput #txtUserId class="mcItem" name="userId" #userId="ngModel" type="text" [(ngModel)]="model.UserId" required autofocus>
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-error>This field is required</mat-error>
+         
+         
+        </mat-form-field>
+      </div>
+      <div class="login_field_div">
+        <mat-form-field  class="field_group ">
+          <mat-label>Password</mat-label>
+          <input matInput class="mcItem" type="password" name="password" #password="ngModel" ng-init="model.Password=''" [(ngModel)]="model.Password" required placeholder="Enter Password" />
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="d-flex justify-content-center gap-2" style="margin-top:40px;">
+        <button class="btn btn-secondary" type="Submit" id="btnLogOn" name="command" value="LogIn">Sign In</button>
+        <button class="btn btn-secondary" type="button" id="btnSendPassword" (click)="tbForogotPwd()" value="ForgotPassword">Forgot Password</button>
+      </div>
+    
+    </mat-card-content>
+  </mat-card>
+</form>
